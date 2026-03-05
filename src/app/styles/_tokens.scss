@@ -94,3 +94,74 @@ $container-xl: 1200px;
 $gutter-mobile: $space-sm;     // 16px
 $gutter-tablet: $space-md;     // 24px
 $gutter-desktop: $space-lg;    // 32px
+
+// COLORS
+
+// ---- Neutral ----
+$neutral-50:  #fafafa;
+$neutral-100: #f4f4f5;
+$neutral-200: #e4e4e7;
+$neutral-300: #d4d4d8;
+$neutral-400: #a1a1aa;
+$neutral-500: #71717a;
+$neutral-600: #52525b;
+$neutral-700: #3f3f46;
+$neutral-800: #27272a;
+$neutral-900: #18181b;
+$neutral-950: #09090b;
+
+// ---- Positive (green) ----
+$positive-50:  #f0fdf4;
+$positive-100: #dcfce7;
+$positive-200: #bbf7d0;
+$positive-300: #86efac;
+$positive-400: #4ade80;
+$positive-500: #22c55e;
+$positive-600: #16a34a;
+$positive-700: #15803d;
+$positive-800: #166534;
+$positive-900: #14532d;
+
+// ---- Negative (red) ----
+$negative-50:  #fef2f2;
+$negative-100: #fee2e2;
+$negative-200: #fecaca;
+$negative-300: #fca5a5;
+$negative-400: #f87171;
+$negative-500: #ef4444;
+$negative-600: #dc2626;
+$negative-700: #b91c1c;
+$negative-800: #991b1b;
+$negative-900: #7f1d1d;
+
+// ---- Info (celeste / sky) ----
+$info-50:  #f0f9ff;
+$info-100: #e0f2fe;
+$info-200: #bae6fd;
+$info-300: #7dd3fc;
+$info-400: #38bdf8;
+$info-500: #0ea5e9;
+$info-600: #0284c7;
+$info-700: #0369a1;
+$info-800: #075985;
+$info-900: #0c4a6e;
+
+// ---- App colors ----
+$brand-primary:   #FF5E2D;
+$brand-secondary-bold: #2D68B5;
+$brand-secondary-vibrant: #2C75D5;
+$brand-dark-color:    #242424;
+$brand-light-color: #F2F8F4;
+$brand-gray-color: #D3DAD5;
+
+$surface-bg:      $neutral-950;
+$surface-card:    $neutral-900;
+$surface-hover:   $neutral-800;
+
+$text-primary:    $neutral-50;
+$text-secondary:  $neutral-400;
+$text-disabled:   $neutral-600;
+$text-inverse:    $neutral-950;
+
+$border-default:  $neutral-700;
+$border-subtle:   $neutral-800;
