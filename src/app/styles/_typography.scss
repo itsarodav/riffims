@@ -1,0 +1,14 @@
+@use 'tokens' as *;
+
+// Global Typography — Mobile First
+
+html {
+    font-family: $font-family;
+    font-size: 100%; // 16px base
+}
+
+body {
+    font-size: $font-size-base;
+    font-weight: $font-weight-regular;
+    line-height: $line-height-normal;
+}

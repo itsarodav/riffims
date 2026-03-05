@@ -1,0 +1,96 @@
+// Design Tokens — Mobile First
+
+// ---- Breakpoints ----
+$bp-sm: 480px;
+$bp-md: 768px;
+$bp-lg: 1024px;
+$bp-xl: 1280px;
+$bp-2xl: 1536px;
+
+// ---- Spacing scale (rem) ----
+$space-4xs: 0.125rem; // 2px
+$space-3xs: 0.25rem;  // 4px
+$space-2xs: 0.5rem;   // 8px
+$space-xs: 0.75rem;   // 12px
+$space-sm: 1rem;      // 16px
+$space-md: 1.5rem;    // 24px
+$space-lg: 2rem;      // 32px
+$space-xl: 3rem;      // 48px
+$space-2xl: 4rem;     // 64px
+$space-3xl: 6rem;     // 96px
+
+// ---- Font family ----
+$font-family: 'Albert Sans', sans-serif;
+
+// ---- Typography scale (4px steps) ----
+$font-size-xs: 0.75rem;    // 12px
+$font-size-sm: 0.875rem;   // 14px para mobile
+$font-size-base: 1rem;     // 16px
+$font-size-md: 1.25rem;    // 20px
+$font-size-lg: 1.5rem;     // 24px
+$font-size-xl: 1.75rem;    // 28px
+$font-size-2xl: 2rem;      // 32px
+$font-size-3xl: 2.25rem;   // 36px
+$font-size-4xl: 2.5rem;    // 40px
+$font-size-5xl: 2.75rem;   // 44px
+$font-size-6xl: 3rem;      // 48px
+$font-size-7xl: 3.25rem;   // 52px
+$font-size-8xl: 3.5rem;    // 56px
+$font-size-9xl: 3.75rem;   // 60px
+$font-size-10xl: 4rem;     // 64px
+
+$line-height-tight: 1.1;
+$line-height-snug: 1.25;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.75;
+
+$font-weight-thin: 100;
+$font-weight-extralight: 200;
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-extrabold: 800;
+$font-weight-black: 900;
+
+// ---- Border radius ----
+$radius-sm: 0.25rem;  // 4px
+$radius-md: 0.5rem;   // 8px
+$radius-lg: 0.75rem;  // 12px
+$radius-xl: 1rem;     // 16px
+$radius-full: 9999px;
+$radius-circle:50%;
+
+// ---- Shadows ----
+$shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+$shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+$shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+
+// ---- Transitions ----
+$duration-fast: 150ms;
+$duration-base: 250ms;
+$duration-slow: 400ms;
+$easing-default: cubic-bezier(0.4, 0, 0.2, 1);
+$easing-in: cubic-bezier(0.4, 0, 1, 1);
+$easing-out: cubic-bezier(0, 0, 0.2, 1);
+
+// ---- Z-index layers ----
+$z-base: 0;
+$z-dropdown: 100;
+$z-sticky: 200;
+$z-overlay: 300;
+$z-modal: 400;
+$z-toast: 500;
+
+// ---- Container widths (responsive) ----
+$container-sm: 640px;
+$container-md: 768px;
+$container-lg: 1024px;
+$container-xl: 1200px;
+
+// ---- Responsive gutter / padding ----
+$gutter-mobile: $space-sm;     // 16px
+$gutter-tablet: $space-md;     // 24px
+$gutter-desktop: $space-lg;    // 32px
