@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-tag',
   imports: [],
-  templateUrl: './tag.html',
-  styleUrl: './tag.scss',
+  templateUrl: './tag.component.html',
+  styleUrl: './tag.component.scss',
 })
 export class Tag {}

@@ -154,6 +154,10 @@ $brand-dark-color:    #242424;
 $brand-light-color: #F2F8F4;
 $brand-gray-color: #D3DAD5;
 
+// Gradient colors
+$color-overlay-from:#FFCEB4;
+$color-overlay-transparent: #FFCEB4; // → rgba(255,236,217,0.5)
+
 $surface-bg:      $neutral-950;
 $surface-card:    $neutral-900;
 $surface-hover:   $neutral-800;
