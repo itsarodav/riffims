@@ -1,0 +1,11 @@
+@use 'tokens' as *;
+
+svg-icon {
+    color: $brand-primary;
+
+    ::ng-deep svg {
+        fill: currentColor;
+        width: 14px;
+        height: 14px;
+    }
+}
