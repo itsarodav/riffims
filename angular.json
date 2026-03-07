@@ -27,6 +27,11 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "*.svg",
+                "input": "src/app/shared/icons",
+                "output": "assets/icons"
               }
             ],
             "styles": [

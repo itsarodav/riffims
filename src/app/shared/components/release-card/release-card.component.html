@@ -2,7 +2,7 @@
 
     <!-- Icono del tipo de lanzamiento -->
     <div class="release-card__icon">
-        <svg-icon src="assets/icons/release-folder.svg"></svg-icon>
+        <app-icon name="release-folder" [size]="32" />
     </div>
 
     <!-- Título y badge de tipo -->
@@ -14,11 +14,11 @@
     <!-- Metadatos: countdown y niveles -->
     <div class="release-card__meta">
         <div class="release-card__meta-item">
-        <svg-icon src="assets/icons/calendar.svg"></svg-icon>
+        <app-icon name="calendar" [size]="14" />
         <span class="release-card__meta-text">{{ daysToRelease }} días para el lanzamiento</span>
         </div>
         <div class="release-card__meta-item">
-        <svg-icon src="assets/icons/check-filled.svg"></svg-icon>
+        <app-icon name="check-filled" [size]="14" />
         <span class="release-card__meta-text">{{ completedLevels }} niveles completados</span>
         </div>
     </div>

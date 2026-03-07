@@ -1,11 +1,41 @@
 @use 'tokens' as *;
 
-svg-icon {
-    color: $brand-primary;
+.release-card {
+    display: flex;
+    flex-direction: column;
+    gap: $space-xs;
+    padding: 32px 16px;
+    width: 172px;
+    
+    background-color: $brand-light-color;
+    border: 1px solid $brand-gray-color;
+    border-radius: $radius-xl;
+    //Hover
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
 
-    ::ng-deep svg {
-        fill: currentColor;
-        width: 14px;
-        height: 14px;
+    &:hover {
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        transform: translateY(-2px);
     }
+
+    &__meta-icon{
+        display: flex;
+    }
+
+    &__icon{
+        color: $brand-primary;
+    }
+
+    &__title{
+        color: $brand-dark-color;
+        font-weight: $font-weight-bold;
+        font-size: $font-size-base;
+    }
+
+    &__meta-text{
+        color: $brand-dark-color;
+        font-weight: $font-weight-medium;
+        font-size: $font-size-2xs;
+    }
+
 }
