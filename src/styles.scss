@@ -1,3 +1,7 @@
-@use 'app/styles/tokens';
+@use 'app/styles/tokens' as *;
 @use 'app/styles/reset';
 @use 'app/styles/typography';
+
+html, body {
+    background-color: $brand-light-color;
+}

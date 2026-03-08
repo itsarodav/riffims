@@ -18,7 +18,7 @@ export type IconSize = 10 | 12 | 14 | 16 | 24 | 32 | 40 | 48;
   `,
   styles: [`
     :host {
-      display: inline-flex;
+      display: flex;
       align-items: center;
       justify-content: center;
     }
