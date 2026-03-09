@@ -7,6 +7,16 @@
 />
 
 <!-- Feature cards (Calendario, Riffionario) -->
+
+<!-- Riffi tip -->
+    <app-multi-card
+        variant="riffi-tip"
+        title="Riffi tip del día"
+        description="Publica contenido detrás de cámaras en la semana previa."
+        iconName="riffi-v0"
+        [iconSize]="24">
+    </app-multi-card>
+    
 <div class="functionality-cards">
     <app-multi-card
         variant="feature"
@@ -31,12 +41,5 @@
         iconName="add-circle">
     </app-multi-card>
 
-<!-- Riffi tip -->
-    <app-multi-card
-        variant="riffi-tip"
-        title="Riffi tip del día"
-        description="Publica contenido detrás de cámaras en la semana previa."
-        iconName="riffi-v0"
-        [iconSize]="12">
-    </app-multi-card>
+
 <router-outlet />
