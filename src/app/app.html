@@ -5,4 +5,38 @@
     [daysToRelease]="28"
     [completedLevels]="8"
 />
+
+<!-- Feature cards (Calendario, Riffionario) -->
+<div class="functionality-cards">
+    <app-multi-card
+        variant="feature"
+        title="Tu calendario"
+        description="Haz seguimiento a tu lanzamiento con eventos a la vista."
+        iconName="calendar">
+    </app-multi-card>
+
+    <app-multi-card
+        variant="feature"
+        title="Riffionario"
+        description="Tu diccionario de industria musical. Explicado fácil."
+        iconName="riffionario">
+    </app-multi-card>
+</div>
+
+<!-- Empty state "Tus lanzamientos" -->
+    <app-multi-card
+        variant="empty"
+        title="¡Crea tu primer lanzamiento!"
+        description="Tú decides, yo te acompaño."
+        iconName="add-circle">
+    </app-multi-card>
+
+<!-- Riffi tip -->
+    <app-multi-card
+        variant="riffi-tip"
+        title="Riffi tip del día"
+        description="Publica contenido detrás de cámaras en la semana previa."
+        iconName="riffi-v0"
+        [iconSize]="12">
+    </app-multi-card>
 <router-outlet />

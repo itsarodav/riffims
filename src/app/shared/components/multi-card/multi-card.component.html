@@ -1,0 +1,38 @@
+<!-- VARIANT: feature | icono + título + descripción, layout vertical, fondo neutro -->
+<div
+    *ngIf="variant === 'feature'"
+    class="multi-card multi-card--feature">
+    <div class="multi-card__icon-wrapper">
+        <app-icon [name]="iconName" [size]="iconSize" />
+    </div>
+    <div class="multi-card__content">
+        <p class="multi-card__title">{{ title }}</p>
+        <p class="multi-card__description">{{ description }}</p>
+    </div>
+</div>
+
+<!-- VARIANT: empty | icono centrado + texto centrado, fondo de acent -->
+<div
+    *ngIf="variant === 'empty'"
+    class="multi-card multi-card--empty">
+    <div class="multi-card__icon-wrapper">
+        <app-icon [name]="iconName" [size]="iconSize" />
+    </div>
+    <div class="multi-card__content multi-card__content--centered">
+        <p class="multi-card__title">{{ title }}</p>
+        <p class="multi-card__description">{{ description }}</p>
+    </div>
+</div>
+
+<!-- VARIANT: tip | icono a la izquierda + texto a la derecha, fondo de accent -->
+<div
+    *ngIf="variant === 'riffi-tip'"
+    class="multi-card multi-card--tip">
+    <div class="multi-card__icon-wrapper">
+        <app-icon [name]="iconName" [size]="iconSize" />
+    </div>
+    <div class="multi-card__content">
+        <p class="multi-card__title">{{ title }}</p>
+        <p class="multi-card__description">{{ description }}</p>
+    </div>
+</div>
