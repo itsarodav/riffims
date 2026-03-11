@@ -1,0 +1,24 @@
+@use '../styles/tokens' as *;
+
+.login-container{
+    background-color: $brand-light-color;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $space-xl;
+    border-radius: $radius-lg;
+    height: 100%;
+
+    &__inputs{
+        display: flex;
+        flex-direction: column;
+        gap: $space-md;
+    }
+
+    &__actions{
+        display: flex;
+        flex-direction: column;
+        gap: $space-sm;
+    }
+}

@@ -1,1 +1,48 @@
-<p>login works!</p>
+<div class="login-container">
+
+    <!-- Logo -->
+    <div class="login-container__logo">
+        <img src="assets/icons/logo-riffims.svg" alt="Riffims logo" />
+    </div>
+
+    <!-- Inputs -->
+    <div class="login-container__inputs">
+        <input
+        class="input-field"
+        type="email"
+        placeholder="Email"
+        [(ngModel)]="email"
+        />
+        <input
+        class="input-field"
+        type="password"
+        placeholder="Password"
+        [(ngModel)]="password"
+        />
+    </div>
+
+    <!-- Error message -->
+    <p class="login-container__error" *ngIf="errorMessage">
+        {{ errorMessage }}
+    </p>
+
+    <!-- Acciones -->
+    <div class="login-container__actions">
+        <button
+        class="btn btn--primary"
+        (click)="onLogin()"
+        [disabled]="isLoading"
+        >
+        {{ isLoading ? 'Entrando...' : 'Log in' }}
+        </button>
+
+        <button class="btn btn--secondary" (click)="goToForgotPassword()">
+        Forgot Password
+        </button>
+
+        <button class="btn btn--tertiary" (click)="goToRegister()">
+        Create Account
+        </button>
+    </div>
+
+</div>
