@@ -1,48 +1,81 @@
-<div class="login-container">
+<main class="login-container" aria-labelledby="login-title">
 
-    <!-- Logo -->
-    <div class="login-container__logo">
-        <img src="assets/icons/logo-riffims.svg" alt="Riffims logo" />
-    </div>
+    <h1 id="login-title" class="sr-only">Iniciar sesión</h1>
 
-    <!-- Inputs -->
-    <div class="login-container__inputs">
+    <header class="login-container__logo">
+        <img src="assets/icons/logo-riffims.svg" alt="Riffims" />
+    </header>
+
+    <!-- novalidate porque gestiono la validación desde Angular -->
+    <form
+        class="login-container__form"
+        (ngSubmit)="onLogin()"
+        novalidate
+    >
+
+        <fieldset class="login-container__inputs">
+        <legend class="sr-only">Credenciales de acceso</legend>
+
+        <label for="email" class="sr-only">Email</label>
         <input
-        class="input-field"
-        type="email"
-        placeholder="Email"
-        [(ngModel)]="email"
+            id="email"
+            class="input-field"
+            type="email"
+            placeholder="Email"
+            autocomplete="email"
+            [(ngModel)]="email"
+            name="email"
+            required
         />
+
+        <label for="password" class="sr-only">Contraseña</label>
         <input
-        class="input-field"
-        type="password"
-        placeholder="Password"
-        [(ngModel)]="password"
+            id="password"
+            class="input-field"
+            type="password"
+            placeholder="Password"
+            autocomplete="current-password"
+            [(ngModel)]="password"
+            name="password"
+            required
         />
-    </div>
+        </fieldset>
 
-    <!-- Error message -->
-    <p class="login-container__error" *ngIf="errorMessage">
-        {{ errorMessage }}
-    </p>
-
-    <!-- Acciones -->
-    <div class="login-container__actions">
-        <button
-        class="btn btn--primary"
-        (click)="onLogin()"
-        [disabled]="isLoading"
+        <output
+        class="login-container__error"
+        role="alert"
+        *ngIf="errorMessage"
         >
-        {{ isLoading ? 'Entrando...' : 'Log in' }}
+        {{ errorMessage }}
+        </output>
+
+        <!-- acciones dentro del form -->
+        <div class="login-container__actions">
+
+        <button
+            type="submit"
+            class="btn btn--primary"
+            [disabled]="isLoading"
+        >
+            {{ isLoading ? 'Entrando...' : 'Log in' }}
         </button>
 
-        <button class="btn btn--secondary" (click)="goToForgotPassword()">
-        Forgot Password
+        <button
+            type="button"
+            class="btn btn--secondary"
+            (click)="goToForgotPassword()"
+        >
+            Forgot Password
         </button>
 
-        <button class="btn btn--tertiary" (click)="goToRegister()">
-        Create Account
+        <button
+            type="button"
+            class="btn btn--tertiary"
+            (click)="goToRegister()"
+        >
+            Create Account
         </button>
-    </div>
+        </div>
+    </form>
 
-</div>
+</main>

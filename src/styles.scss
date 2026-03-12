@@ -1,6 +1,7 @@
 @use 'app/styles/tokens' as *;
 @use 'app/styles/reset';
 @use 'app/styles/typography';
+@use 'app/styles/utilities';
 
 html, body {
     background-color: $brand-light-color;

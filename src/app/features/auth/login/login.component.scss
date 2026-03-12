@@ -8,10 +8,18 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: $space-xl;
     border-radius: $radius-lg;
     height: 100%;
-    padding: $space-lg $space-2xs;
+    padding: $space-xl $space-2xs;
+
+    &__form{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: $space-lg;
+    }
 
     &__inputs{
         display: flex;
@@ -55,7 +63,17 @@
 
     // ---- Desktop ----
     @media (min-width: $bp-lg) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         padding: $space-md $space-xl;
+        height: 70vh;
+
+        &__form{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     }
 }
 
@@ -88,6 +106,7 @@
     // ---- Desktop ----
     @media (min-width: $bp-lg) {
         padding: $space-sm;
+
     }
 }
 

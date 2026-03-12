@@ -1,1 +1,99 @@
-<p>register works!</p>
+<main class="register-container" aria-labelledby="register-title">
+
+    <h1 id="register-title" class="sr-only">Crear cuenta</h1>
+
+    <header class="register-container__logo">
+        <img src="assets/images/riffims-logo.svg" alt="Riffims" />
+    </header>
+
+    <!-- novalidate porque gestiono la validación desde Angular -->
+    <form
+        class="register-container__form"
+        (ngSubmit)="onRegister()"
+        novalidate
+    >
+
+        <fieldset class="register-container__inputs">
+        <legend class="sr-only">Datos de tu cuenta</legend>
+
+        <label for="username" class="sr-only">Nombre de usuario</label>
+        <input
+            id="username"
+            class="input-field"
+            type="text"
+            placeholder="Username"
+            autocomplete="username"
+            [(ngModel)]="username"
+            name="username"
+            required
+        />
+
+        <label for="email" class="sr-only">Email</label>
+        <input
+            id="email"
+            class="input-field"
+            type="email"
+            placeholder="Email"
+            autocomplete="email"
+            [(ngModel)]="email"
+            name="email"
+            required
+        />
+
+        <label for="password" class="sr-only">Contraseña</label>
+        <input
+            id="password"
+            class="input-field"
+            type="password"
+            placeholder="Password"
+            autocomplete="new-password"
+            [(ngModel)]="password"
+            name="password"
+            required
+        />
+
+        <div class="terms">
+            <input
+            type="checkbox"
+            id="terms"
+            [(ngModel)]="acceptedTerms"
+            name="terms"
+            />
+            <label for="terms">
+            Al crear esta cuenta estás de acuerdo con nuestros
+            <a href="/terms">términos de uso</a> y nuestra
+            <a href="/privacy">política de privacidad</a>
+            </label>
+        </div>
+        </fieldset>
+
+        <output
+        class="register-container__error"
+        role="alert"
+        *ngIf="errorMessage"
+        >
+        {{ errorMessage }}
+        </output>
+
+        <!-- acciones dentro del form -->
+        <div class="register-container__actions">
+
+        <button
+            type="submit"
+            class="btn btn--primary"
+            [disabled]="isLoading || !acceptedTerms"
+        >
+            {{ isLoading ? 'Creando cuenta...' : 'Create Account' }}
+        </button>
+
+        <button
+            type="button"
+            class="btn btn--tertiary"
+            (click)="goToLogin()"
+        >
+            Have an account? Log in here
+        </button>
+        </div>
+    </form>
+
+</main>
