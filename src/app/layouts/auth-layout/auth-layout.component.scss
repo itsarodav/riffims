@@ -19,24 +19,22 @@
 .auth-layout__shape {
   position: absolute;
   z-index: $z-base;
+  width: clamp(200px, 42vw, 320px);
 }
 
 .auth-layout__shape--music {
   top: 9%;
-  left: -10%;
-  width: 50%;
+  left: clamp(-40px, -8vw, -20px);
 }
 
 .auth-layout__shape--album {
   top: -5%;
-  left: 42%;
-  width: 50%;
+  left: clamp(140px, 38vw, 300px);
 }
 
 .auth-layout__shape--ai {
   top: 20%;
-  right: -8%;
-  width: 50%;
+  right: clamp(-35px, -6vw, -15px);
 }
 
 // wrapper interno transparente en mobile, constrains content en desktop
@@ -59,6 +57,7 @@
   border-radius: $space-2xl $space-2xl 0 0;
   padding: $space-xl $space-lg;
   z-index: $z-dropdown;
+  height: 64vh;
 }
 
 // TABLET (≥768px)
@@ -70,7 +69,22 @@
   }
 
   .auth-layout__shape {
-    width: 38%;
+    width: clamp(260px, 38vw, 380px);
+  }
+
+  .auth-layout__shape--music {
+    top: 14%;
+    left: clamp(-80px, -10vw, -40px);
+  }
+
+  .auth-layout__shape--album {
+    top: -8%;
+    left: clamp(280px, 38vw, 380px);
+  }
+
+  .auth-layout__shape--ai {
+    top: 30%;
+    right: clamp(-95px, -12vw, -50px);
   }
 }
 
