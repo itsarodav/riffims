@@ -1,24 +1,130 @@
 @use '../styles/tokens' as *;
 
+// ---- Mobile (base) ----
+
 .login-container{
     background-color: $brand-light-color;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: $space-xl;
+    gap: $space-lg;
     border-radius: $radius-lg;
     height: 100%;
+    padding: $space-sm $gutter-mobile;
 
     &__inputs{
         display: flex;
         flex-direction: column;
-        gap: $space-md;
+        gap: $space-xs;
+        width: 100%;
+    }
+
+    &__error {
+        color: $negative-700;
+        font-size: $font-size-sm;
+        margin: -40px 0 0;
+        width: 100%;
     }
 
     &__actions{
         display: flex;
         flex-direction: column;
-        gap: $space-sm;
+        gap: $space-2xs;
+        width: 100%;
+    }
+
+    // ---- Tablet ----
+    @media (min-width: $bp-md) {
+        gap: $space-xl;
+        padding: $space-sm $gutter-tablet;
+
+        &__inputs{
+            gap: $space-sm;
+        }
+
+        &__error {
+            font-size: $font-size-base;
+        }
+
+        &__actions{
+            gap: $space-sm;
+        }
+    }
+
+    // ---- Desktop ----
+    @media (min-width: $bp-lg) {
+        padding: $space-md $space-xl;
+    }
+}
+
+.input-field {
+    background-color: $brand-light-color;
+    border: 1px solid $brand-gray-color;
+    border-radius: $radius-xl;
+    color: $brand-dark-color;
+    font-family: $font-family;
+    font-size: $font-size-sm;
+    letter-spacing: -0.4px;
+    padding: $space-2xs;
+    width: 100%;
+
+    &::placeholder {
+        color: $brand-gray-bold-color;
+    }
+
+    &:focus {
+        outline: none;
+        border-color: $brand-secondary-vibrant;
+    }
+
+    // ---- Tablet ----
+    @media (min-width: $bp-md) {
+        font-size: $font-size-base;
+        padding: $space-xs;
+    }
+
+    // ---- Desktop ----
+    @media (min-width: $bp-lg) {
+        padding: $space-sm;
+    }
+}
+
+.btn {
+    border-radius: $radius-xl;
+    font-family: $font-family;
+    font-size: $font-size-base;
+    font-weight: $font-weight-bold;
+    height: $space-xl;
+    letter-spacing: -0.4px;
+    cursor: pointer;
+    width: 100%;
+    border: none;
+
+    &--primary {
+        background-color: $brand-secondary-bold;
+        color: white;
+
+        &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        }
+    }
+
+    &--secondary {
+        background-color: $brand-light-color;
+        border: 1px solid $brand-gray-color;
+        color: $brand-dark-color;
+    }
+
+    &--tertiary {
+        background-color: $brand-light-color;
+        color: $brand-dark-color;
+    }
+
+    // ---- Tablet ----
+    @media (min-width: $bp-md) {
+        font-size: $font-size-md;
+        height: 56px;
     }
 }
