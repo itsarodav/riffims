@@ -18,6 +18,8 @@ $space-lg: 2rem;      // 32px
 $space-xl: 3rem;      // 48px
 $space-2xl: 4rem;     // 64px
 $space-3xl: 6rem;     // 96px
+$space-4xl: 8rem;     // 128px
+$space-5xl: 9rem;     // 144px
 
 // ---- Font family ----
 $font-family: 'Albert Sans', sans-serif;
@@ -93,7 +95,7 @@ $container-xl: 1200px;
 
 // ---- Responsive gutter / padding ----
 $gutter-mobile: $space-sm;     // 16px
-$gutter-tablet: $space-md;     // 24px
+$gutter-tablet: $space-md;     
 $gutter-desktop: $space-lg;    // 32px
 
 // COLORS

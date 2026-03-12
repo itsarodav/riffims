@@ -1,6 +1,6 @@
 @use '../styles/tokens' as *;
 
-// ---- Mobile (base) ----
+// Mobile
 
 .login-container{
     background-color: $brand-light-color;
@@ -11,12 +11,12 @@
     gap: $space-lg;
     border-radius: $radius-lg;
     height: 100%;
-    padding: $space-sm $gutter-mobile;
+    padding: $space-lg $space-2xs;
 
     &__inputs{
         display: flex;
         flex-direction: column;
-        gap: $space-xs;
+        gap: $space-sm;
         width: 100%;
     }
 
@@ -30,14 +30,15 @@
     &__actions{
         display: flex;
         flex-direction: column;
-        gap: $space-2xs;
+        gap: $space-sm;
         width: 100%;
     }
 
     // ---- Tablet ----
     @media (min-width: $bp-md) {
+        width: 100%;
         gap: $space-xl;
-        padding: $space-sm $gutter-tablet;
+        padding: $space-xl $space-5xl;
 
         &__inputs{
             gap: $space-sm;
@@ -65,8 +66,8 @@
     color: $brand-dark-color;
     font-family: $font-family;
     font-size: $font-size-sm;
-    letter-spacing: -0.4px;
-    padding: $space-2xs;
+    letter-spacing: -0.01rem;
+    padding: $space-xs;
     width: 100%;
 
     &::placeholder {

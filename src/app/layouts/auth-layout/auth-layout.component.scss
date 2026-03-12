@@ -22,21 +22,21 @@
 }
 
 .auth-layout__shape--music {
-  top: -5%;
-  left: -9%;
-  width: 49%;
+  top: 9%;
+  left: -10%;
+  width: 50%;
 }
 
 .auth-layout__shape--album {
-  top: -4%;
-  left: 40%;
-  width: 49%;
+  top: -5%;
+  left: 42%;
+  width: 50%;
 }
 
 .auth-layout__shape--ai {
-  top: 22%;
-  right: -9%;
-  width: 49%;
+  top: 20%;
+  right: -8%;
+  width: 50%;
 }
 
 // wrapper interno transparente en mobile, constrains content en desktop
@@ -65,10 +65,8 @@
 
 @media (min-width: $bp-md) {
   .auth-layout__panel {
-    max-width: 480px;
-    margin-inline: auto;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
+    right: 0;
   }
 
   .auth-layout__shape {
