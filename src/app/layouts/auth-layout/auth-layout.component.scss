@@ -6,7 +6,7 @@
   position: relative;
   min-height: 100vh;
   background-color: $brand-secondary-vibrant;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 // Background layer
@@ -57,7 +57,9 @@
   border-radius: $space-2xl $space-2xl 0 0;
   padding: $space-xl $space-lg;
   z-index: $z-dropdown;
-  height: 64vh;
+  min-height: 64vh;
+  max-height: 85vh;
+  overflow-y: auto;
 }
 
 // TABLET (≥768px)
@@ -195,8 +197,12 @@
     transform: none;
     width: 48%;
     max-width: none;
+    min-height: auto;
+    max-height: none;
     margin: auto 1% auto auto;
     border-radius: $space-lg;
+    padding: $space-xl;
     z-index: $z-base + 1;
+    overflow-y: auto;
   }
 }

@@ -11,7 +11,6 @@
     justify-content: center;
     gap: $space-xl;
     border-radius: $radius-lg;
-    height: 100%;
     padding: $space-xl $space-2xs;
 
     &__form{
@@ -66,8 +65,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: $space-md $space-xl;
-        height: 70vh;
+        padding: $space-lg $space-xl;
 
         &__form{
             display: flex;
