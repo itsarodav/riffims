@@ -35,29 +35,36 @@ A mobile-first web application for independent music artists to self-manage thei
    npm install
    ```
 
-3. Set up environment files:
+3. Set up environment variables:
 
    ```bash
-   cp src/environments/environment.example.ts src/environments/environment.ts 
-   cp src/environments/environment.example.ts src/environments/environment.development.ts
+   cp .env.example .env
    ```
 
-   Open both files and replace the placeholder values with your Supabase credentials.
+   Open `.env` and fill in your Supabase credentials (see the table below).
 
 4. Start the development server:
 
    ```bash
-   ng serve
+   npm start
    ```
 
    Open [http://localhost:4200](http://localhost:4200) in your browser.
+
+   The `prestart` hook runs `scripts/set-env.js`, which reads `.env` and
+   generates `src/environments/environment.ts` and `environment.development.ts`
+   automatically. Both files are gitignored.
 
 ## Environment variables
 
 | Variable | Description | Where to find it |
 |---|---|---|
-| `supabaseUrl` | Supabase project URL | Supabase dashboard -> Project Settings -> API |
-| `supabaseKey` | Supabase anonymous (public) key | Supabase dashboard -> Project Settings -> API |
+| `SUPABASE_URL` | Supabase project URL | Supabase dashboard -> Project Settings -> API |
+| `SUPABASE_ANON_KEY` | Supabase anonymous (public) key | Supabase dashboard -> Project Settings -> API |
+
+> The `anon` key is public by design. Security is enforced via Row Level
+> Security (RLS) policies in Supabase, not by hiding the key. Never commit the
+> `service_role` key.
 
 ## Available scripts
 
@@ -81,7 +88,18 @@ src/app/
 
 ## Deployment
 
-The project uses Netlify with CI/CD connected to the `main` branch. Every push to `main` triggers an automatic build and deploy. The build output directory is `dist/riffims`.
+The project uses Netlify with CI/CD connected to the `main` branch. Every push
+to `main` triggers an automatic build and deploy. Build configuration lives in
+`netlify.toml` (build command: `npm run build`, publish dir: `dist/riffims/browser`).
+
+Before the first deploy, set these environment variables in **Netlify -> Site
+settings -> Environment variables**:
+
+- `SUPABASE_URL`
+- `SUPABASE_ANON_KEY`
+
+The `prebuild` hook will pick them up and generate the Angular environment
+files during each build.
 
 Production URL: *aún por crear*
 

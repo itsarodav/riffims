@@ -1,0 +1,9 @@
+[build]
+  command = "npm run build"
+  publish = "dist/riffims/browser"
+
+# SPA fallback: every route returns index.html so Angular Router can handle it
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
