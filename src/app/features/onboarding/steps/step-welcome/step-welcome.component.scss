@@ -1,0 +1,54 @@
+@use 'tokens' as *;
+
+.step-welcome {
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+  width: 100%;
+
+  &__title {
+    font-family: $font-family;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: $brand-dark-color;
+    margin: 0;
+  }
+
+  &__lead {
+    font-family: $font-family;
+    font-size: $font-size-sm;
+    color: $brand-dark-color;
+    margin: 0;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: $space-2xs;
+    margin: 0;
+    padding-left: $space-md;
+    font-family: $font-family;
+    font-size: $font-size-sm;
+    color: $brand-dark-color;
+  }
+
+  &__note {
+    font-family: $font-family;
+    font-size: $font-size-xs;
+    color: $brand-gray-bold-color;
+    margin: 0;
+  }
+
+  @media (min-width: $bp-md) {
+    gap: $space-lg;
+
+    &__title {
+      font-size: $font-size-xl;
+    }
+
+    &__lead,
+    &__list {
+      font-size: $font-size-base;
+    }
+  }
+}

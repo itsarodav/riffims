@@ -1,0 +1,95 @@
+@use 'tokens' as *;
+
+.step-emoji {
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+  width: 100%;
+
+  &__title {
+    font-family: $font-family;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: $brand-dark-color;
+    margin: 0;
+  }
+
+  &__lead {
+    font-family: $font-family;
+    font-size: $font-size-sm;
+    color: $brand-dark-color;
+    margin: 0;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: $space-2xs;
+  }
+
+  &__option {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 1;
+    border-radius: $radius-lg;
+    border: 1px solid $brand-gray-color;
+    background-color: $brand-light-color;
+    font-size: $font-size-lg;
+    cursor: pointer;
+    transition: background-color $duration-fast $easing-default,
+                border-color $duration-fast $easing-default,
+                transform $duration-fast $easing-default;
+
+    &:hover:not(:disabled):not(.step-emoji__option--selected) {
+      border-color: $brand-secondary-vibrant;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $brand-secondary-vibrant;
+      outline-offset: 2px;
+    }
+
+    &--selected {
+      background-color: $brand-secondary-bold;
+      border-color: $brand-secondary-bold;
+      transform: scale(1.05);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  &__error {
+    color: $negative-700;
+    font-family: $font-family;
+    font-size: $font-size-sm;
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: $space-sm;
+  }
+
+  @media (min-width: $bp-md) {
+    &__title {
+      font-size: $font-size-xl;
+    }
+
+    &__lead {
+      font-size: $font-size-base;
+    }
+
+    &__grid {
+      grid-template-columns: repeat(8, 1fr);
+      gap: $space-xs;
+    }
+
+    &__option {
+      font-size: $font-size-xl;
+    }
+  }
+}

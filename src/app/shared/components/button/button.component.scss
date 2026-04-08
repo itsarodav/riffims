@@ -1,1 +1,52 @@
 @use 'tokens' as *;
+
+// Estilos extraídos de login/register para centralizar aquí la apariencia
+// de todos los botones de la aplicación.
+
+.btn {
+  border-radius: $radius-xl;
+  font-family: $font-family;
+  font-size: $font-size-base;
+  font-weight: $font-weight-bold;
+  height: $space-xl;
+  letter-spacing: -0.4px;
+  cursor: pointer;
+  border: none;
+  padding: 0 $space-md;
+  transition: opacity $duration-fast $easing-default,
+              background-color $duration-fast $easing-default;
+
+  &--full {
+    width: 100%;
+  }
+
+  &--primary {
+    background-color: $brand-secondary-bold;
+    color: white;
+  }
+
+  &--secondary {
+    background-color: $brand-light-color;
+    border: 1px solid $brand-gray-color;
+    color: $brand-dark-color;
+  }
+
+  &--tertiary {
+    background-color: $brand-light-color;
+    color: $brand-dark-color;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  &--loading {
+    cursor: progress;
+  }
+
+  @media (min-width: $bp-md) {
+    font-size: $font-size-md;
+    height: 56px;
+  }
+}

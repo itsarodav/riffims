@@ -1,0 +1,30 @@
+<section class="step-genres" aria-labelledby="genres-title">
+  <h2 id="genres-title" class="step-genres__title">¿Qué géneros te definen?</h2>
+  <p class="step-genres__lead">
+    Selecciona entre {{ min }} y {{ max }} géneros que mejor representen tu música.
+  </p>
+
+  <app-chip-group
+    [options]="options"
+    mode="multiple"
+    [selected]="genres"
+    [min]="min"
+    [max]="max"
+    (selectedChange)="onSelectedChange($event)"
+  />
+
+  <p class="step-genres__counter">
+    {{ genres.length }} / {{ max }} seleccionados
+  </p>
+
+  <div class="step-genres__actions">
+    <app-button variant="tertiary" (click)="back.emit()">Atrás</app-button>
+    <app-button
+      variant="primary"
+      [disabled]="!canContinue"
+      (click)="onContinue()"
+    >
+      Continuar
+    </app-button>
+  </div>
+</section>

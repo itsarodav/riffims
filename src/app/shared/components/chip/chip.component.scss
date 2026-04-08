@@ -1,0 +1,48 @@
+@use 'tokens' as *;
+
+// El selector de host aplica :host para que la clase .chip resida en el
+// propio elemento <app-chip>, conservando el comportamiento de botón.
+:host {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-3xs;
+  padding: $space-2xs $space-sm;
+  border-radius: $radius-full;
+  background-color: $brand-light-color;
+  border: 1px solid $brand-gray-color;
+  color: $brand-dark-color;
+  font-family: $font-family;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color $duration-fast $easing-default,
+              border-color $duration-fast $easing-default,
+              color $duration-fast $easing-default;
+
+  &:hover:not(.chip--disabled):not(.chip--selected) {
+    border-color: $brand-secondary-vibrant;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $brand-secondary-vibrant;
+    outline-offset: 2px;
+  }
+
+  &.chip--selected {
+    background-color: $brand-secondary-bold;
+    border-color: $brand-secondary-bold;
+    color: white;
+  }
+
+  &.chip--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  @media (min-width: $bp-md) {
+    font-size: $font-size-base;
+    padding: $space-xs $space-md;
+  }
+}

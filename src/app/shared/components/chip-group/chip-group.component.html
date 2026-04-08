@@ -1,0 +1,11 @@
+<div class="chip-group" role="group">
+  <app-chip
+    *ngFor="let option of options"
+    [selected]="isSelected(option.value)"
+    [disabled]="isDisabled(option.value)"
+    (toggle)="toggle(option.value)"
+  >
+    <span *ngIf="option.emoji" aria-hidden="true">{{ option.emoji }}</span>
+    <span>{{ option.label }}</span>
+  </app-chip>
+</div>

@@ -6,93 +6,71 @@
         <img src="assets/icons/logo-riffims.svg" alt="Riffims" />
     </header>
 
-    <!-- novalidate porque gestiono la validación desde Angular -->
     <form
         class="register-container__form"
         (ngSubmit)="onRegister()"
         novalidate
     >
-
         <fieldset class="register-container__inputs">
-        <legend class="sr-only">Datos de tu cuenta</legend>
+            <legend class="sr-only">Datos de tu cuenta</legend>
 
-        <label for="username" class="sr-only">Nombre de usuario</label>
-        <input
-            id="username"
-            class="input-field"
-            type="text"
-            placeholder="Username"
-            autocomplete="username"
-            [(ngModel)]="username"
-            name="username"
-            required
-        />
-
-        <label for="email" class="sr-only">Email</label>
-        <input
-            id="email"
-            class="input-field"
-            type="email"
-            placeholder="Email"
-            autocomplete="email"
-            [(ngModel)]="email"
-            name="email"
-            required
-        />
-
-        <label for="password" class="sr-only">Contraseña</label>
-        <input
-            id="password"
-            class="input-field"
-            type="password"
-            placeholder="Password"
-            autocomplete="new-password"
-            [(ngModel)]="password"
-            name="password"
-            required
-        />
-
-        <div class="terms">
-            <input
-            type="checkbox"
-            id="terms"
-            [(ngModel)]="acceptedTerms"
-            name="terms"
+            <app-input
+                type="email"
+                label="Email"
+                placeholder="Email"
+                autocomplete="email"
+                name="email"
+                [hideLabel]="true"
+                [required]="true"
+                [(value)]="email"
             />
-            <label for="terms">
-            Al crear esta cuenta estás de acuerdo con nuestros
-            <a href="/terms">términos de uso</a> y nuestra
-            <a href="/privacy">política de privacidad</a>
-            </label>
-        </div>
+
+            <app-input
+                type="password"
+                label="Contraseña"
+                placeholder="Password"
+                autocomplete="new-password"
+                name="password"
+                [hideLabel]="true"
+                [required]="true"
+                [(value)]="password"
+            />
+
+            <div class="terms">
+                <input
+                    type="checkbox"
+                    id="terms"
+                    [(ngModel)]="acceptedTerms"
+                    name="terms"
+                />
+                <label for="terms">
+                    Al crear esta cuenta estás de acuerdo con nuestros
+                    <a href="/terms">términos de uso</a> y nuestra
+                    <a href="/privacy">política de privacidad</a>
+                </label>
+            </div>
         </fieldset>
 
         <output
-        class="register-container__error"
-        role="alert"
-        *ngIf="errorMessage"
+            class="register-container__error"
+            role="alert"
+            *ngIf="errorMessage"
         >
-        {{ errorMessage }}
+            {{ errorMessage }}
         </output>
 
-        <!-- acciones dentro del form -->
         <div class="register-container__actions">
+            <app-button
+                type="submit"
+                variant="primary"
+                [disabled]="isLoading || !acceptedTerms"
+            >
+                {{ isLoading ? 'Creating account...' : 'Create an account' }}
+            </app-button>
 
-        <button
-            type="submit"
-            class="btn btn--primary"
-            [disabled]="isLoading || !acceptedTerms"
-        >
-            {{ isLoading ? 'Creating account...' : 'Create an account' }}
-        </button>
-
-        <button
-            type="button"
-            class="btn btn--tertiary"
-            (click)="goToLogin()"
-        >
-            Have an account? Log in here
-        </button>
+            <app-button variant="tertiary" (click)="goToLogin()">
+                Have an account? Log in here
+            </app-button>
         </div>
     </form>
 

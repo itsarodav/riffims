@@ -6,75 +6,57 @@
         <img src="assets/icons/logo-riffims.svg" alt="Riffims" />
     </header>
 
-    <!-- novalidate porque gestiono la validación desde Angular -->
     <form
         class="login-container__form"
         (ngSubmit)="onLogin()"
         novalidate
     >
-
         <fieldset class="login-container__inputs">
-        <legend class="sr-only">Credenciales de acceso</legend>
+            <legend class="sr-only">Credenciales de acceso</legend>
 
-        <label for="email" class="sr-only">Email</label>
-        <input
-            id="email"
-            class="input-field"
-            type="email"
-            placeholder="Email"
-            autocomplete="email"
-            [(ngModel)]="email"
-            name="email"
-            required
-        />
+            <app-input
+                type="email"
+                label="Email"
+                placeholder="Email"
+                autocomplete="email"
+                name="email"
+                [hideLabel]="true"
+                [required]="true"
+                [(value)]="email"
+            />
 
-        <label for="password" class="sr-only">Contraseña</label>
-        <input
-            id="password"
-            class="input-field"
-            type="password"
-            placeholder="Password"
-            autocomplete="current-password"
-            [(ngModel)]="password"
-            name="password"
-            required
-        />
+            <app-input
+                type="password"
+                label="Contraseña"
+                placeholder="Password"
+                autocomplete="current-password"
+                name="password"
+                [hideLabel]="true"
+                [required]="true"
+                [(value)]="password"
+            />
         </fieldset>
 
         <output
-        class="login-container__error"
-        role="alert"
-        *ngIf="errorMessage"
+            class="login-container__error"
+            role="alert"
+            *ngIf="errorMessage"
         >
-        {{ errorMessage }}
+            {{ errorMessage }}
         </output>
 
-        <!-- acciones dentro del form -->
         <div class="login-container__actions">
+            <app-button type="submit" variant="primary" [disabled]="isLoading">
+                {{ isLoading ? 'Entrando...' : 'Log in' }}
+            </app-button>
 
-        <button
-            type="submit"
-            class="btn btn--primary"
-            [disabled]="isLoading"
-        >
-            {{ isLoading ? 'Entrando...' : 'Log in' }}
-        </button>
+            <app-button variant="secondary" (click)="goToForgotPassword()">
+                Forgot Password
+            </app-button>
 
-        <button
-            type="button"
-            class="btn btn--secondary"
-            (click)="goToForgotPassword()"
-        >
-            Forgot Password
-        </button>
-
-        <button
-            type="button"
-            class="btn btn--tertiary"
-            (click)="goToRegister()"
-        >
-            Create Account
-        </button>
+            <app-button variant="tertiary" (click)="goToRegister()">
+                Create Account
+            </app-button>
         </div>
     </form>
 

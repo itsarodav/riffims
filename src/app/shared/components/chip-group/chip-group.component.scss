@@ -1,0 +1,12 @@
+@use 'tokens' as *;
+
+.chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2xs;
+  width: 100%;
+
+  @media (min-width: $bp-md) {
+    gap: $space-xs;
+  }
+}

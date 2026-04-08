@@ -1,0 +1,36 @@
+<section class="step-basics" aria-labelledby="basics-title">
+  <h2 id="basics-title" class="step-basics__title">Empecemos con lo básico</h2>
+  <p class="step-basics__lead">
+    ¿Cómo quieres que te vean en Riffims?
+  </p>
+
+  <div class="step-basics__fields">
+    <app-input
+      label="Nombre artístico"
+      placeholder="Tu nombre o el de tu banda"
+      [required]="true"
+      [(value)]="artistName"
+    />
+
+    <app-input
+      label="Nombre de usuario"
+      placeholder="usuario"
+      hint="Mínimo 3 caracteres. Podrá usarse para encontrarte."
+      [required]="true"
+      [error]="error"
+      [(value)]="username"
+    />
+  </div>
+
+  <div class="step-basics__actions">
+    <app-button variant="tertiary" (click)="back.emit()">Atrás</app-button>
+    <app-button
+      variant="primary"
+      [disabled]="!canContinue"
+      [loading]="isChecking"
+      (click)="onContinue()"
+    >
+      {{ isChecking ? 'Comprobando...' : 'Continuar' }}
+    </app-button>
+  </div>
+</section>

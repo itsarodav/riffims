@@ -1,0 +1,61 @@
+<main class="onboarding" aria-labelledby="onboarding-title">
+  <h1 id="onboarding-title" class="sr-only">Configura tu perfil</h1>
+
+  <header class="onboarding__header" aria-label="Progreso del onboarding">
+    <div class="onboarding__progress">
+      <div
+        class="onboarding__progress-bar"
+        [style.--progress]="(currentStep / totalSteps) * 100 + '%'"
+      ></div>
+      <p class="onboarding__progress-text">
+        Paso {{ currentStep }} de {{ totalSteps }}
+      </p>
+    </div>
+
+    <button
+      type="button"
+      class="onboarding__signout"
+      (click)="onSignOut()"
+    >
+      Salir
+    </button>
+  </header>
+
+  <div class="onboarding__content">
+    <app-step-welcome
+      *ngIf="currentStep === 1"
+      (next)="goNext()"
+    />
+
+    <app-step-basics
+      *ngIf="currentStep === 2"
+      [artistName]="draft.artist_name || ''"
+      [username]="draft.username || ''"
+      (next)="onBasicsNext($event)"
+      (back)="goBack()"
+    />
+
+    <app-step-role
+      *ngIf="currentStep === 3"
+      [role]="draft.role || null"
+      (next)="onRoleNext($event)"
+      (back)="goBack()"
+    />
+
+    <app-step-genres
+      *ngIf="currentStep === 4"
+      [genres]="draft.genres || []"
+      (next)="onGenresNext($event)"
+      (back)="goBack()"
+    />
+
+    <app-step-emoji
+      *ngIf="currentStep === 5"
+      [emoji]="draft.emoji || null"
+      [submitting]="submitting"
+      [errorMessage]="errorMessage"
+      (finish)="onEmojiFinish($event)"
+      (back)="goBack()"
+    />
+  </div>
+</main>

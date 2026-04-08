@@ -3,22 +3,20 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
+import { Button } from '../../../shared/components/button/button.component';
+import { InputComponent } from '../../../shared/components/input/input.component';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, Button, InputComponent],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
-  username = '';
   email = '';
   password = '';
-
-  // si el checkbox de términos está marcado
   acceptedTerms = false;
-
   errorMessage = '';
   isLoading = false;
 
@@ -28,7 +26,6 @@ export class RegisterComponent {
   ) {}
 
   async onRegister() {
-    // Validación required no dejar registrarse sin aceptar términos
     if (!this.acceptedTerms) {
       this.errorMessage = 'Debes aceptar los términos de uso para continuar';
       return;
@@ -41,16 +38,18 @@ export class RegisterComponent {
 
     if (error) {
       this.errorMessage = 'No se pudo crear la cuenta. Inténtalo de nuevo.';
-    } else {
-      // Registro exitoso → redirigir al login
-      this.router.navigate(['/login']);
+      this.isLoading = false;
+      return;
     }
 
+    // Tras crear la cuenta, el trigger de Supabase ya ha insertado la
+    // fila en profiles con onboarding_completed = false, así que vamos
+    // directamente al onboarding.
+    this.router.navigate(['/onboarding']);
     this.isLoading = false;
   }
 
   goToLogin() {
     this.router.navigate(['/login']);
   }
-
 }

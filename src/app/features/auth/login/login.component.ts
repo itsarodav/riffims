@@ -3,30 +3,26 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
+import { ProfileService } from '../../../core/services/profile.service';
+import { Button } from '../../../shared/components/button/button.component';
+import { InputComponent } from '../../../shared/components/input/input.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-  ],
+  imports: [CommonModule, FormsModule, Button, InputComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  // Valores que se enlazan con los inputs del formulario
   email = '';
   password = '';
-
-  // Mensaje de error que se muestra si algo falla
   errorMessage = '';
-
-  // Controla si el botón está desactivado mientras carga
   isLoading = false;
 
   constructor(
     private authService: AuthService,
+    private profileService: ProfileService,
     private router: Router
   ) {}
 
@@ -37,13 +33,14 @@ export class LoginComponent {
     const { error } = await this.authService.signIn(this.email, this.password);
 
     if (error) {
-      // Si hay error, lo mostramos al usuario
       this.errorMessage = 'Email o contraseña incorrectos';
-    } else {
-      // Si va bien, redirigimos a home
-      this.router.navigate(['/home']);
+      this.isLoading = false;
+      return;
     }
 
+    // Redirigir según el estado del onboarding
+    const completed = await this.profileService.isOnboardingCompleted();
+    this.router.navigate([completed ? '/home' : '/onboarding']);
     this.isLoading = false;
   }
 
@@ -54,5 +51,4 @@ export class LoginComponent {
   goToForgotPassword() {
     this.router.navigate(['/forgot-password']);
   }
-
 }

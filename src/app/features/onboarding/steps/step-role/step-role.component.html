@@ -1,0 +1,22 @@
+<section class="step-role" aria-labelledby="role-title">
+  <h2 id="role-title" class="step-role__title">¿Cómo te defines?</h2>
+  <p class="step-role__lead">Elige la opción que mejor te represente.</p>
+
+  <app-chip-group
+    [options]="options"
+    mode="single"
+    [selected]="selectedValues"
+    (selectedChange)="onSelectedChange($event)"
+  />
+
+  <div class="step-role__actions">
+    <app-button variant="tertiary" (click)="back.emit()">Atrás</app-button>
+    <app-button
+      variant="primary"
+      [disabled]="!role"
+      (click)="onContinue()"
+    >
+      Continuar
+    </app-button>
+  </div>
+</section>

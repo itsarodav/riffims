@@ -1,0 +1,39 @@
+<section class="step-emoji" aria-labelledby="emoji-title">
+  <h2 id="emoji-title" class="step-emoji__title">Elige tu emoticono</h2>
+  <p class="step-emoji__lead">
+    Será la pieza visual que acompañe a tu perfil en toda la aplicación.
+  </p>
+
+  <div class="step-emoji__grid" role="radiogroup" aria-label="Emoticono del perfil">
+    <button
+      type="button"
+      class="step-emoji__option"
+      [class.step-emoji__option--selected]="emoji === e"
+      *ngFor="let e of emojis"
+      role="radio"
+      [attr.aria-checked]="emoji === e"
+      [disabled]="submitting"
+      (click)="select(e)"
+    >
+      {{ e }}
+    </button>
+  </div>
+
+  <output class="step-emoji__error" role="alert" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </output>
+
+  <div class="step-emoji__actions">
+    <app-button variant="tertiary" [disabled]="submitting" (click)="back.emit()">
+      Atrás
+    </app-button>
+    <app-button
+      variant="primary"
+      [disabled]="!emoji"
+      [loading]="submitting"
+      (click)="onFinish()"
+    >
+      {{ submitting ? 'Guardando...' : 'Finalizar' }}
+    </app-button>
+  </div>
+</section>

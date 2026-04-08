@@ -1,0 +1,45 @@
+@use 'tokens' as *;
+
+.step-basics {
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+  width: 100%;
+
+  &__title {
+    font-family: $font-family;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: $brand-dark-color;
+    margin: 0;
+  }
+
+  &__lead {
+    font-family: $font-family;
+    font-size: $font-size-sm;
+    color: $brand-dark-color;
+    margin: 0;
+  }
+
+  &__fields {
+    display: flex;
+    flex-direction: column;
+    gap: $space-sm;
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: $space-sm;
+  }
+
+  @media (min-width: $bp-md) {
+    &__title {
+      font-size: $font-size-xl;
+    }
+
+    &__lead {
+      font-size: $font-size-base;
+    }
+  }
+}
