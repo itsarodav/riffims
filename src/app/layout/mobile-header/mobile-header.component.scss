@@ -1,0 +1,57 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-md $gutter-mobile;
+  background: linear-gradient(180deg, #FFCBA4 0%, $brand-light-color 100%);
+
+  @include desktop {
+    display: none;
+  }
+
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: $space-xs;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__greeting {
+    font-size: $font-size-base;
+    font-weight: $font-weight-bold;
+    color: $brand-dark-color;
+    margin: 0;
+  }
+
+  &__role {
+    font-size: $font-size-xs;
+    color: $brand-dark-color;
+    opacity: 0.7;
+    margin: 0;
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: $space-2xs;
+  }
+
+  &__icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: $space-2xs;
+    color: $brand-dark-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

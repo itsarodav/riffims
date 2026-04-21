@@ -1,0 +1,52 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.navbar {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-sm $space-md;
+  background-color: $brand-light-color;
+  border-bottom: 1px solid $brand-gray-color;
+  z-index: $z-sticky;
+
+  @include desktop {
+    display: flex;
+  }
+
+  &__left {
+    display: flex;
+    align-items: center;
+  }
+
+  &__title {
+    font-size: $font-size-base;
+    font-weight: $font-weight-medium;
+    color: $brand-dark-color;
+    margin: 0;
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: $space-sm;
+  }
+
+  &__avatar-link {
+    display: flex;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  &__icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: $brand-dark-color;
+    padding: $space-3xs;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+}

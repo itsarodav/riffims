@@ -1,0 +1,23 @@
+<!-- Desktop: Navbar top -->
+<app-navbar />
+
+<div class="app-shell">
+  <!-- Desktop: Sidebar left -->
+  <app-sidebar />
+
+  <!-- Main scrollable area -->
+  <div class="app-shell__main">
+    <!-- Mobile: Header scrolls with content -->
+    <app-mobile-header />
+
+    <div class="app-shell__content">
+      <router-outlet />
+    </div>
+  </div>
+
+  <!-- Desktop: Riffi panel right -->
+  <app-riffi-panel class="app-shell__riffi" />
+</div>
+
+<!-- Mobile: Bottom nav fixed -->
+<app-bottom-nav />

@@ -1,0 +1,49 @@
+<section class="home">
+  <!-- 1. Section header -->
+  <h1 class="home__heading">Tus lanzamientos</h1>
+
+  <!-- 2. Release empty state -->
+  <a class="home__release-empty" routerLink="/nuevo">
+    <div class="home__release-icon">
+      <app-icon name="add-circle-filled" [size]="32" />
+    </div>
+    <p class="home__release-title">¡Crea tu primer lanzamiento!</p>
+    <p class="home__release-subtitle">Tú decides, yo te acompaño. Y termina cada paso para aumentar de nivel</p>
+  </a>
+
+  <!-- 3. Riffi tip card -->
+  <app-multi-card
+    variant="riffi-tip"
+    iconName="riffi-v0"
+    [iconSize]="32"
+    title="Riffi tip del día"
+    description="&quot;Publica contenido detrás de cámaras en la semana previa a tu lanzamiento. La anticipación mueve más que el anuncio.&quot;"
+  />
+
+  <!-- 4. Cover preview card -->
+  <app-multi-card
+    variant="feature"
+    iconName="music-album"
+    [iconSize]="32"
+    title="Cover preview"
+    description="Mira cómo quedaría tu portada en un reproductor de streaming, antes de publicarla."
+  />
+
+  <!-- 5. Grid 2 columns -->
+  <div class="home__grid">
+    <app-multi-card
+      variant="feature"
+      iconName="calendar"
+      [iconSize]="32"
+      title="Tu calendario"
+      description="Haz seguimiento a tu lanzamiento con eventos a la vista, y una cuenta regresiva para el gran día."
+    />
+    <app-multi-card
+      variant="feature"
+      iconName="riffionario"
+      [iconSize]="32"
+      title="Riffionario"
+      description="Tu diccionario de industria musical. Contratos, publishing, distribución... explicado fácil."
+    />
+  </div>
+</section>

@@ -9,6 +9,7 @@ export interface Profile {
   role: ArtistRole | null;
   genres: string[];
   emoji: string | null;
+  avatar_url: string | null;
   onboarding_completed: boolean;
   created_at: string;
   updated_at: string;

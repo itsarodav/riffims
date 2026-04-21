@@ -1,0 +1,43 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.bottom-nav {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: transparent;
+  z-index: $z-sticky;
+  padding: 0 $gutter-mobile;
+  gap: $space-2xs;
+  margin: 1rem 0;
+
+  @include desktop {
+    display: none;
+  }
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex: 1;
+    height: 64px;
+    background-color: $brand-light-color;
+    border: 1px solid $brand-gray-color;
+    border-radius: $radius-full;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.06);
+    padding: 0 $space-xs;
+    gap: $space-3xs;
+  }
+
+  &__ai {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+  }
+}

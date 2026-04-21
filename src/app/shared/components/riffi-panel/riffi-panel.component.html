@@ -1,0 +1,56 @@
+<aside class="riffi-panel">
+  <div class="riffi-panel__header">
+    <h2 class="riffi-panel__greeting">¡Hey, {{ userName() }} está aquí!</h2>
+    <p class="riffi-panel__subtitle">¿Cómo puedo ayudarte hoy?</p>
+
+    <div class="riffi-panel__actions">
+      <button class="riffi-panel__chip">
+        <app-icon name="idea" [size]="16" />
+        <span>Dame un Riffi tip</span>
+      </button>
+      <button class="riffi-panel__chip">
+        <app-icon name="riffionario" [size]="16" />
+        <span>Palabra de Riffionario</span>
+      </button>
+      <button class="riffi-panel__chip">
+        <app-icon name="idea" [size]="16" />
+        <span>Idea para lanzamiento</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="riffi-panel__messages">
+    @for (msg of riffi.messages(); track msg.timestamp) {
+      <div class="riffi-panel__message riffi-panel__message--{{ msg.role }}">
+        {{ msg.content }}
+      </div>
+    }
+
+    @if (riffi.loading()) {
+      <div class="riffi-panel__typing">Riffi está escribiendo...</div>
+    }
+  </div>
+
+  <div class="riffi-panel__input-area">
+    <input
+      class="riffi-panel__input"
+      [(ngModel)]="userInput"
+      placeholder="Pregúntale a Riffi"
+      (keyup.enter)="send()"
+    />
+    <div class="riffi-panel__input-actions">
+      <button class="riffi-panel__input-btn">
+        <app-icon name="add-circle" [size]="24" />
+      </button>
+      <button class="riffi-panel__input-btn">
+        <app-icon name="emoji-happy" [size]="24" />
+      </button>
+      <button class="riffi-panel__input-btn">
+        <app-icon name="mic" [size]="24" />
+      </button>
+      <button class="riffi-panel__send-btn" (click)="send()">
+        <app-icon name="arrow-up" [size]="24" />
+      </button>
+    </div>
+  </div>
+</aside>

@@ -1,0 +1,41 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.app-shell {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+
+  &__main {
+    flex: 1;
+    overflow-y: auto;
+    padding-bottom: 64px; // space for bottom nav in mobile
+
+    @include desktop {
+      padding-bottom: 0;
+    }
+  }
+
+  &__content {
+    padding: $gutter-mobile;
+
+    @include desktop {
+      padding: $space-md $space-lg;
+    }
+  }
+
+  &__riffi {
+    display: none;
+
+    @include desktop {
+      display: flex;
+    }
+  }
+}

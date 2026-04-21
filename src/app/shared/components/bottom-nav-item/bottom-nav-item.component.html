@@ -1,0 +1,14 @@
+<a
+  class="bottom-nav-item"
+  [class.bottom-nav-item--create]="variant === 'create'"
+  [class.bottom-nav-item--ai]="variant === 'ai'"
+  [routerLink]="route"
+  routerLinkActive="bottom-nav-item--active"
+>
+  <div class="bottom-nav-item__icon">
+    <app-icon [name]="iconName" [size]="variant === 'ai' ? 40 : 24" />
+  </div>
+  @if (variant !== 'create' && variant !== 'ai') {
+    <span class="bottom-nav-item__label">{{ label }}</span>
+  }
+</a>

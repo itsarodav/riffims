@@ -1,0 +1,72 @@
+<section class="perfil">
+  <!-- Avatar -->
+  <div class="perfil__avatar-section">
+    <app-avatar [src]="avatarUrl()" [size]="96" />
+
+    <app-button
+      variant="secondary"
+      [fullWidth]="false"
+      [loading]="uploading()"
+      (click)="fileInput.click()"
+    >
+      Cambiar foto
+    </app-button>
+
+    <input
+      #fileInput
+      type="file"
+      accept="image/jpeg,image/png,image/webp"
+      hidden
+      (change)="onFileSelected($event)"
+    />
+  </div>
+
+  <!-- Datos del perfil -->
+  <div class="perfil__data-section">
+    <h2 class="perfil__section-title">Datos del perfil</h2>
+
+    <app-input
+      label="Nombre artístico"
+      [value]="artistName()"
+      placeholder="Tu nombre artístico"
+      (valueChange)="onArtistNameChange($event)"
+    />
+
+    <div class="perfil__field">
+      <label class="perfil__label">Rol</label>
+      <app-chip-group
+        [options]="roleOptions"
+        mode="single"
+        [selected]="selectedRole()"
+        (selectedChange)="onRoleChange($event)"
+      />
+    </div>
+
+    <div class="perfil__field">
+      <label class="perfil__label">Géneros (máx. {{ maxGenres }})</label>
+      <app-chip-group
+        [options]="genreOptions"
+        mode="multiple"
+        [selected]="selectedGenres()"
+        [max]="maxGenres"
+        [min]="minGenres"
+        (selectedChange)="onGenresChange($event)"
+      />
+    </div>
+
+    <app-button
+      variant="primary"
+      [loading]="saving()"
+      (click)="saveProfile()"
+    >
+      Guardar cambios
+    </app-button>
+  </div>
+
+  <!-- Cerrar sesión -->
+  <div class="perfil__logout-section">
+    <app-button variant="tertiary" (click)="signOut()">
+      Cerrar sesión
+    </app-button>
+  </div>
+</section>

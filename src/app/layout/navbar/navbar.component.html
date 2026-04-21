@@ -1,0 +1,13 @@
+<header class="navbar">
+  <div class="navbar__left">
+    <h1 class="navbar__title">Inicio</h1>
+  </div>
+  <div class="navbar__right">
+    <button class="navbar__icon-btn">
+      <app-icon name="notification" [size]="24" />
+    </button>
+    <a routerLink="/perfil" class="navbar__avatar-link">
+      <app-avatar [src]="avatarUrl()" [size]="36" />
+    </a>
+  </div>
+</header>

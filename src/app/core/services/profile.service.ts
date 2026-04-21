@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SupabaseService } from './supabase.service';
-import { OnboardingData, Profile } from '../models/profile.model';
+import { ArtistRole, OnboardingData, Profile } from '../models/profile.model';
 
 // Aísla el acceso a la tabla public.profiles. Ningún componente toca
 // directamente el cliente de Supabase para trabajar con perfiles: todo
@@ -81,6 +81,65 @@ export class ProfileService {
         emoji: payload.emoji,
         onboarding_completed: true,
       })
+      .eq('id', userId);
+
+    return { error };
+  }
+
+  // Sube una imagen de avatar a Supabase Storage, sobreescribiendo
+  // si ya existía. Retorna la URL pública o null si falla.
+  async uploadAvatar(file: File): Promise<string | null> {
+    const { data: sessionData } = await this.supabase.getSession();
+    const userId = sessionData.session?.user?.id;
+    if (!userId) return null;
+
+    const ext = file.name.split('.').pop() ?? 'jpg';
+    const path = `${userId}/avatar.${ext}`;
+
+    const { error } = await this.supabase.client.storage
+      .from('avatars')
+      .upload(path, file, { upsert: true });
+
+    if (error) {
+      console.error('ProfileService.uploadAvatar', error);
+      return null;
+    }
+
+    const { data: urlData } = this.supabase.client.storage
+      .from('avatars')
+      .getPublicUrl(path);
+
+    // Append timestamp to bust cache after re-upload
+    return `${urlData.publicUrl}?t=${Date.now()}`;
+  }
+
+  // Actualiza el campo avatar_url en la tabla profiles.
+  async updateAvatarUrl(avatarUrl: string) {
+    const { data: sessionData } = await this.supabase.getSession();
+    const userId = sessionData.session?.user?.id;
+    if (!userId) return { error: new Error('No hay sesión activa') };
+
+    const { error } = await this.supabase.client
+      .from('profiles')
+      .update({ avatar_url: avatarUrl })
+      .eq('id', userId);
+
+    return { error };
+  }
+
+  // Actualiza los campos editables del perfil (nombre, rol, géneros).
+  async updateProfile(data: {
+    artist_name?: string;
+    role?: ArtistRole;
+    genres?: string[];
+  }) {
+    const { data: sessionData } = await this.supabase.getSession();
+    const userId = sessionData.session?.user?.id;
+    if (!userId) return { error: new Error('No hay sesión activa') };
+
+    const { error } = await this.supabase.client
+      .from('profiles')
+      .update(data)
       .eq('id', userId);
 
     return { error };

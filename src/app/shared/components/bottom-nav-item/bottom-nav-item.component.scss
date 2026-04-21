@@ -1,0 +1,52 @@
+@use 'tokens' as *;
+
+.bottom-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $space-3xs;
+  text-decoration: none;
+  color: $brand-dark-color;
+  transition: color $duration-fast $easing-default;
+  flex: 1;
+  height: 40px;
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: $radius-full;
+  }
+
+  &__label {
+    font-size: $font-size-2xs;
+    font-weight: $font-weight-medium;
+    letter-spacing: -0.2px;
+  }
+
+  &--active {
+    color: $brand-dark-color;
+  }
+
+  &--create {
+    .bottom-nav-item__icon {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  &--ai {
+    flex: none;
+    width: 64px;
+    height: 64px;
+    background: transparent;
+
+    .bottom-nav-item__icon {
+      width: 48px;
+      height: 48px;
+    }
+  }
+}

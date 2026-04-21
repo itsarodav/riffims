@@ -3,7 +3,12 @@ import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component
 import { LoginComponent } from './features/auth/login/login.component';
 import { RegisterComponent } from './features/auth/register/register.component';
 import { OnboardingComponent } from './features/onboarding/onboarding.component';
-import { Home } from './features/home/home';
+import { AppShellComponent } from './layout/app-shell/app-shell.component';
+import { HomeComponent } from './features/home/home.component';
+import { LanzamientosComponent } from './features/lanzamientos/lanzamientos.component';
+import { RiffiComponent } from './features/riffi/riffi.component';
+import { PerfilComponent } from './features/perfil/perfil.component';
+import { NuevoLanzamientoComponent } from './features/nuevo-lanzamiento/nuevo-lanzamiento.component';
 import { authGuard } from './core/guards/auth-guard';
 import { guestGuard } from './core/guards/guest-guard';
 import {
@@ -27,9 +32,16 @@ export const routes: Routes = [
     ],
   },
   {
-    path: 'home',
-    component: Home,
+    path: '',
+    component: AppShellComponent,
     canActivate: [authGuard, onboardingGuard],
+    children: [
+      { path: 'home', component: HomeComponent },
+      { path: 'lanzamientos', component: LanzamientosComponent },
+      { path: 'riffi', component: RiffiComponent },
+      { path: 'perfil', component: PerfilComponent },
+      { path: 'nuevo', component: NuevoLanzamientoComponent },
+    ],
   },
-  { path: '**', redirectTo: '' },
+  { path: '**', redirectTo: 'home' },
 ];

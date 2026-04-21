@@ -1,15 +1,15 @@
 @use 'tokens' as *;
 
-// Responsive Mixins — Mobile First
+// Responsive Mixins - Mobile First
 
-// Tablet — 768px+
+// Tablet - 768px+
 @mixin tablet {
     @media (min-width: $bp-md) {
         @content;
     }
 }
 
-// Desktop — 1024px+
+// Desktop - 1024px+
 @mixin desktop {
     @media (min-width: $bp-lg) {
         @content;

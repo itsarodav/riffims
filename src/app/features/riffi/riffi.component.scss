@@ -1,0 +1,167 @@
+@use 'tokens' as *;
+
+.riffi-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: calc(100vh - 64px - 80px); // minus bottom nav and header approx
+  background: linear-gradient(180deg, #FFCBA4 0%, $brand-light-color 30%);
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $space-sm;
+  }
+
+  &__back,
+  &__help {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: $brand-dark-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    padding: $space-2xs $space-sm;
+    border: 1px solid $brand-gray-color;
+    border-radius: $radius-full;
+    background: #fff;
+  }
+
+  &__body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: $space-md;
+  }
+
+  &__welcome {
+    text-align: center;
+  }
+
+  &__greeting {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    color: $brand-dark-color;
+    margin: 0 0 $space-3xs;
+  }
+
+  &__subtitle {
+    font-size: $font-size-sm;
+    color: $brand-dark-color;
+    opacity: 0.7;
+    margin: 0 0 $space-md;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: $space-2xs;
+  }
+
+  &__chip {
+    display: flex;
+    align-items: center;
+    gap: $space-3xs;
+    padding: $space-2xs $space-xs;
+    border: 1px solid $brand-gray-color;
+    border-radius: $radius-full;
+    background: #fff;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    color: $brand-dark-color;
+    cursor: pointer;
+    font-family: $font-family;
+  }
+
+  &__messages {
+    display: flex;
+    flex-direction: column;
+    gap: $space-2xs;
+    margin-top: $space-md;
+  }
+
+  &__message {
+    padding: $space-xs $space-sm;
+    border-radius: $radius-lg;
+    font-size: $font-size-sm;
+    max-width: 85%;
+
+    &--user {
+      align-self: flex-end;
+      background-color: $brand-secondary-vibrant;
+      color: #fff;
+    }
+
+    &--assistant {
+      align-self: flex-start;
+      background-color: #fff;
+      border: 1px solid $brand-gray-color;
+      color: $brand-dark-color;
+    }
+  }
+
+  &__typing {
+    font-size: $font-size-xs;
+    color: $brand-gray-bold-color;
+  }
+
+  &__input-area {
+    padding: $space-sm $space-md $space-md;
+  }
+
+  &__input {
+    width: 100%;
+    padding: $space-xs $space-sm;
+    border: 1px solid $brand-gray-color;
+    border-radius: $radius-lg;
+    font-size: $font-size-sm;
+    font-family: $font-family;
+    background: #fff;
+    outline: none;
+    box-sizing: border-box;
+
+    &:focus {
+      border-color: $brand-secondary-vibrant;
+    }
+  }
+
+  &__input-actions {
+    display: flex;
+    align-items: center;
+    gap: $space-2xs;
+    margin-top: $space-2xs;
+  }
+
+  &__input-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: $brand-gray-bold-color;
+    padding: $space-3xs;
+    display: flex;
+  }
+
+  &__send-btn {
+    margin-left: auto;
+    width: 36px;
+    height: 36px;
+    border-radius: $radius-circle;
+    background-color: $brand-secondary-vibrant;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

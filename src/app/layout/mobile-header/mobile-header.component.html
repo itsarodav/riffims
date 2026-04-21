@@ -1,0 +1,14 @@
+<header class="mobile-header">
+  <div class="mobile-header__left">
+    <app-avatar [src]="profile()?.avatar_url ?? null" [size]="44" />
+    <div class="mobile-header__info">
+      <p class="mobile-header__greeting">Hola {{ displayName }}! 👋</p>
+      <p class="mobile-header__role">{{ roleLabel }}</p>
+    </div>
+  </div>
+  <div class="mobile-header__right">
+    <button class="mobile-header__icon-btn">
+      <app-icon name="notification" [size]="24" />
+    </button>
+  </div>
+</header>
