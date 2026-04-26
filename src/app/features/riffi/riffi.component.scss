@@ -4,7 +4,6 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  min-height: calc(100vh - 64px - 80px); // minus bottom nav and header approx
   background: linear-gradient(180deg, #FFCBA4 0%, $brand-light-color 30%);
 
   &__header {
@@ -29,10 +28,10 @@
   &__logo {
     display: flex;
     align-items: center;
-    padding: $space-2xs $space-sm;
+    padding: $space-4xs $space-md;
     border: 1px solid $brand-gray-color;
     border-radius: $radius-full;
-    background: #fff;
+    background: $brand-light-color;
   }
 
   &__body {
@@ -41,6 +40,7 @@
     flex-direction: column;
     justify-content: center;
     padding: $space-md;
+    overflow-y: auto;
   }
 
   &__welcome {
@@ -75,12 +75,24 @@
     padding: $space-2xs $space-xs;
     border: 1px solid $brand-gray-color;
     border-radius: $radius-full;
-    background: #fff;
+    background: $brand-light-color;
     font-size: $font-size-xs;
     font-weight: $font-weight-medium;
     color: $brand-dark-color;
     cursor: pointer;
     font-family: $font-family;
+
+    &--tip app-icon {
+      color: $brand-secondary-vibrant;
+    }
+
+    &--riffionario app-icon {
+      color:$negative-500;
+    }
+
+    &--idea app-icon {
+      color: $brand-primary;
+    }
   }
 
   &__messages {

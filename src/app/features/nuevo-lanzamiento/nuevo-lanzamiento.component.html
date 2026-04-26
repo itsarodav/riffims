@@ -1,0 +1,86 @@
+<section class="nuevo-lanzamiento">
+  <!-- Back button -->
+  <a class="nuevo-lanzamiento__back" routerLink="/home">
+    <app-icon name="arrow-left" [size]="16" />
+    <span>Atrás</span>
+  </a>
+
+  <!-- Form -->
+  <div class="nuevo-lanzamiento__form">
+    <!-- Nombre -->
+    <app-input
+      label="Nombre del lanzamiento"
+      placeholder="Ej: Mi primer single"
+      [value]="name"
+      (valueChange)="name = $event"
+      [error]="nameError"
+    />
+
+    <!-- Tipo -->
+    <div class="nuevo-lanzamiento__field">
+      <label class="nuevo-lanzamiento__label">Tipo</label>
+      <app-chip-group
+        mode="single"
+        [options]="typeOptions"
+        [selected]="releaseType"
+        (selectedChange)="releaseType = $event"
+      />
+      <p class="nuevo-lanzamiento__error" *ngIf="typeError">{{ typeError }}</p>
+    </div>
+
+    <!-- Fecha -->
+    <app-input
+      label="Día de lanzamiento"
+      placeholder="DD/MM/AAAA"
+      [value]="releaseDate"
+      (valueChange)="releaseDate = $event"
+      [error]="dateError"
+    />
+
+    <!-- Experiencia previa -->
+    <div class="nuevo-lanzamiento__field">
+      <label class="nuevo-lanzamiento__label">¿Has realizado algún lanzamiento musical antes?</label>
+      <app-chip-group
+        mode="single"
+        [options]="yesNoOptions"
+        [selected]="hasPreviousRelease"
+        (selectedChange)="hasPreviousRelease = $event"
+      />
+    </div>
+
+    <!-- Distribuidora -->
+    <div class="nuevo-lanzamiento__field">
+      <label class="nuevo-lanzamiento__label">¿Cuentas con distribuidora y otros tipos de herramientas musicales?</label>
+      <app-chip-group
+        mode="single"
+        [options]="yesNoOptions"
+        [selected]="hasDistributor"
+        (selectedChange)="hasDistributor = $event"
+      />
+    </div>
+
+    <!-- Elementos de planificación -->
+    <div class="nuevo-lanzamiento__field">
+      <label class="nuevo-lanzamiento__label">¿Qué elementos te gustaría planificar y aprender?</label>
+      <app-chip-group
+        mode="multiple"
+        [options]="planningOptions"
+        [selected]="planningElements"
+        (selectedChange)="planningElements = $event"
+      />
+    </div>
+
+    <!-- Error general -->
+    <p class="nuevo-lanzamiento__error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+    <!-- Botones -->
+    <div class="nuevo-lanzamiento__actions">
+      <app-button variant="secondary" [fullWidth]="false" routerLink="/home">
+        Cerrar
+      </app-button>
+      <app-button variant="primary" [fullWidth]="false" [loading]="loading" (click)="onSubmit()">
+        Crear
+      </app-button>
+    </div>
+  </div>
+</section>

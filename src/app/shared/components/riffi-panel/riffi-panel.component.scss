@@ -54,7 +54,19 @@
     transition: background-color $duration-fast $easing-default;
 
     &:hover {
-      background-color: $neutral-100;
+      background-color: $brand-gray-color;
+    }
+
+    &--tip app-icon {
+      color: $brand-secondary-vibrant;
+    }
+
+    &--riffionario app-icon{
+      color: $negative-600;
+    }
+
+    &--idea app-icon {
+      color: $brand-primary;
     }
   }
 

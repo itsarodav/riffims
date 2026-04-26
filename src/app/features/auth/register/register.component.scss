@@ -1,8 +1,6 @@
 @use '../styles/tokens' as *;
 
-// Estilos de .btn y .input-field migrados a sus componentes atómicos.
-// Aquí sólo permanece el layout propio del contenedor de registro
-// y los estilos específicos del bloque de términos.
+// Aquí sólo permanece el layout propio del contenedor de registro y los estilos específicos del bloque de términos.
 
 .register-container{
     background-color: $brand-light-color;

@@ -1,8 +1,6 @@
 @use '../styles/tokens' as *;
 
-// Los estilos de .btn y .input-field se han movido a sus componentes
-// atómicos (app-button, app-input). Aquí sólo queda el layout propio
-// del contenedor de login.
+//Aquí sólo queda el layout propio del contenedor de login.
 
 .login-container{
     background-color: $brand-light-color;

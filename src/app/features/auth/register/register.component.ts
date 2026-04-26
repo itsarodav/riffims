@@ -42,9 +42,6 @@ export class RegisterComponent {
       return;
     }
 
-    // Tras crear la cuenta, el trigger de Supabase ya ha insertado la
-    // fila en profiles con onboarding_completed = false, así que vamos
-    // directamente al onboarding.
     this.router.navigate(['/onboarding']);
     this.isLoading = false;
   }

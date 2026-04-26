@@ -21,6 +21,10 @@
     @include desktop {
       padding-bottom: 0;
     }
+
+    &--no-bottom-pad {
+      padding-bottom: 0;
+    }
   }
 
   &__content {
@@ -28,6 +32,15 @@
 
     @include desktop {
       padding: $space-md $space-lg;
+    }
+
+    &--flush {
+      padding: 0;
+      height: 100%;
+
+      @include desktop {
+        padding: $space-md $space-lg;
+      }
     }
   }
 

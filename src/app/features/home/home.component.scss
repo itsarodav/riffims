@@ -6,12 +6,47 @@
   flex-direction: column;
   gap: $space-sm;
 
+  &__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $space-2xs;
+  }
+
   &__heading {
     font-size: $font-size-xl;
     font-weight: $font-weight-bold;
     color: $brand-dark-color;
-    margin: 0 0 $space-2xs;
+    margin: 0;
     letter-spacing: -0.5px;
+  }
+
+  &__create-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: $space-2xs $space-md;
+    background-color: $brand-secondary-vibrant;
+    color: white;
+    font-family: $font-family;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    border-radius: $radius-full;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color $duration-fast $easing-default;
+
+    &:hover {
+      background-color: $brand-secondary-bold;
+    }
+  }
+
+  // Release cards container
+  &__releases {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-sm;
   }
 
   // Release empty state card

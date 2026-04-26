@@ -1,15 +1,30 @@
 <section class="home">
   <!-- 1. Section header -->
-  <h1 class="home__heading">Tus lanzamientos</h1>
+  <div class="home__header">
+    <h1 class="home__heading">Tus lanzamientos</h1>
+    <a *ngIf="hasReleases" class="home__create-btn" routerLink="/nuevo">Crear</a>
+  </div>
 
-  <!-- 2. Release empty state -->
-  <a class="home__release-empty" routerLink="/nuevo">
+  <!-- 2a. Release empty state (no releases) -->
+  <a *ngIf="!loading && !hasReleases" class="home__release-empty" routerLink="/nuevo">
     <div class="home__release-icon">
       <app-icon name="add-circle-filled" [size]="32" />
     </div>
     <p class="home__release-title">¡Crea tu primer lanzamiento!</p>
     <p class="home__release-subtitle">Tú decides, yo te acompaño. Y termina cada paso para aumentar de nivel</p>
   </a>
+
+  <!-- 2b. Release cards (has releases) -->
+  <div *ngIf="hasReleases" class="home__releases">
+    <app-release-card
+      *ngFor="let release of releases"
+      [title]="release.name"
+      [releaseType]="getDisplayType(release.release_type)"
+      [daysToRelease]="getDaysToRelease(release)"
+      [completedLevels]="release.completed_levels"
+      [fullWidth]="releases.length === 1"
+    />
+  </div>
 
   <!-- 3. Riffi tip card -->
   <app-multi-card

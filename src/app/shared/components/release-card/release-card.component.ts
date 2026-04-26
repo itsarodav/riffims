@@ -21,4 +21,5 @@ export class ReleaseCardComponent {
   @Input() releaseType: ReleaseType = 'Single';
   @Input() daysToRelease: number = 0;
   @Input() completedLevels: number = 0;
+  @Input() fullWidth = false;
 }

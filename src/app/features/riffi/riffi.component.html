@@ -4,7 +4,7 @@
       <app-icon name="arrow-left" [size]="24" />
     </a>
     <div class="riffi-page__logo">
-      <app-icon name="logo-riffims" [size]="24" />
+      <app-icon name="logo-riffims" [size]="40" />
     </div>
     <button class="riffi-page__help">
       <app-icon name="help" [size]="24" />
@@ -13,19 +13,19 @@
 
   <div class="riffi-page__body">
     <div class="riffi-page__welcome">
-      <h2 class="riffi-page__greeting">¡Hey, Blanca está aquí!</h2>
+      <h2 class="riffi-page__greeting">¡Hey, {{ displayName }} está aquí!</h2>
       <p class="riffi-page__subtitle">¿Cómo puedo ayudarte hoy?</p>
 
       <div class="riffi-page__actions">
-        <button class="riffi-page__chip">
-          <app-icon name="idea" [size]="16" />
+        <button class="riffi-page__chip riffi-page__chip--tip">
+          <app-icon name="riffi-v0" [size]="16" />
           <span>Dame un Riffi tip</span>
         </button>
-        <button class="riffi-page__chip">
+        <button class="riffi-page__chip riffi-page__chip--riffionario">
           <app-icon name="riffionario" [size]="16" />
           <span>Palabra de Riffionario</span>
         </button>
-        <button class="riffi-page__chip">
+        <button class="riffi-page__chip riffi-page__chip--idea">
           <app-icon name="idea" [size]="16" />
           <span>Idea para lanzamiento</span>
         </button>
