@@ -1,4 +1,4 @@
-# RiffIMS
+# Riffims
 
 A mobile-first web application for independent music artists to self-manage their releases.
 
@@ -101,7 +101,7 @@ settings -> Environment variables**:
 The `prebuild` hook will pick them up and generate the Angular environment
 files during each build.
 
-Production URL: *aún por crear*
+Production URL: [*enlace*](https://riffims.netlify.app)
 
 ## License
 
