@@ -1,0 +1,141 @@
+<!-- MOBILE LAYOUT -->
+<div class="cover-preview cover-preview--mobile">
+  <!-- Mobile Header -->
+  <header class="cover-preview__mobile-header">
+    <button
+      class="cover-preview__back-btn"
+      type="button"
+      aria-label="Volver"
+      (click)="goBack()"
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M15 18l-6-6 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <span class="cover-preview__mobile-badge">Cover Preview</span>
+
+    <button
+      class="cover-preview__download-icon"
+      type="button"
+      aria-label="Descargar preview"
+      (click)="exportAsJpeg()"
+      [disabled]="isExporting"
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </header>
+
+  <!-- Player Mockup (editable) -->
+  <app-music-player-mockup
+    [coverImageUrl]="activeCoverUrl"
+    [songTitle]="songTitle"
+    [artistName]="artistName"
+    [editable]="true"
+    (songTitleChange)="onSongTitleChange($event)"
+    (artistNameChange)="onArtistNameChange($event)"
+    (coverClicked)="onMobileCoverClick()"
+  />
+
+  <!-- Download Button -->
+  <div class="cover-preview__mobile-action">
+    <app-button
+      variant="primary"
+      [fullWidth]="true"
+      [loading]="isExporting"
+      [disabled]="isExporting"
+      (click)="exportAsJpeg()"
+    >
+      Guardar preview
+    </app-button>
+  </div>
+
+  <!-- Thumbnail Grid -->
+  <div *ngIf="hasCovers" class="cover-preview__mobile-grid">
+    <app-cover-thumbnail-grid
+      [covers]="covers"
+      [activeIndex]="activeIndex"
+      (selectCover)="onSelectCover($event)"
+      (uploadCover)="onUploadCover($event)"
+      (deleteCover)="onDeleteCover($event)"
+    />
+  </div>
+
+  <!-- Hidden file input for mobile cover tap -->
+  <input
+    #mobileFileInput
+    type="file"
+    accept="image/*"
+    class="cover-preview__hidden-input"
+    (change)="onMobileFileSelected($event)"
+    aria-hidden="true"
+    tabindex="-1"
+  />
+</div>
+
+<!-- DESKTOP LAYOUT -->
+<div class="cover-preview cover-preview--desktop">
+  <!-- Back Link -->
+  <nav class="cover-preview__nav">
+    <a
+      class="cover-preview__back-link"
+      role="button"
+      tabindex="0"
+      (click)="goBack()"
+      (keydown.enter)="goBack()"
+    >
+      &lt;Atrás
+    </a>
+  </nav>
+
+  <div class="cover-preview__layout">
+    <!-- Left: Player -->
+    <div class="cover-preview__player-col">
+      <app-music-player-mockup
+        [coverImageUrl]="activeCoverUrl"
+        [songTitle]="songTitle"
+        [artistName]="artistName"
+        [editable]="false"
+        (coverClicked)="onMobileCoverClick()"
+      />
+    </div>
+
+    <!-- Right: Controls -->
+    <div class="cover-preview__controls-col">
+      <app-cover-controls-panel
+        [songTitle]="songTitle"
+        [artistName]="artistName"
+        [covers]="covers"
+        [activeIndex]="activeIndex"
+        (songTitleChange)="onSongTitleChange($event)"
+        (artistNameChange)="onArtistNameChange($event)"
+        (selectCover)="onSelectCover($event)"
+        (uploadCover)="onUploadCover($event)"
+        (deleteCover)="onDeleteCover($event)"
+      />
+
+      <app-button
+        variant="primary"
+        [fullWidth]="true"
+        [loading]="isExporting"
+        [disabled]="isExporting"
+        (click)="exportAsJpeg()"
+      >
+        Descargar preview
+      </app-button>
+    </div>
+  </div>
+
+  <!-- Hidden file input for desktop cover click -->
+  <input
+    #mobileFileInput
+    type="file"
+    accept="image/*"
+    class="cover-preview__hidden-input"
+    (change)="onMobileFileSelected($event)"
+    aria-hidden="true"
+    tabindex="-1"
+  />
+</div>

@@ -27,6 +27,7 @@ import { RiffiPanelComponent } from '../../shared/components/riffi-panel/riffi-p
 export class AppShellComponent implements OnInit, OnDestroy {
   isFormRoute = false;
   isRiffiRoute = false;
+  isCoverPreviewRoute = false;
   private routerSub!: Subscription;
 
   constructor(private router: Router) {}
@@ -45,5 +46,6 @@ export class AppShellComponent implements OnInit, OnDestroy {
   private checkRoute(url: string) {
     this.isFormRoute = url.startsWith('/nuevo');
     this.isRiffiRoute = url.startsWith('/riffi');
+    this.isCoverPreviewRoute = url.startsWith('/cover-preview');
   }
 }

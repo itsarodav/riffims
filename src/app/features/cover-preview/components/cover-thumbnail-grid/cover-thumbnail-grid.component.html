@@ -1,0 +1,80 @@
+<section class="cover-grid" aria-label="Portadas anteriores">
+  <div class="cover-grid__header">
+    <h3 class="cover-grid__title">Portadas anteriores</h3>
+    <p class="cover-grid__subtitle">Puedes probar hasta con las últimas 4 versiones</p>
+  </div>
+
+  <!-- Empty state: ninguna imagen subida -->
+  <div
+    *ngIf="allEmpty"
+    class="cover-grid__empty-state"
+    [class.cover-grid__empty-state--dragover]="dragOverEmpty"
+    role="button"
+    tabindex="0"
+    aria-label="Subir portada"
+    (click)="onEmptyClick()"
+    (keydown.enter)="onEmptyClick()"
+    (keydown.space)="onEmptyClick(); $event.preventDefault()"
+    (dragover)="onEmptyDragOver($event)"
+    (dragleave)="onEmptyDragLeave()"
+    (drop)="onEmptyDrop($event)"
+  >
+    <app-icon name="add-circle-filled" [size]="32" />
+    <p class="cover-grid__empty-text">Sube tu imagen: arrastra el archivo o haz clic aquí.</p>
+  </div>
+
+  <!-- Grid 2x2: al menos una imagen subida -->
+  <div *ngIf="!allEmpty" class="cover-grid__slots">
+    <div
+      *ngFor="let cover of covers; let i = index"
+      class="cover-grid__slot"
+      [class.cover-grid__slot--active]="cover && i === activeIndex"
+      [class.cover-grid__slot--empty]="!cover"
+      [class.cover-grid__slot--dragover]="dragOverIndex === i"
+      role="button"
+      [attr.tabindex]="0"
+      [attr.aria-label]="cover ? 'Seleccionar portada ' + (i + 1) : 'Subir portada ' + (i + 1)"
+      (click)="onSlotClick(i)"
+      (keydown.enter)="onSlotClick(i)"
+      (keydown.space)="onSlotClick(i); $event.preventDefault()"
+      (dragover)="onDragOver($event, i)"
+      (dragleave)="onDragLeave(i)"
+      (drop)="onDrop($event, i)"
+    >
+      <img
+        *ngIf="cover"
+        class="cover-grid__image"
+        [src]="cover.image_url"
+        [alt]="'Portada ' + (i + 1)"
+        loading="lazy"
+      />
+
+      <button
+        *ngIf="cover"
+        class="cover-grid__delete"
+        type="button"
+        aria-label="Eliminar portada"
+        (click)="onDeleteClick($event, i)"
+      >
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <circle cx="10" cy="10" r="10" fill="rgba(0,0,0,0.6)"/>
+          <path d="M6.5 6.5L13.5 13.5M13.5 6.5L6.5 13.5" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <div *ngIf="!cover" class="cover-grid__placeholder">
+        <app-icon name="add-circle-filled" [size]="32" />
+      </div>
+    </div>
+  </div>
+
+  <input
+    #fileInput
+    type="file"
+    accept="image/*"
+    class="cover-grid__file-input"
+    (change)="onFileSelected($event)"
+    aria-hidden="true"
+    tabindex="-1"
+  />
+</section>

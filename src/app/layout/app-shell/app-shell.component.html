@@ -6,18 +6,18 @@
   <app-sidebar />
 
   <!-- Main scrollable area -->
-  <div class="app-shell__main" [class.app-shell__main--no-bottom-pad]="isFormRoute || isRiffiRoute">
+  <div class="app-shell__main" [class.app-shell__main--no-bottom-pad]="isFormRoute || isRiffiRoute || isCoverPreviewRoute">
     <!-- Mobile: Header scrolls with content -->
-    <app-mobile-header *ngIf="!isFormRoute && !isRiffiRoute" />
+    <app-mobile-header *ngIf="!isFormRoute && !isRiffiRoute && !isCoverPreviewRoute" />
 
-    <div class="app-shell__content" [class.app-shell__content--flush]="isRiffiRoute">
+    <div class="app-shell__content" [class.app-shell__content--flush]="isRiffiRoute || isCoverPreviewRoute">
       <router-outlet />
     </div>
   </div>
 
   <!-- Desktop: Riffi panel right -->
-  <app-riffi-panel *ngIf="!isFormRoute && !isRiffiRoute" class="app-shell__riffi" />
+  <app-riffi-panel *ngIf="!isFormRoute && !isRiffiRoute && !isCoverPreviewRoute" class="app-shell__riffi" />
 </div>
 
 <!-- Mobile: Bottom nav fixed -->
-<app-bottom-nav *ngIf="!isFormRoute && !isRiffiRoute" />
+<app-bottom-nav *ngIf="!isFormRoute && !isRiffiRoute && !isCoverPreviewRoute" />

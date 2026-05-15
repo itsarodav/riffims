@@ -1,0 +1,39 @@
+@use 'tokens' as *;
+
+.controls-panel {
+  display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+
+  &__card {
+    border: 1px solid $brand-gray-color;
+    border-radius: $radius-xl;
+    padding: $space-md;
+    background-color: $brand-light-color;
+  }
+
+  &__card-header {
+    margin-bottom: $space-sm;
+  }
+
+  &__card-title {
+    font-family: $font-family;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: $brand-dark-color;
+    margin: 0 0 $space-3xs;
+  }
+
+  &__card-subtitle {
+    font-family: $font-family;
+    font-size: $font-size-sm;
+    color: $brand-gray-bold-color;
+    margin: 0;
+  }
+
+  &__fields {
+    display: flex;
+    flex-direction: column;
+    gap: $space-sm;
+  }
+}

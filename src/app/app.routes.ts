@@ -9,6 +9,7 @@ import { LanzamientosComponent } from './features/lanzamientos/lanzamientos.comp
 import { RiffiComponent } from './features/riffi/riffi.component';
 import { PerfilComponent } from './features/perfil/perfil.component';
 import { NuevoLanzamientoComponent } from './features/nuevo-lanzamiento/nuevo-lanzamiento.component';
+import { CoverPreviewComponent } from './features/cover-preview/cover-preview.component';
 import { authGuard } from './core/guards/auth-guard';
 import { guestGuard } from './core/guards/guest-guard';
 import {
@@ -41,6 +42,7 @@ export const routes: Routes = [
       { path: 'riffi', component: RiffiComponent },
       { path: 'perfil', component: PerfilComponent },
       { path: 'nuevo', component: NuevoLanzamientoComponent },
+      { path: 'cover-preview', component: CoverPreviewComponent },
     ],
   },
   { path: '**', redirectTo: 'home' },

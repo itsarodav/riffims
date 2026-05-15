@@ -1,0 +1,154 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.cover-grid {
+  &__header {
+    margin-bottom: $space-sm;
+  }
+
+  &__title {
+    font-family: $font-family;
+    font-size: $font-size-md;
+    font-weight: $font-weight-bold;
+    color: $text-primary;
+    margin: 0 0 $space-3xs;
+
+    @include desktop {
+      color: $brand-dark-color;
+    }
+  }
+
+  &__subtitle {
+    font-family: $font-family;
+    font-size: $font-size-sm;
+    color: $text-secondary;
+    margin: 0;
+
+    @include desktop {
+      color: $brand-gray-bold-color;
+    }
+  }
+
+  &__empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: $space-xs;
+    padding: $space-xl $space-md;
+    border: 1px dashed $brand-gray-color;
+    border-radius: $radius-lg;
+    background-color: $brand-light-color;
+    color: $brand-primary;
+    cursor: pointer;
+    transition: border-color $duration-fast $easing-default;
+
+    &:focus-visible {
+      outline: 2px solid $brand-secondary-vibrant;
+      outline-offset: 2px;
+    }
+
+    @include desktop {
+      &:hover {
+        border-color: $brand-primary;
+      }
+    }
+
+    &--dragover {
+      border-color: $brand-primary;
+      background-color: rgba($brand-primary, 0.05);
+    }
+  }
+
+  &__empty-text {
+    font-family: $font-family;
+    font-size: $font-size-sm;
+    color: $brand-gray-bold-color;
+    text-align: center;
+    margin: 0;
+  }
+
+  &__slots {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-2xs;
+  }
+
+  &__slot {
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: $radius-lg;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color $duration-fast $easing-default,
+                transform $duration-fast $easing-default;
+
+    &:focus-visible {
+      outline: 2px solid $brand-secondary-vibrant;
+      outline-offset: 2px;
+    }
+
+    &--active {
+      border-color: $brand-secondary-vibrant;
+    }
+
+    &--empty {
+      background-color: $brand-light-color;
+      border: 1px dashed $brand-gray-color;
+
+      @include desktop {
+        &:hover {
+          border-color: $brand-primary;
+        }
+      }
+    }
+
+    &--dragover {
+      border-color: $brand-primary;
+      background-color: rgba($brand-primary, 0.05);
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  &__delete {
+    position: absolute;
+    top: $space-3xs;
+    right: $space-3xs;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    line-height: 0;
+    transition: transform $duration-fast $easing-default;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  &__placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: $brand-primary;
+  }
+
+  &__file-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+}

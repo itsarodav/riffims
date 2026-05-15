@@ -1,0 +1,133 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+// Mobile Layout
+
+.cover-preview--mobile {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: $neutral-900;
+  padding: $space-sm;
+  gap: $space-sm;
+
+  @include desktop {
+    display: none;
+  }
+}
+
+.cover-preview--desktop {
+  display: none;
+
+  @include desktop {
+    display: block;
+  }
+}
+
+.cover-preview {
+  // Mobile Header
+  &__mobile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $space-2xs 0;
+  }
+
+  &__back-btn,
+  &__download-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: $space-3xs;
+    color: $neutral-50;
+    line-height: 0;
+    border-radius: $radius-md;
+
+    &:focus-visible {
+      outline: 2px solid $brand-secondary-vibrant;
+      outline-offset: 2px;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &__mobile-badge {
+    font-family: $font-family;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $neutral-900;
+    background-color: $neutral-50;
+    padding: $space-3xs $space-xs;
+    border-radius: $radius-full;
+  }
+
+  &__mobile-action {
+    padding: $space-2xs 0;
+  }
+
+  &__mobile-grid {
+    background-color: $neutral-800;
+    border-radius: $radius-xl;
+    padding: $space-sm;
+  }
+
+  // Desktop Layout
+  &__nav {
+    margin-bottom: $space-md;
+  }
+
+  &__back-link {
+    font-family: $font-family;
+    font-size: $font-size-base;
+    font-weight: $font-weight-medium;
+    color: $brand-dark-color;
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $brand-secondary-vibrant;
+      outline-offset: 2px;
+      border-radius: $radius-sm;
+    }
+  }
+
+  &__layout {
+    display: flex;
+    gap: $space-lg;
+    align-items: flex-start;
+    justify-content: center;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  &__player-col {
+    flex: 1;
+    max-width: 420px;
+  }
+
+  &__controls-col {
+    flex: 1;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: $space-sm;
+  }
+
+  // Hidden file input
+  &__hidden-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+}

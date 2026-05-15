@@ -35,14 +35,16 @@
     description="&quot;Publica contenido detrás de cámaras en la semana previa a tu lanzamiento. La anticipación mueve más que el anuncio.&quot;"
   />
 
-  <!-- 4. Cover preview card -->
-  <app-multi-card
-    variant="feature"
-    iconName="music-album"
-    [iconSize]="32"
-    title="Cover preview"
-    description="Mira cómo quedaría tu portada en un reproductor de streaming, antes de publicarla."
-  />
+  <!-- 4. Cover preview card (enlace a /cover-preview) -->
+  <a class="home__card-link" routerLink="/cover-preview">
+    <app-multi-card
+      variant="feature"
+      iconName="music-album"
+      [iconSize]="32"
+      title="Cover preview"
+      description="Mira cómo quedaría tu portada en un reproductor de streaming, antes de publicarla."
+    />
+  </a>
 
   <!-- 5. Grid 2 columns -->
   <div class="home__grid">

@@ -1,0 +1,35 @@
+<aside class="controls-panel" aria-label="Controles de portada">
+  <!-- Card 1: Metadata -->
+  <section class="controls-panel__card">
+    <div class="controls-panel__card-header">
+      <h2 class="controls-panel__card-title">Cover Preview</h2>
+      <p class="controls-panel__card-subtitle">Rellena los datos y prueba tu portada</p>
+    </div>
+
+    <div class="controls-panel__fields">
+      <app-input
+        label="Título"
+        placeholder="Título de canción"
+        [value]="songTitle"
+        (valueChange)="songTitleChange.emit($event)"
+      />
+      <app-input
+        label="Nombre de artista"
+        placeholder="Nombre de artista"
+        [value]="artistName"
+        (valueChange)="artistNameChange.emit($event)"
+      />
+    </div>
+  </section>
+
+  <!-- Card 2: Thumbnails -->
+  <section class="controls-panel__card">
+    <app-cover-thumbnail-grid
+      [covers]="covers"
+      [activeIndex]="activeIndex"
+      (selectCover)="selectCover.emit($event)"
+      (uploadCover)="uploadCover.emit($event)"
+      (deleteCover)="deleteCover.emit($event)"
+    />
+  </section>
+</aside>

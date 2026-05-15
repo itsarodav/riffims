@@ -1,0 +1,192 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.player {
+  background-color: $neutral-900;
+  border-radius: $radius-xl;
+  padding: $space-md $space-sm $space-lg;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-sm;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+
+  @include desktop {
+    padding: $space-lg $space-md $space-xl;
+    max-width: 420px;
+    margin: 0;
+  }
+
+  // Badge
+  &__badge {
+    display: flex;
+    justify-content: center;
+    margin-bottom: $space-2xs;
+  }
+
+  &__badge-text {
+    font-family: $font-family;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    color: $neutral-900;
+    background-color: $neutral-50;
+    padding: $space-3xs $space-xs;
+    border-radius: $radius-full;
+    letter-spacing: -0.02em;
+  }
+
+  // Cover Art
+  &__cover {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: $radius-lg;
+    overflow: hidden;
+    background-color: $brand-light-color;
+    cursor: pointer;
+    transition: transform $duration-fast $easing-default;
+
+    &:focus-visible {
+      outline: 2px solid $brand-secondary-vibrant;
+      outline-offset: 2px;
+    }
+
+    &--empty {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  &__cover-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  &__cover-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $brand-primary;
+  }
+
+  // Track Info
+  &__info {
+    display: flex;
+    align-items: center;
+    gap: $space-sm;
+    width: 100%;
+    padding: 0 $space-3xs;
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    opacity: 0.7;
+  }
+
+  &__track {
+    flex: 1;
+    text-align: center;
+    min-width: 0;
+  }
+
+  &__title,
+  &__title-input {
+    display: block;
+    font-family: $font-family;
+    font-size: $font-size-base;
+    font-weight: $font-weight-bold;
+    color: $neutral-50;
+    letter-spacing: -0.02em;
+    line-height: $line-height-normal;
+
+    &--placeholder {
+      color: $neutral-500;
+    }
+  }
+
+  &__artist,
+  &__artist-input {
+    display: block;
+    font-family: $font-family;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-regular;
+    color: $neutral-400;
+    line-height: $line-height-normal;
+
+    &--placeholder {
+      color: $neutral-500;
+    }
+  }
+
+  &__title-input,
+  &__artist-input {
+    background: transparent;
+    border: none;
+    text-align: center;
+    width: 100%;
+    padding: 0;
+    outline: none;
+
+    &::placeholder {
+      color: $neutral-500;
+    }
+
+    &:focus {
+      border-bottom: 1px solid $neutral-500;
+    }
+  }
+
+  // Progress Bar
+  &__progress {
+    width: 100%;
+    padding: 0 $space-3xs;
+  }
+
+  &__progress-bar {
+    width: 100%;
+    height: 4px;
+    background-color: $neutral-700;
+    border-radius: $radius-full;
+    overflow: hidden;
+  }
+
+  &__progress-fill {
+    width: 75%;
+    height: 100%;
+    background-color: $neutral-50;
+    border-radius: $radius-full;
+  }
+
+  &__times {
+    display: flex;
+    justify-content: space-between;
+    margin-top: $space-3xs;
+  }
+
+  &__time {
+    font-family: $font-family;
+    font-size: $font-size-2xs;
+    color: $neutral-400;
+  }
+
+  // Transport Controls
+  &__controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $space-lg;
+    padding-top: $space-2xs;
+  }
+
+  &__control {
+    opacity: 0.9;
+
+    &--play {
+      opacity: 1;
+    }
+  }
+}
