@@ -1,0 +1,120 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.path-level-card {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2xs;
+  padding: $space-sm;
+  border-radius: $radius-lg;
+  border: 1px solid $border-subtle;
+  background-color: $brand-light-color;
+  transition: border-color $duration-fast $easing-default;
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    gap: $space-xs;
+  }
+
+  &__number {
+    flex-shrink: 0;
+    padding: $space-2xs;
+    border-radius: $radius-md;
+    font-family: $font-family;
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-bold;
+    line-height: 1;
+    background-color: $brand-gray-subtle-color;
+    color: $brand-gray-bold-color;
+
+    &--soundcheck {
+      background-color: $yellow-100;
+      color: $yellow-600;
+    }
+
+    &--produccion {
+      background-color: $purple-100;
+      color: $purple-700;
+    }
+
+    &--release {
+      background-color: $positive-100;
+      color: $positive-700;
+    }
+
+    &--post-release {
+      background-color: $blue-100;
+      color: $blue-700;
+    }
+  }
+
+  &__title-group {
+    display: flex;
+    flex-direction: column;
+    gap: $space-3xs;
+    min-width: 0;
+  }
+
+  &__title {
+    margin: 0;
+    font-family: $font-family;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+    line-height: $line-height-snug;
+    color: $brand-dark-color;
+
+    @include tablet {
+      font-size: $font-size-base;
+    }
+  }
+
+  &__subtitle {
+    margin: 0;
+    font-family: $font-family;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-regular;
+    line-height: $line-height-normal;
+    color: $brand-dark-color;
+
+    @include tablet {
+      font-size: $font-size-sm;
+    }
+  }
+
+  // Active state
+  &--active {
+    border-color: $brand-gray-bold-color;
+  }
+
+  // Completed state -> phase colors
+  &--completed.path-level-card--phase-produccion {
+    border-color: $purple-300;
+  }
+
+  &--completed.path-level-card--phase-release {
+    border-color: $blue-300;
+  }
+
+  &--completed.path-level-card--phase-post-release {
+    border-color: $positive-300;
+  }
+
+  // Locked state
+  &--locked {
+    border-color: $neutral-200;
+
+    .path-level-card__number {
+      background-color: $brand-gray-subtle-color;
+      color: $brand-gray-bold-color;
+    }
+
+    .path-level-card__title {
+      color: $brand-gray-bold-color;
+    }
+
+    .path-level-card__subtitle {
+      color: $brand-gray-bold-color;
+    }
+  }
+}

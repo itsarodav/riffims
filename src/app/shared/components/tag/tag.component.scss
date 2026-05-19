@@ -1,0 +1,69 @@
+@use 'tokens' as *;
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-3xs;
+  padding: $space-3xs $space-xs;
+  border-radius: $radius-full;
+  font-family: $font-family;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-snug;
+  white-space: nowrap;
+  background-color: transparent;
+  color: $brand-secondary-bold;
+  border: 1px solid $brand-secondary-bold;
+
+  // --- Disabled state for default variant ---
+  &--disabled {
+    color: $brand-gray-bold-color;
+    border-color: $brand-gray-bold-color;
+    background-color: transparent;
+  }
+
+  // --- Badge variants (active) ---
+  &--soundcheck {
+    background-color: $yellow-100;
+    color: $yellow-700;
+    border-color: $yellow-300;
+  }
+
+  &--produccion {
+    background-color: $purple-50;
+    color: $purple-700;
+    border-color: $purple-300;
+  }
+
+  &--release {
+    background-color: $positive-50;
+    color: $positive-700;
+    border-color: $positive-200;
+  }
+
+  &--post-release {
+    background-color: $blue-50;
+    color: $blue-700;
+    border-color: $blue-400;
+  }
+
+  // --- Disabled state for badge variants ---
+  &--soundcheck#{&}--disabled,
+  &--produccion#{&}--disabled,
+  &--release#{&}--disabled,
+  &--post-release#{&}--disabled {
+    background-color: #E8E8E8;
+    color: $brand-gray-bold-color;
+    border-color: $brand-gray-bold-color;
+  }
+
+  &__icon {
+    display: inline-flex;
+    flex-shrink: 0;
+  }
+
+  &__label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

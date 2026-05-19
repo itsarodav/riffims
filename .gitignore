@@ -49,6 +49,10 @@ __screenshots__/
 .env.*
 !.env.example
 
+# Supabase
+supabase/.env
+supabase/.env.local
+
 # System files
 .DS_Store
 Thumbs.db

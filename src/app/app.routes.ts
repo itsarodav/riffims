@@ -43,6 +43,12 @@ export const routes: Routes = [
       { path: 'perfil', component: PerfilComponent },
       { path: 'nuevo', component: NuevoLanzamientoComponent },
       { path: 'cover-preview', component: CoverPreviewComponent },
+      {
+        path: 'releases/:releaseId/path',
+        loadComponent: () => import('./features/releases/release-path/release-path.component')
+          .then(m => m.ReleasePathComponent),
+        data: { pageTitle: 'Ruta de lanzamiento' },
+      },
     ],
   },
   { path: '**', redirectTo: 'home' },

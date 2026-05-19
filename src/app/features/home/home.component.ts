@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { IconComponent } from '../../shared/components/icon/icon.component';
 import { MultiCardComponent } from '../../shared/components/multi-card/multi-card.component';
 import { ReleaseCardComponent, ReleaseType as CardReleaseType } from '../../shared/components/release-card/release-card.component';
@@ -26,7 +26,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private releaseService: ReleaseService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private router: Router
   ) {}
 
   async ngOnInit() {
@@ -60,5 +61,11 @@ export class HomeComponent implements OnInit {
       album: 'Álbum',
     };
     return map[type] ?? 'Single';
+  }
+
+  openReleasePath(release: Release): void {
+    this.router.navigate(['/releases', release.id, 'path'], {
+      queryParams: { name: release.name },
+    });
   }
 }

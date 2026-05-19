@@ -1,0 +1,108 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.release-path {
+  max-width: 640px;
+  margin: 0 auto;
+  padding-bottom: $space-xl;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: $space-2xs;
+    margin-bottom: $space-xs;
+  }
+
+  &__back-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: none;
+    border-radius: $radius-md;
+    background: transparent;
+    color: $brand-dark-color;
+    cursor: pointer;
+    transition: background-color $duration-fast $easing-default;
+
+    &:hover {
+      background-color: $neutral-100;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $brand-secondary-vibrant;
+      outline-offset: 2px;
+    }
+  }
+
+  &__release-name {
+    font-family: $font-family;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $brand-dark-color;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+
+    @include tablet {
+      font-size: $font-size-base;
+    }
+  }
+
+  &__title {
+    margin: 0 0 $space-md;
+    font-family: $font-family;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    line-height: $line-height-tight;
+    color: $brand-dark-color;
+
+    @include tablet {
+      font-size: $font-size-2xl;
+    }
+  }
+
+  &__loading,
+  &__error {
+    display: flex;
+    justify-content: center;
+    padding: $space-xl 0;
+    font-family: $font-family;
+    font-size: $font-size-sm;
+    color: $brand-gray-bold-color;
+  }
+
+  &__error {
+    color: $negative-600;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__item {
+    width: 100%;
+  }
+
+  &__connector {
+    display: flex;
+    justify-content: center;
+    height: $space-md;
+    list-style: none;
+
+    &::after {
+      content: '';
+      width: 0;
+      height: 100%;
+      border-left: 2px dashed $brand-gray-color;
+    }
+  }
+}

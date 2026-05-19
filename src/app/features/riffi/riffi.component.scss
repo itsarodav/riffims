@@ -127,6 +127,13 @@
     color: $brand-gray-bold-color;
   }
 
+  &__error {
+    font-size: $font-size-xs;
+    color: $negative-500;
+    padding: $space-2xs;
+    text-align: center;
+  }
+
   &__input-area {
     padding: $space-sm $space-md $space-md;
   }

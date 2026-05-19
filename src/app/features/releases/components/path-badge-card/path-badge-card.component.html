@@ -1,0 +1,20 @@
+<article
+  class="path-badge-card"
+  [class.path-badge-card--unlocked]="unlocked"
+  [class.path-badge-card--locked]="!unlocked"
+  [class.path-badge-card--amber]="starterBadge && unlocked"
+  [class.path-badge-card--produccion]="phaseInfo?.phase === 'produccion' && unlocked"
+  [class.path-badge-card--release]="phaseInfo?.phase === 'release' && unlocked"
+  [class.path-badge-card--post-release]="phaseInfo?.phase === 'post-release' && unlocked"
+  [attr.aria-label]="badge.label + (unlocked ? ' - desbloqueado' : ' - bloqueado')"
+>
+  <div class="path-badge-card__icon-wrapper">
+    <app-icon [name]="iconName" [size]="48" class="path-badge-card__icon" />
+  </div>
+
+  <div class="path-badge-card__content">
+    <h3 class="path-badge-card__title">{{ badge.label }}</h3>
+    <app-tag [label]="levelsLabel" [variant]="tagVariant" [disabled]="tagDisabled" />
+    <p class="path-badge-card__description">{{ badge.description }}</p>
+  </div>
+</article>

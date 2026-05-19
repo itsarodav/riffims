@@ -28,6 +28,7 @@ export class AppShellComponent implements OnInit, OnDestroy {
   isFormRoute = false;
   isRiffiRoute = false;
   isCoverPreviewRoute = false;
+  isReleasePathRoute = false;
   private routerSub!: Subscription;
 
   constructor(private router: Router) {}
@@ -47,5 +48,6 @@ export class AppShellComponent implements OnInit, OnDestroy {
     this.isFormRoute = url.startsWith('/nuevo');
     this.isRiffiRoute = url.startsWith('/riffi');
     this.isCoverPreviewRoute = url.startsWith('/cover-preview');
+    this.isReleasePathRoute = url.startsWith('/releases');
   }
 }

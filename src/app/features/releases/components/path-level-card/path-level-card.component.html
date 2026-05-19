@@ -1,0 +1,29 @@
+<article
+  class="path-level-card"
+  [class.path-level-card--active]="isActive"
+  [class.path-level-card--completed]="isCompleted"
+  [class.path-level-card--locked]="isLocked"
+  [class.path-level-card--phase-produccion]="mission.phase === 'produccion'"
+  [class.path-level-card--phase-release]="mission.phase === 'release'"
+  [class.path-level-card--phase-post-release]="mission.phase === 'post-release'"
+  [attr.aria-current]="isActive ? 'step' : null"
+>
+  <div class="path-level-card__header">
+    <span
+      class="path-level-card__number"
+      [class.path-level-card__number--soundcheck]="mission.level === 1"
+      [class.path-level-card__number--produccion]="mission.level >= 2 && mission.level <= 3"
+      [class.path-level-card__number--release]="mission.level >= 4 && mission.level <= 8"
+      [class.path-level-card__number--post-release]="mission.level >= 9"
+    >{{ levelNumber }}</span>
+    <div class="path-level-card__title-group">
+      <h3 class="path-level-card__title">{{ mission.title }}</h3>
+      <app-tag
+        [label]="mission.badgeLabel"
+        [variant]="tagVariant"
+        [disabled]="tagDisabled"
+      />
+      <p class="path-level-card__subtitle">{{ mission.subtitle }}</p>
+    </div>
+  </div>
+</article>

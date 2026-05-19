@@ -1,0 +1,128 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.path-badge-card {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  padding: $space-sm $space-md;
+  border-radius: $radius-xl;
+  border: 1px solid $neutral-200;
+  background-color: $brand-light-color;
+  transition: border-color $duration-fast $easing-default,
+              background-color $duration-fast $easing-default;
+
+  &__icon-wrapper {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+  }
+
+  &__icon {
+    display: flex;
+    color: $neutral-300;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: $space-3xs;
+    min-width: 0;
+  }
+
+  &__title {
+    margin: 0;
+    font-family: $font-family;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+    line-height: $line-height-snug;
+    color: $brand-dark-color;
+
+    @include tablet {
+      font-size: $font-size-base;
+    }
+  }
+
+  &__description {
+    margin: 0;
+    font-family: $font-family;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-regular;
+    line-height: $line-height-normal;
+    color: $brand-gray-bold-color;
+
+    @include tablet {
+      font-size: $font-size-sm;
+    }
+  }
+
+  // Locked state
+  &--locked {
+    .path-badge-card__title {
+      color: $brand-gray-bold-color;
+    }
+
+    .path-badge-card__description {
+      color: $neutral-400;
+    }
+  }
+
+  // Unlocked - amber (starter badge)
+  &--amber {
+    background-color: $yellow-50;
+    border-color: $yellow-300;
+
+    .path-badge-card__icon {
+      color: $yellow-600;
+    }
+
+    .path-badge-card__title {
+      color: $yellow-800;
+    }
+  }
+
+  // Unlocked - produccion
+  &--produccion {
+    background-color: $purple-50;
+    border-color: $purple-300;
+
+    .path-badge-card__icon {
+      color: $purple-600;
+    }
+
+    .path-badge-card__title {
+      color: $purple-800;
+    }
+  }
+
+  // Unlocked - release
+  &--release {
+    background-color: $blue-50;
+    border-color: $blue-300;
+
+    .path-badge-card__icon {
+      color: $blue-600;
+    }
+
+    .path-badge-card__title {
+      color: $blue-800;
+    }
+  }
+
+  // Unlocked - post-release
+  &--post-release {
+    background-color: $positive-50;
+    border-color: $positive-300;
+
+    .path-badge-card__icon {
+      color: $positive-600;
+    }
+
+    .path-badge-card__title {
+      color: $positive-800;
+    }
+  }
+}

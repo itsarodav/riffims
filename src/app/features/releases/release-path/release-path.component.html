@@ -1,0 +1,63 @@
+<section class="release-path" aria-label="Ruta de lanzamiento">
+  <header class="release-path__header">
+    <button
+      class="release-path__back-btn"
+      (click)="goBack()"
+      aria-label="Volver al inicio"
+      type="button"
+    >
+      <app-icon name="arrow-left" [size]="24" />
+    </button>
+    <span class="release-path__release-name">{{ releaseName() }}</span>
+  </header>
+
+  <h1 class="release-path__title">Ruta de lanzamiento</h1>
+
+  <div *ngIf="missions.loading()" class="release-path__loading" aria-live="polite">
+    <p>Cargando tu ruta...</p>
+  </div>
+
+  <div *ngIf="missions.error() as error" class="release-path__error" role="alert">
+    <p>Error al cargar el progreso: {{ error }}</p>
+  </div>
+
+  <ol
+    *ngIf="!missions.loading() && !missions.error()"
+    class="release-path__list"
+    aria-label="Niveles de la ruta"
+  >
+    <ng-container *ngFor="let mission of MISSIONS; let last = last">
+      <li class="release-path__item">
+        <app-path-level-card
+          [mission]="mission"
+          [state]="missions.getMissionState(mission.level)"
+        />
+      </li>
+
+      <!-- Starter badge after level 1 -->
+      <ng-container *ngIf="mission.level === 1">
+        <li class="release-path__connector" aria-hidden="true"></li>
+        <li class="release-path__item">
+          <app-path-badge-card
+            [badge]="STARTER_BADGE"
+            [unlocked]="missions.showStarterBadge()"
+          />
+        </li>
+      </ng-container>
+
+      <!-- Phase badge after specific levels -->
+      <ng-container *ngIf="getPhaseBadgeAfterLevel(mission.level) as phaseBadge">
+        <li class="release-path__connector" aria-hidden="true"></li>
+        <li class="release-path__item">
+          <app-path-badge-card
+            [badge]="phaseBadge"
+            [unlocked]="missions.isBadgeUnlocked(phaseBadge.badgeId)"
+          />
+        </li>
+      </ng-container>
+
+      <!-- Connector between items (not after last) -->
+      <li *ngIf="!last" class="release-path__connector" aria-hidden="true"></li>
+    </ng-container>
+  </ol>
+</section>

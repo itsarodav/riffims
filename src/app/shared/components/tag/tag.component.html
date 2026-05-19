@@ -1,1 +1,11 @@
-<p>tag works!</p>
+<span
+  class="tag"
+  [class.tag--soundcheck]="variant === 'soundcheck'"
+  [class.tag--produccion]="variant === 'produccion'"
+  [class.tag--release]="variant === 'release'"
+  [class.tag--post-release]="variant === 'post-release'"
+  [class.tag--disabled]="disabled"
+>
+  <app-icon *ngIf="icon" [name]="icon" [size]="14" class="tag__icon" />
+  <span class="tag__label">{{ label }}</span>
+</span>
