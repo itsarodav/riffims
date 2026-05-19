@@ -15,6 +15,13 @@ export class PathBadgeCardComponent {
   @Input({ required: true }) badge!: PhaseInfo | StarterBadge;
   @Input() unlocked = false;
 
+  private static readonly DISABLED_ICONS: Record<string, string> = {
+    'first-badge': 'first-badge-disabled',
+    'second-badge': 'second_badge_disabled',
+    'third-badge': 'third_badge_disabled',
+    'fourth-badge': 'fourth_badge_disabled',
+  };
+
   get isPhaseInfo(): boolean {
     return 'phase' in this.badge;
   }
@@ -44,6 +51,7 @@ export class PathBadgeCardComponent {
   }
 
   get iconName(): string {
-    return this.badge.icon;
+    if (this.unlocked) return this.badge.icon;
+    return PathBadgeCardComponent.DISABLED_ICONS[this.badge.icon] ?? this.badge.icon;
   }
 }
