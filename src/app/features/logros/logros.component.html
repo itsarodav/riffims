@@ -1,0 +1,58 @@
+<div class="logros-page">
+  <header class="logros-page__header">
+    <button
+      class="logros-page__back"
+      type="button"
+      aria-label="Volver"
+      (click)="goBack()"
+    >
+      <app-icon name="arrow-left" [size]="24" />
+    </button>
+    <h1 class="logros-page__title">Tus logros</h1>
+    <span class="logros-page__spacer"></span>
+  </header>
+
+  <div class="logros-page__summary">
+    <div class="logros-page__summary-numbers">
+      <span class="logros-page__summary-count">{{ totalUnlocked }}</span>
+      <span class="logros-page__summary-separator">/</span>
+      <span class="logros-page__summary-total">{{ totalPossible }}</span>
+    </div>
+    <p class="logros-page__summary-label">badges obtenidos</p>
+    <div class="logros-page__summary-bar">
+      <div
+        class="logros-page__summary-fill"
+        [style.width.%]="totalPossible > 0 ? (totalUnlocked / totalPossible) * 100 : 0"
+      ></div>
+    </div>
+  </div>
+
+  <div class="logros-page__grid">
+    @for (stat of badgeStats; track stat.badgeId) {
+      <article
+        class="logros-page__card"
+        [class.logros-page__card--unlocked]="isUnlocked(stat)"
+        [class.logros-page__card--locked]="!isUnlocked(stat)"
+        [class.logros-page__card--amber]="stat.badgeId === 'started' && isUnlocked(stat)"
+        [class.logros-page__card--produccion]="stat.phase === 'produccion' && isUnlocked(stat)"
+        [class.logros-page__card--release]="stat.phase === 'release' && isUnlocked(stat)"
+        [class.logros-page__card--post-release]="stat.phase === 'post-release' && isUnlocked(stat)"
+        [attr.aria-label]="stat.badge.label + (isUnlocked(stat) ? ' - desbloqueado' : ' - bloqueado')"
+      >
+        <div class="logros-page__card-icon">
+          <app-icon [name]="getIconName(stat)" [size]="48" />
+        </div>
+        <h3 class="logros-page__card-label">{{ stat.badge.label }}</h3>
+        <div class="logros-page__card-progress">
+          <div class="logros-page__card-bar">
+            <div
+              class="logros-page__card-fill"
+              [style.width.%]="stat.total > 0 ? (stat.unlocked / stat.total) * 100 : 0"
+            ></div>
+          </div>
+          <span class="logros-page__card-count">{{ stat.unlocked }} / {{ stat.total }}</span>
+        </div>
+      </article>
+    }
+  </div>
+</div>

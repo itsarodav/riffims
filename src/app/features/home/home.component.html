@@ -53,13 +53,15 @@
 
   <!-- 5. Grid 2 columns -->
   <div class="home__grid">
-    <app-multi-card
-      variant="feature"
-      iconName="badge"
-      [iconSize]="32"
-      title="Tus logros"
-      description="Echa un vistazo a todo lo que has logrado en tus lanzamientos."
-    />
+    <a class="home__card-link" routerLink="/logros">
+      <app-multi-card
+        variant="feature"
+        iconName="badge"
+        [iconSize]="32"
+        title="Tus logros"
+        description="Echa un vistazo a todo lo que has logrado en tus lanzamientos."
+      />
+    </a>
     <app-multi-card
       variant="feature"
       iconName="riffionario"

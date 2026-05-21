@@ -29,6 +29,7 @@ export class AppShellComponent implements OnInit, OnDestroy {
   isRiffiRoute = false;
   isCoverPreviewRoute = false;
   isReleasePathRoute = false;
+  isLogrosRoute = false;
   private routerSub!: Subscription;
 
   constructor(private router: Router) {}
@@ -49,5 +50,6 @@ export class AppShellComponent implements OnInit, OnDestroy {
     this.isRiffiRoute = url.startsWith('/riffi');
     this.isCoverPreviewRoute = url.startsWith('/cover-preview');
     this.isReleasePathRoute = url.startsWith('/releases');
+    this.isLogrosRoute = url.startsWith('/logros');
   }
 }
