@@ -1,6 +1,8 @@
 import {
   Component,
   OnInit,
+  ViewChildren,
+  QueryList,
   ViewChild,
   ElementRef,
   ChangeDetectorRef,
@@ -35,8 +37,8 @@ export class CoverPreviewComponent implements OnInit {
   isExporting = false;
   isUploading = false;
 
-  @ViewChild(MusicPlayerMockupComponent)
-  playerMockup!: MusicPlayerMockupComponent;
+  @ViewChildren(MusicPlayerMockupComponent)
+  playerMockups!: QueryList<MusicPlayerMockupComponent>;
 
   @ViewChild('mobileFileInput')
   mobileFileInput!: ElementRef<HTMLInputElement>;
@@ -138,24 +140,64 @@ export class CoverPreviewComponent implements OnInit {
     this.onUploadCover({ position, file });
   }
 
+  private getVisiblePlayer(): MusicPlayerMockupComponent | null {
+    const players = this.playerMockups?.toArray() ?? [];
+    return (
+      players.find(
+        (p) => p.playerRoot.nativeElement.offsetWidth > 0
+      ) ?? null
+    );
+  }
+
   async exportAsJpeg(): Promise<void> {
-    if (!this.playerMockup) return;
+    const player = this.getVisiblePlayer();
+    if (!player) return;
     this.isExporting = true;
     this.cdr.detectChanges();
 
     try {
       const html2canvas = (await import('html2canvas')).default;
-      const element = this.playerMockup.playerRoot.nativeElement;
+      const element = player.playerRoot.nativeElement;
+
       const canvas = await html2canvas(element, {
-        backgroundColor: null,
+        backgroundColor: '#18181b',
         scale: 2,
         useCORS: true,
+        allowTaint: false,
         logging: false,
+        onclone: async (_doc: Document, clonedEl: HTMLElement) => {
+          // Convertir imágenes cross-origin a data URLs en el CLON
+          const imgs = clonedEl.querySelectorAll('img');
+          for (const img of imgs) {
+            if (!img.src || img.src.startsWith('data:')) continue;
+            try {
+              const res = await fetch(img.src);
+              const blob = await res.blob();
+              const dataUrl: string = await new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onloadend = () => resolve(reader.result as string);
+                reader.readAsDataURL(blob);
+              });
+              img.src = dataUrl;
+            } catch {
+              // Si falla el fetch, dejar la imagen original
+            }
+          }
+        },
       });
-      const link = document.createElement('a');
-      link.href = canvas.toDataURL('image/jpeg', 0.92);
-      link.download = `cover-preview-${Date.now()}.jpg`;
-      link.click();
+
+      const jpegBlob = await new Promise<Blob | null>((resolve) =>
+        canvas.toBlob(resolve, 'image/jpeg', 0.92)
+      );
+
+      if (jpegBlob) {
+        const url = URL.createObjectURL(jpegBlob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `cover-preview-${Date.now()}.jpg`;
+        link.click();
+        URL.revokeObjectURL(url);
+      }
     } catch (err) {
       console.error('CoverPreviewComponent.exportAsJpeg', err);
     }
