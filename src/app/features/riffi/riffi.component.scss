@@ -38,13 +38,13 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     padding: $space-md;
     overflow-y: auto;
   }
 
   &__welcome {
     text-align: center;
+    margin: auto 0;
   }
 
   &__greeting {
