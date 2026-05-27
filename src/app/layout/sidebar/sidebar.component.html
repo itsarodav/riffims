@@ -1,15 +1,11 @@
 <aside class="sidebar">
-  <div class="sidebar__logo">
-    <img src="assets/icons/logo-riffims.svg" alt="Riffims" width="96">
-  </div>
-
   <nav class="sidebar__nav">
     <a class="sidebar__link" routerLink="/home" routerLinkActive="sidebar__link--active">
       <app-icon name="home" [size]="24" />
       <span>Inicio</span>
     </a>
     <a class="sidebar__link" routerLink="/lanzamientos" routerLinkActive="sidebar__link--active">
-      <app-icon name="music-album" [size]="24" />
+      <app-icon name="release-folder" [size]="24" />
       <span>Lanzamientos</span>
     </a>
     <a class="sidebar__link" routerLink="/riffionario" routerLinkActive="sidebar__link--active">
@@ -19,6 +15,10 @@
     <a class="sidebar__link" routerLink="/cover-preview" routerLinkActive="sidebar__link--active">
       <app-icon name="music-album" [size]="24" />
       <span>Cover Preview</span>
+    </a>
+    <a class="sidebar__link" routerLink="/logros" routerLinkActive="sidebar__link--active">
+      <app-icon name="badge" [size]="24" />
+      <span>Tus logros</span>
     </a>
   </nav>
 

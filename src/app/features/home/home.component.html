@@ -1,5 +1,5 @@
 <section class="home">
-  <!-- 1. Section header -->
+  <!-- Section header -->
   <div class="home__header">
     <h1 class="home__heading">Tus lanzamientos</h1>
     <a *ngIf="hasReleases" class="home__create-btn" routerLink="/nuevo">Crear</a>
@@ -14,7 +14,7 @@
     <p class="home__release-subtitle">Tú decides, yo te acompaño. Y termina cada paso para aumentar de nivel</p>
   </a>
 
-  <!-- 2b. Release cards (has releases) -->
+  <!--  Release cards (has releases) -->
   <div *ngIf="hasReleases" class="home__releases">
     <app-release-card
       *ngFor="let release of releases"
@@ -31,7 +31,7 @@
     />
   </div>
 
-  <!-- 3. Riffi tip card -->
+  <!-- Riffi tip card -->
   <app-multi-card
     variant="riffi-tip"
     iconName="riffi-v0"
@@ -40,7 +40,7 @@
     description="&quot;Publica contenido detrás de cámaras en la semana previa a tu lanzamiento. La anticipación mueve más que el anuncio.&quot;"
   />
 
-  <!-- 4. Cover preview card (enlace a /cover-preview) -->
+  <!-- Cover preview card (enlace a /cover-preview) -->
   <a class="home__card-link" routerLink="/cover-preview">
     <app-multi-card
       variant="feature"
@@ -51,7 +51,7 @@
     />
   </a>
 
-  <!-- 5. Grid 2 columns -->
+  <!-- Grid 2 columns -->
   <div class="home__grid">
     <a class="home__card-link" routerLink="/logros">
       <app-multi-card
@@ -62,12 +62,14 @@
         description="Echa un vistazo a todo lo que has logrado en tus lanzamientos."
       />
     </a>
-    <app-multi-card
-      variant="feature"
-      iconName="riffionario"
-      [iconSize]="32"
-      title="Riffionario"
-      description="Tu diccionario de industria musical. Contratos, publishing, distribución... explicado fácil."
-    />
+    <a class="home__card-link" routerLink="/riffionario">
+      <app-multi-card
+        variant="feature"
+        iconName="riffionario"
+        [iconSize]="32"
+        title="Riffionario"
+        description="Tu diccionario de industria musical. Contratos, publishing, distribución... explicado fácil."
+      />
+    </a>
   </div>
 </section>

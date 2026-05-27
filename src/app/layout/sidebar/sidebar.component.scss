@@ -14,11 +14,6 @@
     display: flex;
   }
 
-  &__logo {
-    padding: $space-2xs $space-xs;
-    margin-bottom: $space-lg;
-  }
-
   &__nav {
     display: flex;
     flex-direction: column;

@@ -1,8 +1,7 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { IconComponent } from '../../shared/components/icon/icon.component';
 import { AvatarComponent } from '../../shared/components/avatar/avatar.component';
 import { ProfileService } from '../../core/services/profile.service';
-import { Profile } from '../../core/models/profile.model';
 
 @Component({
   selector: 'app-mobile-header',
@@ -12,16 +11,15 @@ import { Profile } from '../../core/models/profile.model';
   styleUrl: './mobile-header.component.scss',
 })
 export class MobileHeaderComponent implements OnInit {
-  private readonly profileService = inject(ProfileService);
-
-  protected profile = signal<Profile | null>(null);
+  protected readonly profileService = inject(ProfileService);
 
   protected get displayName(): string {
-    return this.profile()?.artist_name || this.profile()?.username || 'Artista';
+    const p = this.profileService.profile();
+    return p?.artist_name || p?.username || 'Artista';
   }
 
   protected get roleLabel(): string {
-    const role = this.profile()?.role;
+    const role = this.profileService.profile()?.role;
     switch (role) {
       case 'musician': return 'Músico';
       case 'singer': return 'Cantante';
@@ -31,7 +29,8 @@ export class MobileHeaderComponent implements OnInit {
   }
 
   async ngOnInit() {
-    const p = await this.profileService.getCurrentProfile();
-    this.profile.set(p);
+    if (!this.profileService.profile()) {
+      await this.profileService.loadProfile();
+    }
   }
 }

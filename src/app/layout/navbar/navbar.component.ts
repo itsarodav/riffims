@@ -1,7 +1,5 @@
-import { Component, inject, OnInit, OnDestroy, signal } from '@angular/core';
-import { RouterLink, Router, NavigationEnd, ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { Component, inject, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { IconComponent } from '../../shared/components/icon/icon.component';
 import { AvatarComponent } from '../../shared/components/avatar/avatar.component';
 import { ProfileService } from '../../core/services/profile.service';
@@ -13,37 +11,12 @@ import { ProfileService } from '../../core/services/profile.service';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })
-export class NavbarComponent implements OnInit, OnDestroy {
-  private readonly profileService = inject(ProfileService);
-  private readonly router = inject(Router);
-  private readonly route = inject(ActivatedRoute);
-  private routerSub!: Subscription;
-
-  protected avatarUrl = signal<string | null>(null);
-  protected pageTitle = signal<string>('Inicio');
+export class NavbarComponent implements OnInit {
+  protected readonly profileService = inject(ProfileService);
 
   async ngOnInit() {
-    const profile = await this.profileService.getCurrentProfile();
-    if (profile?.avatar_url) {
-      this.avatarUrl.set(profile.avatar_url);
+    if (!this.profileService.profile()) {
+      await this.profileService.loadProfile();
     }
-
-    this.updateTitle();
-    this.routerSub = this.router.events
-      .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
-      .subscribe(() => this.updateTitle());
-  }
-
-  ngOnDestroy() {
-    this.routerSub?.unsubscribe();
-  }
-
-  private updateTitle(): void {
-    let current = this.route;
-    while (current.firstChild) {
-      current = current.firstChild;
-    }
-    const title = current.snapshot.data['pageTitle'] as string | undefined;
-    this.pageTitle.set(title ?? 'Inicio');
   }
 }

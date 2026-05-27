@@ -53,6 +53,18 @@
     color: $brand-dark-color;
   }
 
+  &__save-msg {
+    margin: $space-2xs 0 0;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    color: $positive-600;
+    text-align: center;
+
+    &--error {
+      color: $negative-600;
+    }
+  }
+
   &__logout-section {
     margin-top: $space-md;
   }

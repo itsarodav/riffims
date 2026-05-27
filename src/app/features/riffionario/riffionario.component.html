@@ -1,0 +1,163 @@
+<div class="riffionario">
+  <!-- Header -->
+  <header class="riffionario__header">
+    <button
+      class="riffionario__back"
+      type="button"
+      aria-label="Volver"
+      (click)="goBack()"
+    >
+      <app-icon name="arrow-left" [size]="24" />
+    </button>
+    <h1 class="riffionario__title">Riffionario</h1>
+    <span class="riffionario__spacer"></span>
+  </header>
+
+  <!-- Barra de búsqueda -->
+  <div class="riffionario__search">
+    <div class="riffionario__search-wrapper">
+      <app-icon name="search" [size]="16" />
+      <input
+        class="riffionario__search-input"
+        type="text"
+        placeholder="Busca un término musical..."
+        [ngModel]="searchInput"
+        (ngModelChange)="onSearchInput($event)"
+        maxlength="100"
+        aria-label="Buscar término musical"
+      />
+      @if (searchInput) {
+        <button
+          class="riffionario__search-clear"
+          type="button"
+          aria-label="Limpiar búsqueda"
+          (click)="clearSearch()"
+        >
+          <app-icon name="close" [size]="16" />
+        </button>
+      }
+    </div>
+  </div>
+
+  <!-- Contenido -->
+  <div class="riffionario__body">
+
+    <!-- Loading -->
+    @if (service.loading()) {
+      <div class="riffionario__loading" aria-live="polite">
+        Buscando...
+      </div>
+    }
+
+    <!-- Resultado seleccionado (BD supabase o ia) -->
+    @if (service.selectedResult(); as result) {
+      <article class="riffionario__result" aria-live="polite">
+        <div class="riffionario__result-header">
+          <h2 class="riffionario__result-term">{{ result.term }}</h2>
+          @if (result.category) {
+            <span class="riffionario__result-category">{{ result.category }}</span>
+          }
+          @if (result.source === 'ai') {
+            <span class="riffionario__result-badge">
+              <app-icon name="riffi-v0" [size]="14" />
+              Riffi AI
+            </span>
+          }
+        </div>
+        <p class="riffionario__result-definition">{{ result.definition }}</p>
+        <button
+          class="riffionario__result-back"
+          type="button"
+          (click)="clearSearch()"
+        >
+          Buscar otro término
+        </button>
+      </article>
+    }
+
+    <!-- ia loading -->
+    @if (service.aiLoading()) {
+      <div class="riffionario__ai-loading" aria-live="polite">
+        <app-icon name="riffi-v0" [size]="24" />
+        <span>Riffi está buscando la definición...</span>
+      </div>
+    }
+
+    <!-- Lista filtrada mientras escribe -->
+    @if (!service.selectedResult() && service.hasQuery() && service.hasResults() && !service.loading()) {
+      <ul class="riffionario__list" role="listbox" aria-label="Resultados de búsqueda">
+        @for (term of service.filteredTerms(); track term.id) {
+          <li
+            class="riffionario__list-item"
+            role="option"
+            tabindex="0"
+            (click)="selectTerm(term)"
+            (keydown.enter)="selectTerm(term)"
+          >
+            <span class="riffionario__list-term">{{ term.term }}</span>
+            @if (term.category) {
+              <span class="riffionario__list-category">{{ term.category }}</span>
+            }
+          </li>
+        }
+      </ul>
+    }
+
+    <!-- Sin resultados → ofrecer Ask Riffi -->
+    @if (service.showNoResults() && !service.aiLoading()) {
+      <div class="riffionario__empty">
+        <p class="riffionario__empty-text">
+          No encontramos "<strong>{{ searchInput }}</strong>" en el Riffionario.
+        </p>
+        <button
+          class="riffionario__ask-riffi"
+          type="button"
+          (click)="askRiffi()"
+        >
+          <app-icon name="riffi-v0" [size]="16" />
+          <span>Preguntarle a Riffi</span>
+        </button>
+      </div>
+    }
+
+    <!-- Estado default: recientes + populares -->
+    @if (service.showDefault() && !service.loading() && !service.aiLoading()) {
+
+      <!-- Búsquedas recientes -->
+      @if (service.recentSearches().length > 0) {
+        <section class="riffionario__section" aria-label="Búsquedas recientes">
+          <h3 class="riffionario__section-title">Recientes</h3>
+          <div class="riffionario__chips">
+            @for (search of service.recentSearches(); track search.id) {
+              <app-chip (toggle)="onSearchInput(search.search_query)">
+                <app-icon name="clock" [size]="14" />
+                {{ search.search_query }}
+              </app-chip>
+            }
+          </div>
+        </section>
+      }
+
+      <!-- Términos populares / recomendados -->
+      @if (service.popularTerms().length > 0) {
+        <section class="riffionario__section" aria-label="Términos populares">
+          <h3 class="riffionario__section-title">Populares</h3>
+          <div class="riffionario__chips">
+            @for (term of service.popularTerms(); track term.id) {
+              <app-chip (toggle)="selectTerm(term)">
+                {{ term.term }}
+              </app-chip>
+            }
+          </div>
+        </section>
+      }
+    }
+
+    <!-- Error -->
+    @if (service.error()) {
+      <div class="riffionario__error" role="alert">
+        {{ service.error() }}
+      </div>
+    }
+  </div>
+</div>

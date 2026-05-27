@@ -9,14 +9,8 @@ import {
 } from '../../shared/components/chip-group/chip-group.component';
 import { ProfileService } from '../../core/services/profile.service';
 import { AuthService } from '../../core/services/auth.service';
-import { ArtistRole, Profile } from '../../core/models/profile.model';
+import { ArtistRole } from '../../core/models/profile.model';
 import { MUSIC_GENRES, MAX_GENRES, MIN_GENRES } from '../onboarding/data/genres.data';
-
-interface RoleOption {
-  value: ArtistRole;
-  label: string;
-  emoji: string;
-}
 
 @Component({
   selector: 'app-perfil',
@@ -29,7 +23,6 @@ export class PerfilComponent implements OnInit {
   private readonly profileService = inject(ProfileService);
   private readonly authService = inject(AuthService);
 
-  protected profile = signal<Profile | null>(null);
   protected avatarUrl = signal<string | null>(null);
   protected artistName = signal('');
   protected selectedRole = signal<ArtistRole[]>([]);
@@ -37,6 +30,7 @@ export class PerfilComponent implements OnInit {
 
   protected uploading = signal(false);
   protected saving = signal(false);
+  protected saveMessage = signal<{ type: 'success' | 'error'; text: string } | null>(null);
 
   protected readonly roleOptions: ChipOption<ArtistRole>[] = [
     { value: 'musician', label: 'Músico', emoji: '🎸' },
@@ -53,9 +47,8 @@ export class PerfilComponent implements OnInit {
   protected readonly minGenres = MIN_GENRES;
 
   async ngOnInit() {
-    const p = await this.profileService.getCurrentProfile();
+    const p = await this.profileService.loadProfile();
     if (p) {
-      this.profile.set(p);
       this.avatarUrl.set(p.avatar_url);
       this.artistName.set(p.artist_name ?? '');
       if (p.role) this.selectedRole.set([p.role]);
@@ -84,8 +77,12 @@ export class PerfilComponent implements OnInit {
     this.uploading.set(true);
     const url = await this.profileService.uploadAvatar(file);
     if (url) {
-      await this.profileService.updateAvatarUrl(url);
-      this.avatarUrl.set(url);
+      const { error } = await this.profileService.updateAvatarUrl(url);
+      if (error) {
+        console.error('PerfilComponent.uploadAvatar', error);
+      } else {
+        this.avatarUrl.set(url);
+      }
     }
     this.uploading.set(false);
   }
@@ -104,11 +101,21 @@ export class PerfilComponent implements OnInit {
 
   protected async saveProfile() {
     this.saving.set(true);
-    await this.profileService.updateProfile({
+    this.saveMessage.set(null);
+
+    const { error } = await this.profileService.updateProfile({
       artist_name: this.artistName().trim(),
       role: this.selectedRole()[0] ?? undefined,
       genres: this.selectedGenres(),
     });
+
+    if (error) {
+      console.error('PerfilComponent.saveProfile', error);
+      this.saveMessage.set({ type: 'error', text: 'Error al guardar los cambios.' });
+    } else {
+      this.saveMessage.set({ type: 'success', text: 'Cambios guardados.' });
+    }
+
     this.saving.set(false);
   }
 

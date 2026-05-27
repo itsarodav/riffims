@@ -61,6 +61,12 @@
     >
       Guardar cambios
     </app-button>
+
+    @if (saveMessage(); as msg) {
+      <p class="perfil__save-msg" [class.perfil__save-msg--error]="msg.type === 'error'">
+        {{ msg.text }}
+      </p>
+    }
   </div>
 
   <!-- Cerrar sesión -->

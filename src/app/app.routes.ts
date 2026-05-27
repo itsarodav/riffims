@@ -11,6 +11,7 @@ import { PerfilComponent } from './features/perfil/perfil.component';
 import { NuevoLanzamientoComponent } from './features/nuevo-lanzamiento/nuevo-lanzamiento.component';
 import { CoverPreviewComponent } from './features/cover-preview/cover-preview.component';
 import { LogrosComponent } from './features/logros/logros.component';
+import { RiffionarioComponent } from './features/riffionario/riffionario.component';
 import { authGuard } from './core/guards/auth-guard';
 import { guestGuard } from './core/guards/guest-guard';
 import {
@@ -45,6 +46,7 @@ export const routes: Routes = [
       { path: 'nuevo', component: NuevoLanzamientoComponent },
       { path: 'cover-preview', component: CoverPreviewComponent },
       { path: 'logros', component: LogrosComponent },
+      { path: 'riffionario', component: RiffionarioComponent },
       {
         path: 'releases/:releaseId/path',
         loadComponent: () => import('./features/releases/release-path/release-path.component')

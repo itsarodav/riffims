@@ -19,11 +19,13 @@
     align-items: center;
   }
 
-  &__title {
-    font-size: $font-size-base;
-    font-weight: $font-weight-medium;
-    color: $brand-dark-color;
-    margin: 0;
+  &__logo-link {
+    display: flex;
+    text-decoration: none;
+  }
+
+  &__logo {
+    height: 20px;
   }
 
   &__right {

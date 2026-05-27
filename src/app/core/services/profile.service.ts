@@ -1,18 +1,22 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { SupabaseService } from './supabase.service';
 import { ArtistRole, OnboardingData, Profile } from '../models/profile.model';
 
-// Aísla el acceso a la tabla public.profiles. Ningún componente toca
-// directamente el cliente de Supabase para trabajar con perfiles: todo
-// pasa por aquí.
 @Injectable({
   providedIn: 'root',
 })
 export class ProfileService {
+  private readonly _profile = signal<Profile | null>(null);
+  readonly profile = this._profile.asReadonly();
+
   constructor(private supabase: SupabaseService) {}
 
-  // Devuelve la fila de profiles del usuario autenticado, o null si
-  // no hay sesión o no existe aún la fila.
+  async loadProfile(): Promise<Profile | null> {
+    const p = await this.getCurrentProfile();
+    this._profile.set(p);
+    return p;
+  }
+
   async getCurrentProfile(): Promise<Profile | null> {
     const { data: sessionData } = await this.supabase.getSession();
     const userId = sessionData.session?.user?.id;
@@ -38,8 +42,7 @@ export class ProfileService {
   }
 
   // Comprueba si un username está disponible, ignorando mayúsculas y
-  // excluyendo al propio usuario autenticado, de modo que reabrir el
-  // paso con el mismo nombre no dé un falso positivo de ocupado.
+  // excluyendo al propio usuario autenticado, de modo que reabrir el paso con el mismo nombre no dé un falso positivo de ocupado.
   async isUsernameAvailable(username: string): Promise<boolean> {
     const normalized = username.trim().toLowerCase();
     if (!normalized) return false;
@@ -61,9 +64,7 @@ export class ProfileService {
     return data[0].id === userId;
   }
 
-  // Guarda los datos recogidos durante el onboarding y marca la fila
-  // como completada. Devuelve { error } para que el componente pueda
-  // mostrar un mensaje si algo falla.
+  // Guarda los datos recogidos durante el onboarding y marca la fila como completada. Devuelve { error } para que el componente pueda mostrar un mensaje si algo falla.
   async completeOnboarding(payload: OnboardingData) {
     const { data: sessionData } = await this.supabase.getSession();
     const userId = sessionData.session?.user?.id;
@@ -108,12 +109,9 @@ export class ProfileService {
     const { data: urlData } = this.supabase.client.storage
       .from('avatars')
       .getPublicUrl(path);
-
-    // Append timestamp to bust cache after re-upload
     return `${urlData.publicUrl}?t=${Date.now()}`;
   }
 
-  // Actualiza el campo avatar_url en la tabla profiles.
   async updateAvatarUrl(avatarUrl: string) {
     const { data: sessionData } = await this.supabase.getSession();
     const userId = sessionData.session?.user?.id;
@@ -124,10 +122,18 @@ export class ProfileService {
       .update({ avatar_url: avatarUrl })
       .eq('id', userId);
 
+    if (!error) {
+      const current = this._profile();
+      if (current) {
+        this._profile.set({ ...current, avatar_url: avatarUrl });
+      } else {
+        await this.loadProfile();
+      }
+    }
+
     return { error };
   }
 
-  // Actualiza los campos editables del perfil (nombre, rol, géneros).
   async updateProfile(data: {
     artist_name?: string;
     role?: ArtistRole;
@@ -141,6 +147,15 @@ export class ProfileService {
       .from('profiles')
       .update(data)
       .eq('id', userId);
+
+    if (!error) {
+      const current = this._profile();
+      if (current) {
+        this._profile.set({ ...current, ...data });
+      } else {
+        await this.loadProfile();
+      }
+    }
 
     return { error };
   }
