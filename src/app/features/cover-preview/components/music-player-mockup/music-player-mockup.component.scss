@@ -21,9 +21,13 @@
 
   // Badge
   &__badge {
-    display: flex;
+    display: none;
     justify-content: center;
     margin-bottom: $space-2xs;
+
+    @include desktop {
+      display: flex;
+    }
   }
 
   &__badge-text {
