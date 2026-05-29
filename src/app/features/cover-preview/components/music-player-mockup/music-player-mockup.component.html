@@ -30,9 +30,7 @@
   <!-- Track Info -->
   <div class="player__info">
     <!-- Shuffle icon -->
-    <svg class="player__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
+    <app-icon name="arrows-repeat" [size]="32" />
 
     <div class="player__track">
       <input
@@ -59,10 +57,7 @@
     </div>
 
     <!-- Add icon -->
-    <svg class="player__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <circle cx="12" cy="12" r="10" stroke="white" stroke-width="1.5"/>
-      <path d="M12 8v8M8 12h8" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-    </svg>
+    <app-icon name="add-circle" [size]="32" />
   </div>
 
   <!-- Progress Bar -->
