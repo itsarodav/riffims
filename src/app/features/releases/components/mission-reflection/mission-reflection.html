@@ -1,0 +1,26 @@
+<div class="mission-reflection">
+  <label class="mission-reflection__label" for="reflection-textarea">
+    {{ question }}
+  </label>
+
+  <textarea
+    id="reflection-textarea"
+    class="mission-reflection__textarea"
+    rows="4"
+    placeholder="Escribe tu reflexión aquí..."
+    [ngModel]="answer()"
+    (ngModelChange)="onInput($event)"
+  ></textarea>
+
+  <div class="mission-reflection__status" aria-live="polite">
+    <span *ngIf="saveStatus() === 'saving'" class="mission-reflection__status-text">
+      Guardando...
+    </span>
+    <span *ngIf="saveStatus() === 'saved'" class="mission-reflection__status-text mission-reflection__status-text--saved">
+      &#10003; Guardado
+    </span>
+    <span *ngIf="saveStatus() === 'error'" class="mission-reflection__status-text mission-reflection__status-text--error">
+      Error al guardar
+    </span>
+  </div>
+</div>

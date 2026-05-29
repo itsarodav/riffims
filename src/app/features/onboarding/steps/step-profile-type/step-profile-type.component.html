@@ -1,0 +1,32 @@
+<section class="step-profile-type" aria-labelledby="profile-type-title">
+  <h2 id="profile-type-title" class="step-profile-type__title">
+    ¿Qué tipo de perfil quieres?
+  </h2>
+  <p class="step-profile-type__lead">Elige cómo vas a usar Riffims.</p>
+
+  <app-chip-group
+    [options]="options"
+    mode="single"
+    [selected]="selectedValues"
+    (selectedChange)="onSelectedChange($event)"
+  />
+
+  @if (comingSoonVisible) {
+    <div class="step-profile-type__coming-soon" role="status">
+      <p class="step-profile-type__coming-soon-text">
+        🚧 Riffims se sigue construyendo. Esta opción estará disponible próximamente. ¡Atento/a a todo lo que viene! 🚧
+      </p>
+    </div>
+  }
+
+  <div class="step-profile-type__actions">
+    <app-button variant="tertiary" (click)="back.emit()">Atrás</app-button>
+    <app-button
+      variant="primary"
+      [disabled]="!profileType || comingSoonVisible"
+      (click)="onContinue()"
+    >
+      Continuar
+    </app-button>
+  </div>
+</section>

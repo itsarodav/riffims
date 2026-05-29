@@ -31,6 +31,11 @@
         <app-path-level-card
           [mission]="mission"
           [state]="missions.getMissionState(mission.level)"
+          (click)="navigateToMission(mission.level)"
+          (keydown.enter)="navigateToMission(mission.level)"
+          role="link"
+          tabindex="0"
+          [style.cursor]="missions.getMissionState(mission.level) !== 'locked' ? 'pointer' : 'default'"
         />
       </li>
 

@@ -15,6 +15,7 @@ import { MusicPlayerMockupComponent } from './components/music-player-mockup/mus
 import { CoverControlsPanelComponent } from './components/cover-controls-panel/cover-controls-panel.component';
 import { CoverThumbnailGridComponent } from './components/cover-thumbnail-grid/cover-thumbnail-grid.component';
 import { Button } from '../../shared/components/button/button.component';
+import { IconComponent } from '../../shared/components/icon/icon.component';
 
 @Component({
   selector: 'app-cover-preview',
@@ -25,6 +26,7 @@ import { Button } from '../../shared/components/button/button.component';
     CoverControlsPanelComponent,
     CoverThumbnailGridComponent,
     Button,
+    IconComponent,
   ],
   templateUrl: './cover-preview.component.html',
   styleUrl: './cover-preview.component.scss',

@@ -10,6 +10,8 @@ export interface Mission {
   interactionTypes: InteractionType[];
   badgeLabel: string;
   subtasks: string[];
+  tip: string;
+  reflectionQuestion: string;
   badgeOnComplete?: BadgeId;
 }
 
@@ -76,11 +78,13 @@ export const MISSIONS: Mission[] = [
     interactionTypes: ['checklist', 'riffi'],
     badgeLabel: 'Punto de partida',
     subtasks: [
-      'Confirmar que tienes grabación final',
-      'Indicar si la mezcla está terminada',
-      'Indicar si el máster está terminado',
-      'Confirmar formato de entrega correcto (.wav 24bit / 44.1kHz)',
+      'He terminado la letra y la composición',
+      'Tengo la canción grabada (aunque sea demo)',
+      'Sé cuándo quiero lanzarla (fecha aproximada)',
+      'Tengo claro el nombre del proyecto',
     ],
+    tip: 'Antes de hablar de fechas y plataformas, lo más importante es saber exactamente qué tienes entre manos. Los artistas que llegaron más lejos empezaron siendo brutalmente honestos sobre su punto de partida.',
+    reflectionQuestion: '¿Dónde está este proyecto ahora mismo, y qué necesita de ti?',
     badgeOnComplete: 'started',
   },
   {
@@ -96,6 +100,8 @@ export const MISSIONS: Mission[] = [
       'Nombrar los archivos con convención correcta',
       'Guardar copia de seguridad en al menos dos ubicaciones',
     ],
+    tip: '',
+    reflectionQuestion: '',
   },
   {
     level: 3,
@@ -110,6 +116,8 @@ export const MISSIONS: Mission[] = [
       'Previsualizar con la herramienta cover preview',
       'Exportar en JPG y PNG',
     ],
+    tip: '',
+    reflectionQuestion: '',
     badgeOnComplete: 'studio',
   },
   {
@@ -125,6 +133,8 @@ export const MISSIONS: Mission[] = [
       'Registrar la obra en tu entidad de gestión (SGAE, ASCAP...)',
       'Guardar los códigos ISRC asignados',
     ],
+    tip: '',
+    reflectionQuestion: '',
   },
   {
     level: 5,
@@ -139,6 +149,8 @@ export const MISSIONS: Mission[] = [
       'Fijar la fecha en Riffims',
       'Activar la cuenta atrás en la release-card',
     ],
+    tip: '',
+    reflectionQuestion: '',
   },
   {
     level: 6,
@@ -154,6 +166,8 @@ export const MISSIONS: Mission[] = [
       'Configurar fecha de lanzamiento en la distribuidora',
       'Confirmar territorios de distribución',
     ],
+    tip: '',
+    reflectionQuestion: '',
   },
   {
     level: 7,
@@ -168,6 +182,8 @@ export const MISSIONS: Mission[] = [
       'Planificar al menos 2 publicaciones de la semana post-release',
       'Preparar al menos una pieza de contenido behind the scenes',
     ],
+    tip: '',
+    reflectionQuestion: '',
   },
   {
     level: 8,
@@ -182,6 +198,8 @@ export const MISSIONS: Mission[] = [
       'Enviar el pitch editorial en Spotify for Artists',
       'Identificar al menos 5 playlists independientes y contactar',
     ],
+    tip: '',
+    reflectionQuestion: '',
     badgeOnComplete: 'platforms',
   },
   {
@@ -197,6 +215,8 @@ export const MISSIONS: Mission[] = [
       'Compartir en stories con enlace directo a la canción',
       'Agradecer a quienes han compartido o guardado la canción',
     ],
+    tip: '',
+    reflectionQuestion: '',
   },
   {
     level: 10,
@@ -211,6 +231,8 @@ export const MISSIONS: Mission[] = [
       'Identificar de dónde vino el tráfico principal',
       'Escribir al menos una conclusión para el próximo lanzamiento',
     ],
+    tip: '',
+    reflectionQuestion: '',
     badgeOnComplete: 'data',
   },
 ];

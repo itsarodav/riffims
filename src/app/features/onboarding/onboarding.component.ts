@@ -12,12 +12,12 @@ import {
 import { StepRoleComponent } from './steps/step-role/step-role.component';
 import { StepGenresComponent } from './steps/step-genres/step-genres.component';
 import { StepEmojiComponent } from './steps/step-emoji/step-emoji.component';
+import { StepProfileTypeComponent } from './steps/step-profile-type/step-profile-type.component';
+import { ProfileType } from './data/profile-types.data';
 
 type DraftData = Partial<OnboardingData>;
 
-// Contenedor del recorrido de onboarding. Mantiene el paso actual, los
-// datos recogidos y orquesta la navegación entre pasos. Al finalizar
-// llama a ProfileService.completeOnboarding y redirige al home.
+// Contenedor del recorrido de onboarding. Mantiene el paso actual, los datos recogidos y orquesta la navegación entre pasos. Al finalizar, llama a ProfileService.completeOnboarding y redirige al home.
 @Component({
   selector: 'app-onboarding',
   standalone: true,
@@ -28,12 +28,13 @@ type DraftData = Partial<OnboardingData>;
     StepRoleComponent,
     StepGenresComponent,
     StepEmojiComponent,
+    StepProfileTypeComponent,
   ],
   templateUrl: './onboarding.component.html',
   styleUrl: './onboarding.component.scss',
 })
 export class OnboardingComponent implements OnInit {
-  readonly totalSteps = 5;
+  readonly totalSteps = 6;
   currentStep = 1;
 
   draft: DraftData = {
@@ -58,8 +59,7 @@ export class OnboardingComponent implements OnInit {
   }
 
   async ngOnInit() {
-    // Precarga lo que ya exista en el perfil por si se retoma un
-    // onboarding interrumpido.
+    // Precarga lo que ya exista en el perfil por si se retoma unonboarding interrumpido.
     const profile = await this.profileService.getCurrentProfile();
     if (profile) {
       this.draft = {
@@ -78,6 +78,10 @@ export class OnboardingComponent implements OnInit {
 
   goBack() {
     if (this.currentStep > 1) this.currentStep--;
+  }
+
+  onProfileTypeNext(_profileType: ProfileType) {
+    this.goNext();
   }
 
   onBasicsNext(data: StepBasicsData) {

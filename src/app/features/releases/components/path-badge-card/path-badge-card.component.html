@@ -6,6 +6,7 @@
   [class.path-badge-card--produccion]="phaseInfo?.phase === 'produccion' && unlocked"
   [class.path-badge-card--release]="phaseInfo?.phase === 'release' && unlocked"
   [class.path-badge-card--post-release]="phaseInfo?.phase === 'post-release' && unlocked"
+  [attr.data-badge-id]="badge.badgeId"
   [attr.aria-label]="badge.label + (unlocked ? ' - desbloqueado' : ' - bloqueado')"
 >
   <div class="path-badge-card__icon-wrapper">

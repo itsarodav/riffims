@@ -1,0 +1,30 @@
+<section class="lanzamientos">
+  <header class="lanzamientos__header">
+    <button
+      class="lanzamientos__back"
+      type="button"
+      aria-label="Volver"
+      (click)="goBack()"
+    >
+      <app-icon name="arrow-left" [size]="24" />
+    </button>
+    <h1 class="lanzamientos__title">Tus lanzamientos</h1>
+    <span class="lanzamientos__spacer"></span>
+  </header>
+
+  <div *ngIf="hasReleases" class="lanzamientos__grid">
+    <app-release-card
+      *ngFor="let release of releases"
+      [title]="release.name"
+      [releaseType]="getDisplayType(release.release_type)"
+      [daysToRelease]="getDaysToRelease(release)"
+      [completedLevels]="release.completed_levels"
+      [fullWidth]="true"
+      (click)="openReleasePath(release)"
+      (keydown.enter)="openReleasePath(release)"
+      role="link"
+      tabindex="0"
+      style="cursor: pointer"
+    />
+  </div>
+</section>

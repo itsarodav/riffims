@@ -1,0 +1,52 @@
+<div class="mission-checklist">
+  <h2 class="mission-checklist__heading">Checklist</h2>
+
+  <div class="mission-checklist__items">
+    <div
+      *ngFor="let subtask of subtasks; let i = index"
+      class="mission-checklist__item"
+    >
+      <input
+        type="checkbox"
+        class="mission-checklist__checkbox"
+        [id]="'task-' + levelNumber + '-' + i"
+        [checked]="checkedItems()[i]"
+        (change)="onCheckChange(i, $any($event.target).checked)"
+      />
+      <label
+        class="mission-checklist__label"
+        [for]="'task-' + levelNumber + '-' + i"
+      >
+        {{ subtask }}
+      </label>
+    </div>
+  </div>
+
+  <div class="mission-checklist__progress">
+    <div
+      class="mission-checklist__progress-bar"
+      role="progressbar"
+      [attr.aria-valuenow]="completedCount()"
+      aria-valuemin="0"
+      [attr.aria-valuemax]="subtasks.length"
+    >
+      <div
+        class="mission-checklist__progress-fill"
+        [style.width.%]="progressPercent()"
+      ></div>
+    </div>
+    <span class="mission-checklist__progress-text">
+      {{ completedCount() }} / {{ subtasks.length }}
+    </span>
+  </div>
+
+  <app-button
+    variant="primary"
+    [fullWidth]="true"
+    [disabled]="!allCompleted() || isSaving()"
+    [loading]="isSaving()"
+    (click)="completeLevel()"
+  >
+    Completar nivel
+  </app-button>
+</div>

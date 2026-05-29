@@ -48,6 +48,12 @@ export const routes: Routes = [
       { path: 'logros', component: LogrosComponent },
       { path: 'riffionario', component: RiffionarioComponent },
       {
+        path: 'releases/:releaseId/path/:level',
+        loadComponent: () => import('./features/releases/release-mission-detail/release-mission-detail')
+          .then(m => m.ReleaseMissionDetail),
+        data: { pageTitle: 'Misión' },
+      },
+      {
         path: 'releases/:releaseId/path',
         loadComponent: () => import('./features/releases/release-path/release-path.component')
           .then(m => m.ReleasePathComponent),

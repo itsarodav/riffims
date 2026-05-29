@@ -1,0 +1,42 @@
+<div class="mission-detail">
+  <header class="mission-detail__header">
+    <button
+      class="mission-detail__back"
+      type="button"
+      aria-label="Volver a la ruta de lanzamiento"
+      (click)="goBack()"
+    >
+      <app-icon name="arrow-left" [size]="24" />
+    </button>
+    <span class="mission-detail__header-title">{{ mission().title }}</span>
+  </header>
+
+  <main class="mission-detail__content">
+    <div class="mission-detail__level-id">
+      <span class="mission-detail__level-number">{{ levelLabel() }}</span>
+      <app-tag label="Soundcheck" variant="soundcheck" />
+    </div>
+
+    <h1 class="mission-detail__title">{{ mission().title }}</h1>
+    <p class="mission-detail__subtitle">{{ mission().subtitle }}</p>
+
+    <app-mission-tip
+      *ngIf="mission().tip"
+      [tip]="mission().tip"
+    />
+
+    <app-mission-reflection
+      *ngIf="mission().reflectionQuestion"
+      [question]="mission().reflectionQuestion"
+      [releaseId]="releaseId()"
+      [levelNumber]="levelNumber()"
+    />
+
+    <app-mission-checklist
+      [subtasks]="mission().subtasks"
+      [releaseId]="releaseId()"
+      [levelNumber]="levelNumber()"
+      (levelCompleted)="onLevelCompleted()"
+    />
+  </main>
+</div>

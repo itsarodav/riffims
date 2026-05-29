@@ -55,6 +55,17 @@ export class MissionsService {
     return 'locked';
   }
 
+  async completeLevel(releaseId: string, currentLevel: number): Promise<void> {
+    const { error } = await this.supabase.client
+      .from('releases')
+      .update({ completed_levels: currentLevel })
+      .eq('id', releaseId)
+      .eq('user_id', (await this.supabase.client.auth.getUser()).data.user?.id ?? '');
+
+    if (error) throw error;
+    this._completedLevels.set(currentLevel);
+  }
+
   isBadgeUnlocked(badgeId: BadgeId): boolean {
     return this.unlockedBadges().includes(badgeId);
   }

@@ -1,0 +1,64 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.mission-reflection {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xs;
+
+  &__label {
+    font-family: $font-family;
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    color: $brand-dark-color;
+    line-height: $line-height-snug;
+  }
+
+  &__textarea {
+    width: 100%;
+    padding: $space-sm;
+    font-family: $font-family;
+    font-size: $font-size-base;
+    font-weight: $font-weight-regular;
+    color: $brand-dark-color;
+    background-color: $brand-light-color;
+    border: 1px solid $brand-gray-color;
+    border-radius: $radius-md;
+    line-height: $line-height-normal;
+    resize: none;
+    outline: none;
+    transition: border-color $duration-fast $easing-default;
+
+    &::placeholder {
+      color: $brand-gray-bold-color;
+    }
+
+    &:focus {
+      border-color: $brand-secondary-bold;
+    }
+
+    @include tablet {
+      resize: vertical;
+    }
+  }
+
+  &__status {
+    min-height: 20px;
+    text-align: right;
+  }
+
+  &__status-text {
+    font-family: $font-family;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    color: $brand-gray-bold-color;
+
+    &--saved {
+      color: $positive-600;
+    }
+
+    &--error {
+      color: $negative-600;
+    }
+  }
+}

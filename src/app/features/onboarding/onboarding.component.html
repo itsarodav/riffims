@@ -27,8 +27,14 @@
       (next)="goNext()"
     />
 
-    <app-step-basics
+    <app-step-profile-type
       *ngIf="currentStep === 2"
+      (next)="onProfileTypeNext($event)"
+      (back)="goBack()"
+    />
+
+    <app-step-basics
+      *ngIf="currentStep === 3"
       [artistName]="draft.artist_name || ''"
       [username]="draft.username || ''"
       (next)="onBasicsNext($event)"
@@ -36,21 +42,21 @@
     />
 
     <app-step-role
-      *ngIf="currentStep === 3"
+      *ngIf="currentStep === 4"
       [role]="draft.role || null"
       (next)="onRoleNext($event)"
       (back)="goBack()"
     />
 
     <app-step-genres
-      *ngIf="currentStep === 4"
+      *ngIf="currentStep === 5"
       [genres]="draft.genres || []"
       (next)="onGenresNext($event)"
       (back)="goBack()"
     />
 
     <app-step-emoji
-      *ngIf="currentStep === 5"
+      *ngIf="currentStep === 6"
       [emoji]="draft.emoji || null"
       [submitting]="submitting"
       [errorMessage]="errorMessage"

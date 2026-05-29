@@ -85,6 +85,11 @@
   // Active state
   &--active {
     border-color: $brand-gray-bold-color;
+
+    &:hover {
+      background-color: $brand-gray-subtle-accent-color;
+      border-color: $brand-secondary-vibrant;
+    }
   }
 
   // Completed state -> phase colors

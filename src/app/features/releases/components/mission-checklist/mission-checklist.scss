@@ -1,0 +1,104 @@
+@use 'tokens' as *;
+
+.mission-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+
+  &__heading {
+    font-family: $font-family;
+    font-size: $font-size-md;
+    font-weight: $font-weight-bold;
+    color: $brand-dark-color;
+    margin: 0;
+  }
+
+  &__items {
+    display: flex;
+    flex-direction: column;
+    gap: $space-xs;
+  }
+
+  &__item {
+    display: flex;
+    align-items: flex-start;
+    gap: $space-xs;
+  }
+
+  &__checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    border: 2px solid $brand-gray-color;
+    border-radius: $radius-sm;
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+    margin-top: 2px;
+    transition: background-color $duration-fast $easing-default,
+                border-color $duration-fast $easing-default;
+
+    &:checked {
+      background-color: $brand-primary;
+      border-color: $brand-primary;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 2px;
+        left: 5px;
+        width: 5px;
+        height: 9px;
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+      }
+    }
+
+    &:focus-visible {
+      outline: 2px solid $brand-secondary-vibrant;
+      outline-offset: 2px;
+    }
+  }
+
+  &__label {
+    font-family: $font-family;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-regular;
+    color: $brand-dark-color;
+    line-height: $line-height-normal;
+    cursor: pointer;
+  }
+
+  // Progress bar
+  &__progress {
+    display: flex;
+    align-items: center;
+    gap: $space-xs;
+  }
+
+  &__progress-bar {
+    flex: 1;
+    height: 6px;
+    background-color: $brand-gray-subtle-color;
+    border-radius: $radius-full;
+    overflow: hidden;
+  }
+
+  &__progress-fill {
+    height: 100%;
+    background-color: $brand-primary;
+    border-radius: $radius-full;
+    transition: width $duration-base $easing-default;
+  }
+
+  &__progress-text {
+    font-family: $font-family;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    color: $brand-gray-bold-color;
+    white-space: nowrap;
+  }
+}
