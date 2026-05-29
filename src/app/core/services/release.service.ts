@@ -46,4 +46,45 @@ export class ReleaseService {
     }
     return { data: data as Release, error: null };
   }
+
+  async getReleaseById(id: string): Promise<Release | null> {
+    const { data, error } = await this.supabase.client
+      .from('releases')
+      .select('*')
+      .eq('id', id)
+      .single();
+
+    if (error) {
+      console.error('ReleaseService.getReleaseById', error);
+      return null;
+    }
+    return data as Release;
+  }
+
+  async updateRelease(
+    id: string,
+    payload: Partial<CreateReleaseData>
+  ): Promise<{ error: Error | null }> {
+    const { error } = await this.supabase.client
+      .from('releases')
+      .update(payload)
+      .eq('id', id);
+
+    if (error) {
+      return { error: error as unknown as Error };
+    }
+    return { error: null };
+  }
+
+  async deleteRelease(id: string): Promise<{ error: Error | null }> {
+    const { error } = await this.supabase.client
+      .from('releases')
+      .delete()
+      .eq('id', id);
+
+    if (error) {
+      return { error: error as unknown as Error };
+    }
+    return { error: null };
+  }
 }

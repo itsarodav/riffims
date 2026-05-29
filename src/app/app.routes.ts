@@ -44,6 +44,7 @@ export const routes: Routes = [
       { path: 'riffi', component: RiffiComponent },
       { path: 'perfil', component: PerfilComponent },
       { path: 'nuevo', component: NuevoLanzamientoComponent },
+      { path: 'editar/:releaseId', component: NuevoLanzamientoComponent },
       { path: 'cover-preview', component: CoverPreviewComponent },
       { path: 'logros', component: LogrosComponent },
       { path: 'riffionario', component: RiffionarioComponent },

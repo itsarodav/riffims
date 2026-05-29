@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { InputComponent } from '../../shared/components/input/input.component';
 import { Button } from '../../shared/components/button/button.component';
 import { ChipGroupComponent, ChipOption } from '../../shared/components/chip-group/chip-group.component';
 import { IconComponent } from '../../shared/components/icon/icon.component';
 import { ReleaseService } from '../../core/services/release.service';
-import { PlanningElement, ReleaseType } from '../../core/models/release.model';
+import { PlanningElement, Release, ReleaseType } from '../../core/models/release.model';
 
 @Component({
   selector: 'app-nuevo-lanzamiento',
@@ -22,7 +22,7 @@ import { PlanningElement, ReleaseType } from '../../core/models/release.model';
   templateUrl: './nuevo-lanzamiento.component.html',
   styleUrl: './nuevo-lanzamiento.component.scss',
 })
-export class NuevoLanzamientoComponent {
+export class NuevoLanzamientoComponent implements OnInit {
   name = '';
   releaseType: ReleaseType[] = [];
   releaseDate = '';
@@ -31,11 +31,17 @@ export class NuevoLanzamientoComponent {
   planningElements: PlanningElement[] = [];
 
   loading = false;
+  loadingData = false;
+  deleting = false;
   errorMessage = '';
+  confirmingDelete = false;
 
   nameError = '';
   typeError = '';
   dateError = '';
+
+  isEditMode = false;
+  private releaseId: string | null = null;
 
   typeOptions: ChipOption<ReleaseType>[] = [
     { value: 'single', label: 'Single' },
@@ -58,8 +64,45 @@ export class NuevoLanzamientoComponent {
 
   constructor(
     private releaseService: ReleaseService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
+
+  async ngOnInit() {
+    this.releaseId = this.route.snapshot.paramMap.get('releaseId');
+    this.isEditMode = !!this.releaseId;
+
+    if (this.isEditMode && this.releaseId) {
+      // Primero intentar datos del router state (instantáneo)
+      const navState = history.state as { release?: Release };
+      let release = navState?.release ?? null;
+
+      // Fallback: fetch de Supabase si no hay state (acceso directo por URL)
+      if (!release) {
+        this.loadingData = true;
+        release = await this.releaseService.getReleaseById(this.releaseId);
+        this.loadingData = false;
+      }
+
+      if (release) {
+        this.prefillForm(release);
+      }
+    }
+  }
+
+  private prefillForm(release: Release) {
+    this.name = release.name;
+    this.releaseType = [release.release_type];
+    this.releaseDate = this.formatToDisplay(release.release_date);
+    this.hasPreviousRelease = [release.has_previous_release ? 'si' : 'no'];
+    this.hasDistributor = [release.has_distributor ? 'si' : 'no'];
+    this.planningElements = release.planning_elements ?? [];
+  }
+
+  private formatToDisplay(isoDate: string): string {
+    const [y, m, d] = isoDate.split('-');
+    return `${d}/${m}/${y}`;
+  }
 
   validate(): boolean {
     let valid = true;
@@ -133,22 +176,57 @@ export class NuevoLanzamientoComponent {
     this.loading = true;
     this.errorMessage = '';
 
-    const { error } = await this.releaseService.createRelease({
+    const payload = {
       name: this.name.trim(),
       release_type: this.releaseType[0],
       release_date: this.formatToISO(this.releaseDate),
       has_previous_release: this.hasPreviousRelease[0] === 'si',
       has_distributor: this.hasDistributor[0] === 'si',
       planning_elements: this.planningElements,
-    });
+    };
 
-    this.loading = false;
+    if (this.isEditMode && this.releaseId) {
+      const { error } = await this.releaseService.updateRelease(this.releaseId, payload);
+      this.loading = false;
+      if (error) {
+        this.errorMessage = 'Ocurrió un error al guardar los cambios. Intenta de nuevo.';
+        return;
+      }
+      this.router.navigate(['/lanzamientos']);
+    } else {
+      const { error } = await this.releaseService.createRelease(payload);
+      this.loading = false;
+      if (error) {
+        this.errorMessage = 'Ocurrió un error al crear el lanzamiento. Intenta de nuevo.';
+        return;
+      }
+      this.router.navigate(['/home']);
+    }
+  }
+
+  onDeleteClick() {
+    this.confirmingDelete = true;
+  }
+
+  onCancelDelete() {
+    this.confirmingDelete = false;
+  }
+
+  async onConfirmDelete() {
+    if (!this.releaseId) return;
+
+    this.deleting = true;
+    this.errorMessage = '';
+
+    const { error } = await this.releaseService.deleteRelease(this.releaseId);
+    this.deleting = false;
 
     if (error) {
-      this.errorMessage = 'Ocurrió un error al crear el lanzamiento. Intenta de nuevo.';
+      this.errorMessage = 'Ocurrió un error al eliminar el lanzamiento. Intenta de nuevo.';
+      this.confirmingDelete = false;
       return;
     }
 
-    this.router.navigate(['/home']);
+    this.router.navigate(['/lanzamientos']);
   }
 }

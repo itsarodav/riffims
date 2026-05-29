@@ -1,12 +1,17 @@
 <section class="nuevo-lanzamiento">
   <!-- Back button -->
-  <a class="nuevo-lanzamiento__back" routerLink="/home">
+  <a class="nuevo-lanzamiento__back" [routerLink]="isEditMode ? '/lanzamientos' : '/home'">
     <app-icon name="arrow-left" [size]="16" />
     <span>Atrás</span>
   </a>
 
+  <!-- loading -->
+  @if (loadingData) {
+    <p class="nuevo-lanzamiento__loading">Cargando datos...</p>
+  }
+
   <!-- Form -->
-  <div class="nuevo-lanzamiento__form">
+  <div class="nuevo-lanzamiento__form" [hidden]="loadingData">
     <!-- Nombre -->
     <app-input
       label="Nombre del lanzamiento"
@@ -16,7 +21,7 @@
       [error]="nameError"
     />
 
-    <!-- Tipo -->
+    <!-- tipo -->
     <div class="nuevo-lanzamiento__field">
       <label class="nuevo-lanzamiento__label">Tipo</label>
       <app-chip-group
@@ -28,7 +33,7 @@
       <p class="nuevo-lanzamiento__error" *ngIf="typeError">{{ typeError }}</p>
     </div>
 
-    <!-- Fecha -->
+    <!-- fecha -->
     <app-input
       label="Día de lanzamiento"
       placeholder="DD/MM/AAAA"
@@ -73,14 +78,39 @@
     <!-- Error general -->
     <p class="nuevo-lanzamiento__error" *ngIf="errorMessage">{{ errorMessage }}</p>
 
-    <!-- Botones -->
+    <!-- botones -->
     <div class="nuevo-lanzamiento__actions">
-      <app-button variant="secondary" [fullWidth]="false" routerLink="/home">
+      <app-button variant="secondary" [fullWidth]="false" [routerLink]="isEditMode ? '/lanzamientos' : '/home'">
         Cerrar
       </app-button>
       <app-button variant="primary" [fullWidth]="false" [loading]="loading" (click)="onSubmit()">
-        Crear
+        {{ isEditMode ? 'Guardar cambios' : 'Crear' }}
       </app-button>
     </div>
+
+    <!-- eliminar (solo en modo edición) -->
+    @if (isEditMode) {
+      <div class="nuevo-lanzamiento__delete-section">
+        @if (!confirmingDelete) {
+          <app-button variant="tertiary" [fullWidth]="true" (click)="onDeleteClick()">
+            Eliminar lanzamiento
+          </app-button>
+        } @else {
+          <div class="nuevo-lanzamiento__delete-confirm">
+            <p class="nuevo-lanzamiento__delete-warning">
+              ¿Estás seguro? Se eliminará el lanzamiento y todo su progreso.
+            </p>
+            <div class="nuevo-lanzamiento__delete-actions">
+              <app-button variant="secondary" [fullWidth]="false" (click)="onCancelDelete()">
+                Cancelar
+              </app-button>
+              <app-button variant="primary" [fullWidth]="false" [loading]="deleting" (click)="onConfirmDelete()">
+                Sí, eliminar
+              </app-button>
+            </div>
+          </div>
+        }
+      </div>
+    }
   </div>
 </section>

@@ -60,6 +60,10 @@ export class LanzamientosComponent implements OnInit {
     return map[type] ?? 'Single';
   }
 
+  editRelease(release: Release): void {
+    this.router.navigate(['/editar', release.id], { state: { release } });
+  }
+
   openReleasePath(release: Release): void {
     this.router.navigate(['/releases', release.id, 'path'], {
       queryParams: { name: release.name },

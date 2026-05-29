@@ -1,8 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { NavigationEnd, NavigationStart, Router, RouterOutlet } from '@angular/router';
+import gsap from 'gsap';
 import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
 import { MobileHeaderComponent } from '../mobile-header/mobile-header.component';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { SidebarComponent } from '../sidebar/sidebar.component';
@@ -25,6 +25,8 @@ import { RiffiPanelComponent } from '../../shared/components/riffi-panel/riffi-p
   styleUrl: './app-shell.component.scss',
 })
 export class AppShellComponent implements OnInit, OnDestroy {
+  @ViewChild('shellContent', { static: true }) shellContent!: ElementRef<HTMLElement>;
+
   isFormRoute = false;
   isRiffiRoute = false;
   isCoverPreviewRoute = false;
@@ -37,9 +39,23 @@ export class AppShellComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.checkRoute(this.router.url);
-    this.routerSub = this.router.events
-      .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
-      .subscribe((e) => this.checkRoute(e.urlAfterRedirects));
+    this.routerSub = this.router.events.subscribe((e) => {
+      if (e instanceof NavigationStart) {
+        gsap.to(this.shellContent.nativeElement, {
+          opacity: 0,
+          duration: 0.25,
+          ease: 'power2.inOut',
+        });
+      }
+      if (e instanceof NavigationEnd) {
+        this.checkRoute(e.urlAfterRedirects);
+        gsap.fromTo(
+          this.shellContent.nativeElement,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.35, ease: 'power2.inOut' }
+        );
+      }
+    });
   }
 
   ngOnDestroy() {
@@ -47,7 +63,7 @@ export class AppShellComponent implements OnInit, OnDestroy {
   }
 
   private checkRoute(url: string) {
-    this.isFormRoute = url.startsWith('/nuevo');
+    this.isFormRoute = url.startsWith('/nuevo') || url.startsWith('/editar');
     this.isRiffiRoute = url.startsWith('/riffi');
     this.isCoverPreviewRoute = url.startsWith('/cover-preview');
     this.isReleasePathRoute = url.startsWith('/releases');

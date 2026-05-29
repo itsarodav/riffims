@@ -1,23 +1,23 @@
-<!-- Desktop: Navbar top -->
+<!-- Desktop Navbar top -->
 <app-navbar />
 
 <div class="app-shell">
-  <!-- Desktop: Sidebar left -->
+  <!-- Desktop Sidebar left -->
   <app-sidebar />
 
   <!-- Main scrollable area -->
   <div class="app-shell__main" [class.app-shell__main--no-bottom-pad]="isFormRoute || isRiffiRoute || isCoverPreviewRoute || isLogrosRoute || isRiffionarioRoute">
-    <!-- Mobile: Header scrolls with content -->
+    <!-- Mobile Header scrolls with content -->
     <app-mobile-header *ngIf="!isFormRoute && !isRiffiRoute && !isCoverPreviewRoute && !isReleasePathRoute && !isLogrosRoute && !isRiffionarioRoute" />
 
-    <div class="app-shell__content" [class.app-shell__content--flush]="isRiffiRoute || isCoverPreviewRoute || isLogrosRoute || isRiffionarioRoute">
+    <div #shellContent class="app-shell__content" [class.app-shell__content--flush]="isRiffiRoute || isCoverPreviewRoute || isLogrosRoute || isRiffionarioRoute">
       <router-outlet />
     </div>
   </div>
 
-  <!-- Desktop: Riffi panel right -->
+  <!-- Desktop Riffi panel right -->
   <app-riffi-panel *ngIf="!isFormRoute && !isRiffiRoute && !isCoverPreviewRoute && !isLogrosRoute && !isRiffionarioRoute" class="app-shell__riffi" />
 </div>
 
-<!-- Mobile: Bottom nav fixed -->
+<!-- Mobile Bottom nav fixed -->
 <app-bottom-nav *ngIf="!isFormRoute && !isRiffiRoute && !isCoverPreviewRoute && !isLogrosRoute && !isRiffionarioRoute" />

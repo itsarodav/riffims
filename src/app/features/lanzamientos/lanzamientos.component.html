@@ -13,18 +13,26 @@
   </header>
 
   <div *ngIf="hasReleases" class="lanzamientos__grid">
-    <app-release-card
-      *ngFor="let release of releases"
-      [title]="release.name"
-      [releaseType]="getDisplayType(release.release_type)"
-      [daysToRelease]="getDaysToRelease(release)"
-      [completedLevels]="release.completed_levels"
-      [fullWidth]="true"
-      (click)="openReleasePath(release)"
-      (keydown.enter)="openReleasePath(release)"
-      role="link"
-      tabindex="0"
-      style="cursor: pointer"
-    />
+    <div class="lanzamientos__card-wrapper" *ngFor="let release of releases">
+      <app-release-card
+        [title]="release.name"
+        [releaseType]="getDisplayType(release.release_type)"
+        [daysToRelease]="getDaysToRelease(release)"
+        [completedLevels]="release.completed_levels"
+        [fullWidth]="true"
+        (click)="openReleasePath(release)"
+        (keydown.enter)="openReleasePath(release)"
+        role="link"
+        tabindex="0"
+        style="cursor: pointer"
+      />
+      <button
+        class="lanzamientos__edit-btn"
+        type="button"
+        (click)="editRelease(release)"
+      >
+        Editar
+      </button>
+    </div>
   </div>
 </section>
