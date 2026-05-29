@@ -73,7 +73,7 @@ export const MISSIONS: Mission[] = [
   {
     level: 1,
     title: '¿Dónde estás ahora?',
-    subtitle: 'Definiremos el estado real del lanzamiento. Es el punto de partida honesto del camino.',
+    subtitle: 'Definiremos el estado real del lanzamiento. Es el punto de partida del camino.',
     phase: 'produccion',
     interactionTypes: ['checklist', 'riffi'],
     badgeLabel: 'Punto de partida',

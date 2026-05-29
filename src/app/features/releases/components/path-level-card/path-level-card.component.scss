@@ -93,16 +93,17 @@
   }
 
   // Completed state -> phase colors
+
   &--completed.path-level-card--phase-produccion {
-    border-color: $purple-300;
+    border-color: $brand-gray-color;
   }
 
   &--completed.path-level-card--phase-release {
-    border-color: $blue-300;
+    border-color: $brand-gray-color;
   }
 
   &--completed.path-level-card--phase-post-release {
-    border-color: $positive-300;
+    border-color: $brand-gray-color;
   }
 
   // Locked state
