@@ -47,15 +47,15 @@
 
         <div class="login-container__actions">
             <app-button type="submit" variant="primary" [disabled]="isLoading">
-                {{ isLoading ? 'Entrando...' : 'Log in' }}
+                {{ isLoading ? 'Entrando...' : 'Acceder' }}
             </app-button>
 
             <app-button variant="secondary" (click)="goToForgotPassword()">
-                Forgot Password
+                Olvidé mi contraseña
             </app-button>
 
             <app-button variant="tertiary" (click)="goToRegister()">
-                Create Account
+                Crear cuenta
             </app-button>
         </div>
     </form>
