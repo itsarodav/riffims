@@ -1,0 +1,46 @@
+<section class="artistas">
+  <header class="artistas__header">
+    <button
+      class="artistas__back"
+      type="button"
+      aria-label="Volver"
+      (click)="goBack()"
+    >
+      <app-icon name="arrow-left" [size]="24" />
+    </button>
+    <h1 class="artistas__title">Artistas</h1>
+    <span class="artistas__spacer"></span>
+  </header>
+
+  <div *ngIf="!loading" class="artistas__grid">
+    <!-- Artist cards -->
+    <div class="artistas__card-wrapper" *ngFor="let artist of artists">
+      <div class="artistas__card">
+        <span class="artistas__card-emoji">{{ artist.emoji || '🎵' }}</span>
+        <span class="artistas__card-name">{{ artist.name }}</span>
+      </div>
+      <button
+        class="artistas__edit-btn"
+        type="button"
+        (click)="editArtist(artist)"
+      >
+        Editar
+      </button>
+    </div>
+
+    <!-- Create new artist card -->
+    <div class="artistas__card-wrapper" *ngIf="canCreateMore">
+      <a class="artistas__card artistas__card--add" routerLink="/artistas/nuevo">
+        <app-icon name="add-circle-filled" [size]="32" />
+        <span class="artistas__card-name">Crear artista</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Invite placeholder -->
+  <div class="artistas__invite">
+    <button class="artistas__invite-btn" type="button" disabled>
+      Invitar artista (próximamente)
+    </button>
+  </div>
+</section>

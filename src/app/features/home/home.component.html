@@ -1,36 +1,109 @@
 <section class="home">
-  <!-- Section header -->
-  <div class="home__header">
-    <h1 class="home__heading">Tus lanzamientos</h1>
-    <a *ngIf="hasReleases" class="home__create-btn" routerLink="/nuevo">Crear</a>
-  </div>
-
-  <!-- 2a. Release empty state (no releases) -->
-  <a *ngIf="!loading && !hasReleases" class="home__release-empty" routerLink="/nuevo">
-    <div class="home__release-icon">
-      <app-icon name="add-circle-filled" [size]="32" />
+  <!-- MANAGER VIEW: Artist selection -->
+  <ng-container *ngIf="isManager && !selectedArtist">
+    <div class="home__header">
+      <h1 class="home__heading">Tus artistas</h1>
+      <a class="home__create-btn" routerLink="/artistas">Ver todos</a>
     </div>
-    <p class="home__release-title">¡Crea tu primer lanzamiento!</p>
-    <p class="home__release-subtitle">Tú decides, yo te acompaño. Y termina cada paso para aumentar de nivel</p>
-  </a>
 
-  <!--  Release cards (has releases) -->
-  <div *ngIf="hasReleases" class="home__releases">
-    <app-release-card
-      *ngFor="let release of releases"
-      [title]="release.name"
-      [releaseType]="getDisplayType(release.release_type)"
-      [daysToRelease]="getDaysToRelease(release)"
-      [completedLevels]="release.completed_levels"
-      [fullWidth]="releases.length === 1"
-      (click)="openReleasePath(release)"
-      (keydown.enter)="openReleasePath(release)"
-      role="link"
-      tabindex="0"
-      style="cursor: pointer"
-    />
-  </div>
+    <div *ngIf="hasArtists" class="home__artists-grid">
+      <div
+        class="home__artist-card"
+        *ngFor="let artist of artists"
+        (click)="selectArtist(artist)"
+        (keydown.enter)="selectArtist(artist)"
+        role="button"
+        tabindex="0"
+      >
+        <span class="home__artist-emoji">{{ artist.emoji || '🎵' }}</span>
+        <span class="home__artist-name">{{ artist.name }}</span>
+      </div>
+    </div>
 
+    <a *ngIf="!hasArtists" class="home__release-empty" routerLink="/artistas/nuevo">
+      <div class="home__release-icon">
+        <app-icon name="add-circle-filled" [size]="32" />
+      </div>
+      <p class="home__release-title">¡Crea tu primer artista!</p>
+      <p class="home__release-subtitle">Gestiona los lanzamientos de los artistas que representas.</p>
+    </a>
+  </ng-container>
+
+  <!-- MANAGER VIEW: Selected artist releases -->
+  <ng-container *ngIf="isManager && selectedArtist">
+    <div class="home__header">
+      <button class="home__back-btn" type="button" (click)="deselectArtist()">
+        <app-icon name="arrow-left" [size]="16" />
+        <span>Volver</span>
+      </button>
+    </div>
+
+    <div class="home__header">
+      <h1 class="home__heading">{{ selectedArtist.name }}</h1>
+      <a class="home__create-btn" (click)="createReleaseForArtist()">Crear</a>
+    </div>
+
+    <div *ngIf="hasReleases" class="home__releases">
+      <app-release-card
+        *ngFor="let release of releases"
+        [title]="release.name"
+        [releaseType]="getDisplayType(release.release_type)"
+        [daysToRelease]="getDaysToRelease(release)"
+        [completedLevels]="release.completed_levels"
+        [fullWidth]="releases.length === 1"
+        (click)="openReleasePath(release)"
+        (keydown.enter)="openReleasePath(release)"
+        role="link"
+        tabindex="0"
+        style="cursor: pointer"
+      />
+    </div>
+
+    <a *ngIf="!loading && !hasReleases" class="home__release-empty" (click)="createReleaseForArtist()">
+      <div class="home__release-icon">
+        <app-icon name="add-circle-filled" [size]="32" />
+      </div>
+      <p class="home__release-title">¡Crea el primer lanzamiento!</p>
+      <p class="home__release-subtitle">Tú decides, yo te acompaño. Y termina cada paso para aumentar de nivel</p>
+    </a>
+  </ng-container>
+
+  <!-- SOLO VIEW (existing) -->
+  <ng-container *ngIf="!isManager">
+    <!-- Section header -->
+    <div class="home__header">
+      <h1 class="home__heading">Tus lanzamientos</h1>
+      <a *ngIf="hasReleases" class="home__create-btn" routerLink="/nuevo">Crear</a>
+    </div>
+
+    <!-- Release empty state (no releases) -->
+    <a *ngIf="!loading && !hasReleases" class="home__release-empty" routerLink="/nuevo">
+      <div class="home__release-icon">
+        <app-icon name="add-circle-filled" [size]="32" />
+      </div>
+      <p class="home__release-title">¡Crea tu primer lanzamiento!</p>
+      <p class="home__release-subtitle">Tú decides, yo te acompaño. Y termina cada paso para aumentar de nivel</p>
+    </a>
+
+    <!-- Release cards (has releases) -->
+    <div *ngIf="hasReleases" class="home__releases">
+      <app-release-card
+        *ngFor="let release of releases"
+        [title]="release.name"
+        [releaseType]="getDisplayType(release.release_type)"
+        [daysToRelease]="getDaysToRelease(release)"
+        [completedLevels]="release.completed_levels"
+        [fullWidth]="releases.length === 1"
+        (click)="openReleasePath(release)"
+        (keydown.enter)="openReleasePath(release)"
+        role="link"
+        tabindex="0"
+        style="cursor: pointer"
+      />
+    </div>
+  </ng-container>
+
+  <!-- Common sections (shown for both manager and solo) -->
   <!-- Riffi tip card -->
   <app-multi-card
     variant="riffi-tip"

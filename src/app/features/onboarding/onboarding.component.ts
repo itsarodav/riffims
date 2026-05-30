@@ -34,8 +34,12 @@ type DraftData = Partial<OnboardingData>;
   styleUrl: './onboarding.component.scss',
 })
 export class OnboardingComponent implements OnInit {
-  readonly totalSteps = 6;
   currentStep = 1;
+  profileType: ProfileType = 'solo';
+
+  get totalSteps(): number {
+    return this.profileType === 'manager' ? 3 : 6;
+  }
 
   draft: DraftData = {
     username: '',
@@ -80,14 +84,52 @@ export class OnboardingComponent implements OnInit {
     if (this.currentStep > 1) this.currentStep--;
   }
 
-  onProfileTypeNext(_profileType: ProfileType) {
+  onProfileTypeNext(profileType: ProfileType) {
+    this.profileType = profileType;
     this.goNext();
   }
 
   onBasicsNext(data: StepBasicsData) {
     this.draft.artist_name = data.artist_name;
     this.draft.username = data.username;
-    this.goNext();
+
+    if (this.profileType === 'manager') {
+      this.finishManagerOnboarding();
+    } else {
+      this.goNext();
+    }
+  }
+
+  private async finishManagerOnboarding() {
+    if (!this.draft.username || !this.draft.artist_name) {
+      this.errorMessage = 'Faltan datos por completar.';
+      return;
+    }
+
+    this.submitting = true;
+    this.errorMessage = '';
+
+    try {
+      const { error } = await this.profileService.completeManagerOnboarding({
+        username: this.draft.username,
+        artist_name: this.draft.artist_name,
+      });
+
+      if (error) {
+        console.error('completeManagerOnboarding error', error);
+        this.errorMessage =
+          'No hemos podido guardar tu perfil. Inténtalo de nuevo.';
+        return;
+      }
+
+      await this.router.navigate(['/home']);
+    } catch (e) {
+      console.error('completeManagerOnboarding threw', e);
+      this.errorMessage =
+        'Ha ocurrido un error inesperado. Inténtalo de nuevo.';
+    } finally {
+      this.submitting = false;
+    }
   }
 
   onRoleNext(role: ArtistRole) {

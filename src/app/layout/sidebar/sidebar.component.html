@@ -4,6 +4,10 @@
       <app-icon name="home" [size]="24" />
       <span>Inicio</span>
     </a>
+    <a *ngIf="isManager()" class="sidebar__link" routerLink="/artistas" routerLinkActive="sidebar__link--active">
+      <app-icon name="emoji-happy" [size]="24" />
+      <span>Artistas</span>
+    </a>
     <a class="sidebar__link" routerLink="/lanzamientos" routerLinkActive="sidebar__link--active">
       <app-icon name="release-folder" [size]="24" />
       <span>Lanzamientos</span>

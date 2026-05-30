@@ -10,6 +10,7 @@ export type PlanningElement =
 export interface Release {
   id: string;
   user_id: string;
+  artist_id: string | null;
   name: string;
   release_type: ReleaseType;
   release_date: string;

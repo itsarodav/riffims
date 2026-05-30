@@ -1,6 +1,11 @@
 import { Injectable, signal } from '@angular/core';
 import { SupabaseService } from './supabase.service';
-import { ArtistRole, OnboardingData, Profile } from '../models/profile.model';
+import {
+  ArtistRole,
+  ManagerOnboardingData,
+  OnboardingData,
+  Profile,
+} from '../models/profile.model';
 
 @Injectable({
   providedIn: 'root',
@@ -80,9 +85,35 @@ export class ProfileService {
         role: payload.role,
         genres: payload.genres,
         emoji: payload.emoji,
+        profile_type: 'solo',
         onboarding_completed: true,
       })
       .eq('id', userId);
+
+    return { error };
+  }
+
+  // Onboarding corto para managers: solo username y display name.
+  async completeManagerOnboarding(payload: ManagerOnboardingData) {
+    const { data: sessionData } = await this.supabase.getSession();
+    const userId = sessionData.session?.user?.id;
+    if (!userId) {
+      return { error: new Error('No hay sesión activa') };
+    }
+
+    const { error } = await this.supabase.client
+      .from('profiles')
+      .update({
+        username: payload.username.trim(),
+        artist_name: payload.artist_name.trim(),
+        profile_type: 'manager',
+        onboarding_completed: true,
+      })
+      .eq('id', userId);
+
+    if (!error) {
+      await this.loadProfile();
+    }
 
     return { error };
   }

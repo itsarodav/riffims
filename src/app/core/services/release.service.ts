@@ -26,8 +26,23 @@ export class ReleaseService {
     return (data as Release[]) ?? [];
   }
 
+  async getArtistReleases(artistId: string): Promise<Release[]> {
+    const { data, error } = await this.supabase.client
+      .from('releases')
+      .select('*')
+      .eq('artist_id', artistId)
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.error('ReleaseService.getArtistReleases', error);
+      return [];
+    }
+    return (data as Release[]) ?? [];
+  }
+
   async createRelease(
-    payload: CreateReleaseData
+    payload: CreateReleaseData,
+    artistId?: string
   ): Promise<{ data: Release | null; error: Error | null }> {
     const { data: sessionData } = await this.supabase.getSession();
     const userId = sessionData.session?.user?.id;
@@ -35,9 +50,17 @@ export class ReleaseService {
       return { data: null, error: new Error('No hay sesión activa') };
     }
 
+    const insertData: Record<string, unknown> = {
+      ...payload,
+      user_id: userId,
+    };
+    if (artistId) {
+      insertData['artist_id'] = artistId;
+    }
+
     const { data, error } = await this.supabase.client
       .from('releases')
-      .insert({ ...payload, user_id: userId })
+      .insert(insertData)
       .select()
       .single();
 

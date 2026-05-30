@@ -42,6 +42,7 @@ export class NuevoLanzamientoComponent implements OnInit {
 
   isEditMode = false;
   private releaseId: string | null = null;
+  private artistId: string | null = null;
 
   typeOptions: ChipOption<ReleaseType>[] = [
     { value: 'single', label: 'Single' },
@@ -70,6 +71,7 @@ export class NuevoLanzamientoComponent implements OnInit {
 
   async ngOnInit() {
     this.releaseId = this.route.snapshot.paramMap.get('releaseId');
+    this.artistId = this.route.snapshot.queryParamMap.get('artistId');
     this.isEditMode = !!this.releaseId;
 
     if (this.isEditMode && this.releaseId) {
@@ -194,7 +196,10 @@ export class NuevoLanzamientoComponent implements OnInit {
       }
       this.router.navigate(['/lanzamientos']);
     } else {
-      const { error } = await this.releaseService.createRelease(payload);
+      const { error } = await this.releaseService.createRelease(
+        payload,
+        this.artistId ?? undefined
+      );
       this.loading = false;
       if (error) {
         this.errorMessage = 'Ocurrió un error al crear el lanzamiento. Intenta de nuevo.';

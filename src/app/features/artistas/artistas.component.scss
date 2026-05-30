@@ -1,0 +1,140 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.artistas {
+  max-width: 960px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: $space-xs;
+    padding: $space-2xs 0;
+  }
+
+  &__back {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: $brand-dark-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $space-3xs;
+    border-radius: $radius-md;
+
+    &:focus-visible {
+      outline: 2px solid $brand-secondary-vibrant;
+      outline-offset: 2px;
+    }
+  }
+
+  &__title {
+    flex: 1;
+    margin: 0;
+    font-family: $font-family;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: $brand-dark-color;
+  }
+
+  &__spacer {
+    width: 32px;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $space-sm;
+
+    @include desktop {
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+  }
+
+  &__card-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: $space-3xs;
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: $space-2xs;
+    padding: $space-md $space-sm;
+    background: $brand-light-color;
+    border: 1px solid $brand-gray-color;
+    border-radius: $radius-lg;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    text-decoration: none;
+    color: inherit;
+
+    &:hover {
+      border-color: $brand-secondary-vibrant;
+    }
+
+    &--add {
+      border-style: dashed;
+      color: $brand-secondary-vibrant;
+    }
+  }
+
+  &__card-emoji {
+    font-size: 2rem;
+  }
+
+  &__card-name {
+    font-family: $font-family;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $brand-dark-color;
+    text-align: center;
+  }
+
+  &__edit-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: $font-family;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    color: $brand-secondary-vibrant;
+    padding: $space-3xs 0;
+    text-align: center;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $brand-secondary-vibrant;
+      outline-offset: 2px;
+      border-radius: $radius-sm;
+    }
+  }
+
+  &__invite {
+    padding-top: $space-sm;
+  }
+
+  &__invite-btn {
+    background: none;
+    border: 1px solid $brand-gray-color;
+    border-radius: $radius-md;
+    padding: $space-xs $space-sm;
+    font-family: $font-family;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $brand-gray-bold-color;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}

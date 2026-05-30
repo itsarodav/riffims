@@ -1,0 +1,90 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.editar-artista {
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+  background-color: $brand-light-color;
+  max-width: 600px;
+
+  &__back {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-3xs;
+    color: $brand-dark-color;
+    font-family: $font-family;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+      color: $brand-secondary-vibrant;
+    }
+  }
+
+  &__loading {
+    font-family: $font-family;
+    font-size: $font-size-sm;
+    color: $brand-gray-bold-color;
+    margin: 0;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: $space-md;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: $space-3xs;
+  }
+
+  &__label {
+    color: $brand-dark-color;
+    font-family: $font-family;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+  }
+
+  &__error {
+    color: $negative-700;
+    font-size: $font-size-xs;
+    margin: 0;
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: row;
+    gap: $space-sm;
+    padding-top: $space-xs;
+  }
+
+  &__delete-section {
+    padding-top: $space-md;
+    border-top: 1px solid $brand-gray-color;
+  }
+
+  &__delete-confirm {
+    display: flex;
+    flex-direction: column;
+    gap: $space-sm;
+  }
+
+  &__delete-warning {
+    margin: 0;
+    font-family: $font-family;
+    font-size: $font-size-sm;
+    color: $negative-700;
+    font-weight: $font-weight-medium;
+  }
+
+  &__delete-actions {
+    display: flex;
+    flex-direction: row;
+    gap: $space-sm;
+  }
+}

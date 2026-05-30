@@ -1,0 +1,90 @@
+<section class="editar-artista">
+  <!-- Back button -->
+  <a class="editar-artista__back" routerLink="/artistas">
+    <app-icon name="arrow-left" [size]="16" />
+    <span>Atrás</span>
+  </a>
+
+  <!-- loading -->
+  @if (loadingData) {
+    <p class="editar-artista__loading">Cargando datos...</p>
+  }
+
+  <!-- Form -->
+  <div class="editar-artista__form" [hidden]="loadingData">
+    <!-- Nombre -->
+    <app-input
+      label="Nombre del artista"
+      placeholder="Ej: Luna Roja"
+      [value]="name"
+      (valueChange)="name = $event"
+      [error]="nameError"
+    />
+
+    <!-- Emoji -->
+    <app-input
+      label="Emoji"
+      placeholder="Ej: 🎵"
+      [value]="emoji"
+      (valueChange)="emoji = $event"
+    />
+
+    <!-- Rol -->
+    <div class="editar-artista__field">
+      <label class="editar-artista__label">Rol</label>
+      <app-chip-group
+        mode="single"
+        [options]="roleOptions"
+        [selected]="role"
+        (selectedChange)="role = $event"
+      />
+    </div>
+
+    <!-- Géneros -->
+    <div class="editar-artista__field">
+      <label class="editar-artista__label">Géneros (máx. {{ maxGenres }})</label>
+      <app-chip-group
+        mode="multiple"
+        [options]="genreOptions"
+        [selected]="genres"
+        (selectedChange)="genres = $event"
+      />
+    </div>
+
+    <!-- Error general -->
+    <p class="editar-artista__error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+    <!-- Botones -->
+    <div class="editar-artista__actions">
+      <app-button variant="secondary" [fullWidth]="false" routerLink="/artistas">
+        Cancelar
+      </app-button>
+      <app-button variant="primary" [fullWidth]="false" [loading]="loading" (click)="onSubmit()">
+        Guardar cambios
+      </app-button>
+    </div>
+
+    <!-- Eliminar artista -->
+    <div class="editar-artista__delete-section">
+      @if (!confirmingDelete) {
+        <app-button variant="tertiary" [fullWidth]="true" (click)="onDeleteClick()">
+          Eliminar artista
+        </app-button>
+      } @else {
+        <div class="editar-artista__delete-confirm">
+          <p class="editar-artista__delete-warning">
+            Al borrar este artista borrarás su perfil y todos los lanzamientos asociados a ella.
+          </p>
+          <div class="editar-artista__delete-actions">
+            <app-button variant="secondary" [fullWidth]="false" (click)="onCancelDelete()">
+              Cancelar
+            </app-button>
+            <app-button variant="primary" [fullWidth]="false" [loading]="deleting" (click)="onConfirmDelete()">
+              Sí, eliminar
+            </app-button>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,68 @@
+<section class="crear-artista">
+  <!-- Back button -->
+  <a class="crear-artista__back" routerLink="/artistas">
+    <app-icon name="arrow-left" [size]="16" />
+    <span>Atrás</span>
+  </a>
+
+  <!-- Form -->
+  <div class="crear-artista__form">
+    <!-- Nombre -->
+    <app-input
+      label="Nombre del artista"
+      placeholder="Ej: Luna Roja"
+      [value]="name"
+      (valueChange)="name = $event"
+      [error]="nameError"
+    />
+
+    <!-- Emoji -->
+    <app-input
+      label="Emoji"
+      placeholder="Ej: 🎵"
+      [value]="emoji"
+      (valueChange)="emoji = $event"
+    />
+
+    <!-- Rol -->
+    <div class="crear-artista__field">
+      <label class="crear-artista__label">Rol</label>
+      <app-chip-group
+        mode="single"
+        [options]="roleOptions"
+        [selected]="role"
+        (selectedChange)="role = $event"
+      />
+    </div>
+
+    <!-- Géneros -->
+    <div class="crear-artista__field">
+      <label class="crear-artista__label">Géneros (máx. {{ maxGenres }})</label>
+      <app-chip-group
+        mode="multiple"
+        [options]="genreOptions"
+        [selected]="genres"
+        (selectedChange)="genres = $event"
+      />
+    </div>
+
+    <!-- Error general -->
+    <p class="crear-artista__error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+    <!-- Botones -->
+    <div class="crear-artista__actions">
+      <app-button variant="secondary" [fullWidth]="false" routerLink="/artistas">
+        Cancelar
+      </app-button>
+      <app-button
+        variant="primary"
+        [fullWidth]="false"
+        [loading]="loading"
+        [disabled]="!canCreate"
+        (click)="onSubmit()"
+      >
+        Crear artista
+      </app-button>
+    </div>
+  </div>
+</section>

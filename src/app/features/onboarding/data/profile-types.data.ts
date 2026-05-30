@@ -10,5 +10,5 @@ export interface ProfileTypeOption {
 export const PROFILE_TYPES: ProfileTypeOption[] = [
   { value: 'solo',    label: 'Flying Solo', emoji: '🚀', comingSoon: false },
   { value: 'banda',   label: 'Banda',       emoji: '🎸', comingSoon: true },
-  { value: 'manager', label: 'Manager',     emoji: '💼', comingSoon: true },
+  { value: 'manager', label: 'Manager',     emoji: '💼', comingSoon: false },
 ];

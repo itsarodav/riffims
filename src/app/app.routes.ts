@@ -12,6 +12,9 @@ import { NuevoLanzamientoComponent } from './features/nuevo-lanzamiento/nuevo-la
 import { CoverPreviewComponent } from './features/cover-preview/cover-preview.component';
 import { LogrosComponent } from './features/logros/logros.component';
 import { RiffionarioComponent } from './features/riffionario/riffionario.component';
+import { ArtistasComponent } from './features/artistas/artistas.component';
+import { CrearArtistaComponent } from './features/artistas/crear-artista/crear-artista.component';
+import { EditarArtistaComponent } from './features/artistas/editar-artista/editar-artista.component';
 import { authGuard } from './core/guards/auth-guard';
 import { guestGuard } from './core/guards/guest-guard';
 import {
@@ -41,6 +44,9 @@ export const routes: Routes = [
     children: [
       { path: 'home', component: HomeComponent },
       { path: 'lanzamientos', component: LanzamientosComponent },
+      { path: 'artistas', component: ArtistasComponent },
+      { path: 'artistas/nuevo', component: CrearArtistaComponent },
+      { path: 'artistas/editar/:artistId', component: EditarArtistaComponent },
       { path: 'riffi', component: RiffiComponent },
       { path: 'perfil', component: PerfilComponent },
       { path: 'nuevo', component: NuevoLanzamientoComponent },
