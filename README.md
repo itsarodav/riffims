@@ -1,65 +1,65 @@
 # Riffims
 
-Plataforma mobile-first para que artistas independientes gestionen sus lanzamientos musicales. Guía paso a paso desde la preproducción hasta el análisis post-lanzamiento. Producto en producción con usuarios reales.
+Mobile-first platform for independent music artists to self-manage their releases. Step-by-step guidance from pre-production through post-release analysis. Live product with real users.
 
-[Abrir Riffims](https://riffims.netlify.app)
-
----
-
-## Contexto
-
-Los artistas independientes sin equipo ni sello enfrentan un proceso de lanzamiento fragmentado: mezcla, distribución, registro de derechos, pitching, promoción. No existe una herramienta que unifique ese flujo y lo haga accesible sin conocimiento previo de la industria. Las plataformas existentes distribuyen música, pero no guían al artista. **Riffims es el coach, no la distribuidora.**
+[Open Riffims](https://riffims.netlify.app)
 
 ---
 
-## Decisiones Técnicas
+## Context
 
-| Decisión | Por qué |
+Independent artists without a team or label face a fragmented release process: mixing, distribution, rights registration, pitching, promotion. There is no tool that unifies that workflow and makes it accessible without prior industry knowledge. Existing platforms distribute music but don't guide the artist. **Riffims is the coach, not the distributor.**
+
+---
+
+## Technical Decisions
+
+| Decision | Why |
 |---|---|
-| **Angular 21 (standalone + signals)** | App con estado complejo, múltiples roles y flujos condicionales. Signals para reactividad granular sin RxJS innecesario. Standalone components eliminan la ceremonia de NgModules. |
-| **Supabase (Auth + PostgreSQL + RLS + Edge Functions + Storage)** | Backend completo sin servidor propio. Row Level Security como capa de autorización real, no middleware. Edge Functions para la integración con Gemini AI sin exponer API keys. |
-| **Sistema de misiones como datos** | 10 niveles con subtareas, tips y reflexiones definidos como constantes tipadas (esto se tiene que reestructurar a nivel producto). El UI consume la estructura, no la define. Agregar o modificar un nivel es editar datos, no componentes. |
-| **Onboarding condicional por rol** | Tres tipos de perfil (solista, banda, manager) con flujos de onboarding distintos. Guards encadenados (auth, onboarding pendiente, onboarding completo) controlan el acceso sin lógica duplicada. |
-| **SCSS + BEM + design tokens** | Sistema de diseño propio sin dependencia de librerías de UI. Tokens como custom properties en `:root` para spacing (base 4px), tipografía y color. Componentes reutilizables propios: Button, Card, Avatar, Input, Tag, Chip. |
-| **Gemini AI contextual (Riffi)** | Asistente integrado en el flujo de misiones, no chatbot aislado. Responde con contexto de industria musical. Tres modos predefinidos: tip, glosario, idea creativa. |
+| **Angular 21 (standalone + signals)** | App with complex state, multiple roles and conditional flows. Signals for granular reactivity without unnecessary RxJS. Standalone components remove NgModules ceremony. |
+| **Supabase (Auth + PostgreSQL + RLS + Edge Functions + Storage)** | Full backend without a custom server. Row Level Security as the real authorization layer, not middleware. Edge Functions for Gemini AI integration without exposing API keys. |
+| **Data-driven mission system** | 10 levels with subtasks, tips and reflections defined as typed constants (pending product-level restructuring). The UI consumes the structure, it doesn't define it. Adding or modifying a level means editing data, not components. |
+| **Role-based conditional onboarding** | Three profile types (solo, band, manager) with distinct onboarding flows. Chained guards (auth, onboarding pending, onboarding complete) control access without duplicated logic. |
+| **SCSS + BEM + design tokens** | Custom design system with no external UI library dependency. Tokens as `:root` custom properties for spacing (4px base), typography and color. Own reusable components: Button, Card, Avatar, Input, Tag, Chip. |
+| **Contextual Gemini AI (Riffi)** | Assistant integrated into the mission flow, not an isolated chatbot. Responds with music industry context. Three predefined modes: tip, glossary, creative idea. |
 
 ---
 
-## Resultados
+## Results
 
 | | |
 |---|---|
-| **Features** | Misiones (10 niveles), AI assistant, cover preview con export, glosario musical, gestión multi-artista, badges |
-| **Roles** | 3 tipos de usuario (solista, banda, manager) con vistas y flujos diferenciados |
-| **Componentes** | Librería propia de 6 componentes base, 0 dependencias de UI externa |
-| **Gamificación** | 4 badges con desbloqueo progresivo por hitos de lanzamiento |
+| **Features** | Missions (10 levels), AI assistant, cover preview with export, music glossary, multi-artist management, badges |
+| **Roles** | 3 user types (solo, band, manager) with differentiated views and flows |
+| **Components** | Custom library of 6 base components, 0 external UI dependencies |
+| **Gamification** | 4 badges with progressive unlocking by release milestones |
 | **Stack** | Angular 21 · TypeScript 5.9 · Supabase · GSAP · Vitest |
 
 ---
 
-## Estructura
+## Structure
 
 ```
 src/app/
-├── core/           # Servicios singleton, guards y modelos
-├── features/       # Páginas por feature (auth, home, releases, riffi, cover-preview...)
+├── core/           # Singleton services, guards and models
+├── features/       # Pages by feature (auth, home, releases, riffi, cover-preview...)
 ├── layout/         # App shell, navbar, sidebar, bottom nav
-├── shared/         # Componentes reutilizables e iconos SVG
-└── styles/         # Tokens, mixins, reset, tipografía
+├── shared/         # Reusable components and SVG icons
+└── styles/         # Tokens, mixins, reset, typography
 ```
 
 ---
 
-## Desarrollo local
+## Local Development
 
 ```bash
 git clone https://github.com/itsarodav/riffims.git
 cd riffims
 npm install
-cp .env.example .env     # Añadir SUPABASE_URL y SUPABASE_ANON_KEY
+cp .env.example .env     # Add SUPABASE_URL and SUPABASE_ANON_KEY
 npm start                # http://localhost:4200
 ```
 
 ---
 
-Desarrollado por [arodav](https://arodav.com).
+Built by [arodav](https://arodav.com).
