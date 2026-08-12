@@ -1,108 +1,65 @@
 # Riffims
 
-A mobile-first web application for independent music artists to self-manage their releases.
+Plataforma mobile-first para que artistas independientes gestionen sus lanzamientos musicales. Guía paso a paso desde la preproducción hasta el análisis post-lanzamiento. Producto en producción con usuarios reales.
 
-## Tech stack
+[Abrir Riffims](https://riffims.netlify.app)
 
-| Technology | Purpose |
+---
+
+## Contexto
+
+Los artistas independientes sin equipo ni sello enfrentan un proceso de lanzamiento fragmentado: mezcla, distribución, registro de derechos, pitching, promoción. No existe una herramienta que unifique ese flujo y lo haga accesible sin conocimiento previo de la industria. Las plataformas existentes distribuyen música, pero no guían al artista. **Riffims es el coach, no la distribuidora.**
+
+---
+
+## Decisiones Técnicas
+
+| Decisión | Por qué |
 |---|---|
-| Angular 21 | Frontend framework |
-| TypeScript | Language |
-| SCSS + BEM | Styling methodology |
-| Supabase | Backend-as-a-Service (auth, database) |
-| GSAP | Animations |
-| angular-svg-icon | SVG icon management |
-| Netlify | Hosting & CI/CD |
+| **Angular 21 (standalone + signals)** | App con estado complejo, múltiples roles y flujos condicionales. Signals para reactividad granular sin RxJS innecesario. Standalone components eliminan la ceremonia de NgModules. |
+| **Supabase (Auth + PostgreSQL + RLS + Edge Functions + Storage)** | Backend completo sin servidor propio. Row Level Security como capa de autorización real, no middleware. Edge Functions para la integración con Gemini AI sin exponer API keys. |
+| **Sistema de misiones como datos** | 10 niveles con subtareas, tips y reflexiones definidos como constantes tipadas (esto se tiene que reestructurar a nivel producto). El UI consume la estructura, no la define. Agregar o modificar un nivel es editar datos, no componentes. |
+| **Onboarding condicional por rol** | Tres tipos de perfil (solista, banda, manager) con flujos de onboarding distintos. Guards encadenados (auth, onboarding pendiente, onboarding completo) controlan el acceso sin lógica duplicada. |
+| **SCSS + BEM + design tokens** | Sistema de diseño propio sin dependencia de librerías de UI. Tokens como custom properties en `:root` para spacing (base 4px), tipografía y color. Componentes reutilizables propios: Button, Card, Avatar, Input, Tag, Chip. |
+| **Gemini AI contextual (Riffi)** | Asistente integrado en el flujo de misiones, no chatbot aislado. Responde con contexto de industria musical. Tres modos predefinidos: tip, glosario, idea creativa. |
 
-## Prerequisites
+---
 
-- Node.js >= 18.19.1
-- npm >= 10.9.4
-- Angular CLI 21
+## Resultados
 
-## Getting started
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/itsarodav/riffims.git
-   cd riffims
-   ```
-
-2. Install dependencies:
-
-   ```bash
-   npm install
-   ```
-
-3. Set up environment variables:
-
-   ```bash
-   cp .env.example .env
-   ```
-
-   Open `.env` and fill in your Supabase credentials (see the table below).
-
-4. Start the development server:
-
-   ```bash
-   npm start
-   ```
-
-   Open [http://localhost:4200](http://localhost:4200) in your browser.
-
-   The `prestart` hook runs `scripts/set-env.js`, which reads `.env` and
-   generates `src/environments/environment.ts` and `environment.development.ts`
-   automatically. Both files are gitignored.
-
-## Environment variables
-
-| Variable | Description | Where to find it |
-|---|---|---|
-| `SUPABASE_URL` | Supabase project URL | Supabase dashboard -> Project Settings -> API |
-| `SUPABASE_ANON_KEY` | Supabase anonymous (public) key | Supabase dashboard -> Project Settings -> API |
-
-> The `anon` key is public by design. Security is enforced via Row Level
-> Security (RLS) policies in Supabase, not by hiding the key. Never commit the
-> `service_role` key.
-
-## Available scripts
-
-| Command | Description |
+| | |
 |---|---|
-| `npm start` | Start the development server |
-| `ng build` | Build for production |
-| `ng test` | Run unit tests with Vitest |
+| **Features** | Misiones (10 niveles), AI assistant, cover preview con export, glosario musical, gestión multi-artista, badges |
+| **Roles** | 3 tipos de usuario (solista, banda, manager) con vistas y flujos diferenciados |
+| **Componentes** | Librería propia de 6 componentes base, 0 dependencias de UI externa |
+| **Gamificación** | 4 badges con desbloqueo progresivo por hitos de lanzamiento |
+| **Stack** | Angular 21 · TypeScript 5.9 · Supabase · GSAP · Vitest |
 
-## Project structure
+---
+
+## Estructura
 
 ```
 src/app/
-├── core/           # Singleton services and route guards
-├── features/       # Feature modules (auth, home)
-├── layout/         # Persistent UI elements (navbar, sidebar)
-├── layouts/        # Page-level layout wrappers (auth-layout)
-├── shared/         # Reusable components and SVG icons
-└── styles/         # Global SCSS tokens, mixins, reset, typography and utilities
+├── core/           # Servicios singleton, guards y modelos
+├── features/       # Páginas por feature (auth, home, releases, riffi, cover-preview...)
+├── layout/         # App shell, navbar, sidebar, bottom nav
+├── shared/         # Componentes reutilizables e iconos SVG
+└── styles/         # Tokens, mixins, reset, tipografía
 ```
 
-## Deployment
+---
 
-The project uses Netlify with CI/CD connected to the `main` branch. Every push
-to `main` triggers an automatic build and deploy. Build configuration lives in
-`netlify.toml` (build command: `npm run build`, publish dir: `dist/riffims/browser`).
+## Desarrollo local
 
-Before the first deploy, set these environment variables in **Netlify -> Site
-settings -> Environment variables**:
+```bash
+git clone https://github.com/itsarodav/riffims.git
+cd riffims
+npm install
+cp .env.example .env     # Añadir SUPABASE_URL y SUPABASE_ANON_KEY
+npm start                # http://localhost:4200
+```
 
-- `SUPABASE_URL`
-- `SUPABASE_ANON_KEY`
+---
 
-The `prebuild` hook will pick them up and generate the Angular environment
-files during each build.
-
-Production URL: [*enlace*](https://riffims.netlify.app)
-
-## License
-
-Copyright &copy; 2026 Andrea Robles Dávila. All rights reserved.
+Desarrollado por [arodav](https://arodav.com).
